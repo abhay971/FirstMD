@@ -645,20 +645,25 @@ function FAQ() {
         <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">FAQ</h2>
         <div className="flex w-full flex-col gap-6">
           {FAQS.map((faq, i) => (
-            <details
+            <div
               key={i}
-              name="faq"
-              open={faq.open}
-              className="group rounded-3xl bg-white px-8 py-6 shadow-sm transition-colors open:bg-blue open:text-white open:shadow-lg"
+              tabIndex={0}
+              className="group rounded-3xl bg-white px-8 py-6 shadow-sm outline-none transition-colors duration-300 hover:bg-blue hover:shadow-lg focus-within:bg-blue focus-within:shadow-lg"
             >
-              <summary className="flex list-none items-center justify-between gap-4">
-                <span className="font-poppins text-xl font-bold text-navy group-open:text-white">{faq.q}</span>
-                <span className="grid size-10 shrink-0 place-items-center rounded-full text-3xl font-light text-navy transition-transform duration-300 group-open:rotate-45 group-open:text-white">
+              <div className="flex items-center justify-between gap-4">
+                <span className="font-poppins text-xl font-bold text-navy transition-colors group-hover:text-white group-focus-within:text-white">
+                  {faq.q}
+                </span>
+                <span className="grid size-10 shrink-0 place-items-center rounded-full text-3xl font-light text-navy transition-transform duration-300 group-hover:rotate-45 group-hover:text-white group-focus-within:rotate-45 group-focus-within:text-white">
                   +
                 </span>
-              </summary>
-              <p className="mt-3 max-w-[640px] font-poppins text-xl text-white/70">{faq.a}</p>
-            </details>
+              </div>
+              <div className="grid grid-rows-[0fr] transition-all duration-300 group-hover:grid-rows-[1fr] group-focus-within:grid-rows-[1fr]">
+                <div className="overflow-hidden">
+                  <p className="mt-3 max-w-[640px] font-poppins text-xl text-white/80">{faq.a}</p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </Reveal>
