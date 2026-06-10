@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #00305e; /* Primary blue — headings, navbar, footer */
+  --color-blue: #005ba8; /* Secondary blue — eyebrow labels */
+  --color-accent: #e3173e; /* Accent red — primary CTAs */
+  --color-accent-soft: #fef5f8; /* Soft red tint — urgent-care card */
+  --color-ink: #121212; /* Charcoal body text */
+  --color-page: #f3f9ff; /* Page background */
+
+  --font-poppins: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-outfit: "Outfit", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  font-family: var(--font-poppins);
+  color: var(--color-ink);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Offset anchor targets so the fixed navbar doesn't cover headings */
+  scroll-padding-top: 7rem;
+}
+
+body {
+  margin: 0;
+  background: var(--color-page);
+}
+
+/* Interactive affordances */
+a,
+button,
+summary {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Continuous marquee used in the trust strip */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Scroll-reveal — elements rise + fade as they enter the viewport */
+.reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero entrance — staggered rise on load */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-rise {
+  opacity: 0;
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .hero-rise {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .animate-marquee {
+    animation: none !important;
+  }
+}
