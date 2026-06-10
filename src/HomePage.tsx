@@ -849,7 +849,7 @@ function Footer() {
 
       <p
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-1/2 select-none text-center font-outfit text-[20vw] font-bold leading-none text-white/10"
+        className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-[30%] select-none text-center font-outfit text-[20vw] font-bold leading-none text-white/10"
       >
         FIRST MD
       </p>
