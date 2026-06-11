@@ -327,8 +327,10 @@ function WhyTrust() {
 
           {/* Arch images (figma-shaped, transparent corners) */}
           <Reveal delay={120} className="hidden shrink-0 items-center justify-center gap-4 lg:flex">
-            <img src="/assets/trust-arch-1.png" alt="First MD physician" className="h-[460px] w-auto" />
-            <img src="/assets/trust-arch-2.png" alt="First MD nurse" className="h-[460px] w-auto" />
+            <div className="h-[460px] w-[210px] overflow-hidden rounded-[110px] shadow-2xl">
+              <img src="/assets/trust-group.png" alt="First MD physician" className="h-full w-full scale-[1.8] object-cover object-[24%_20%]" />
+            </div>
+            <img src="/assets/trust-nurse.png" alt="First MD nurse" className="h-[460px] w-auto -scale-y-100 drop-shadow-2xl" />
           </Reveal>
         </div>
       </Container>
