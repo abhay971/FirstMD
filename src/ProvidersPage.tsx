@@ -25,14 +25,14 @@ import {
 
 function Badge({ icon, children }: { icon: ReactNode; children: ReactNode }) {
   return (
-    <div className="flex items-center gap-4">
-      <span className="grid size-[68px] shrink-0 place-items-center rounded-full bg-[#e3eefb] text-blue">{icon}</span>
-      <p className="font-poppins text-lg font-bold leading-tight text-ink">{children}</p>
+    <div className="flex items-center gap-3">
+      <span className="grid size-14 shrink-0 place-items-center rounded-full bg-[#e3eefb] text-blue">{icon}</span>
+      <p className="max-w-[150px] font-poppins text-base font-bold leading-tight text-ink">{children}</p>
     </div>
   )
 }
 
-const ICON = 'size-8'
+const ICON = 'size-7'
 const IconStethoscope = (
   <svg viewBox="0 0 24 24" className={ICON} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M6 3v5a4 4 0 0 0 8 0V3" />
@@ -95,7 +95,7 @@ function Hero() {
   const shift = Math.min(y, 900) * 0.04
 
   return (
-    <section className="relative overflow-hidden bg-page">
+    <section className="relative flex min-h-svh flex-col overflow-hidden bg-page">
       <div className="pointer-events-none absolute inset-0">
         <img
           src="/assets/providers-hero.png"
@@ -107,18 +107,18 @@ function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-b from-transparent to-page" />
       </div>
 
-      <Container className="relative z-10 pt-40 pb-10 lg:pt-44">
-        <div className="hero-rise flex max-w-[700px] flex-col gap-3" style={{ animationDelay: '60ms' }}>
+      <Container className="relative z-10 flex flex-1 flex-col pt-32 pb-8 lg:pt-36">
+        <div className="hero-rise flex max-w-[680px] flex-col gap-4" style={{ animationDelay: '60ms' }}>
           <p className="font-poppins text-lg font-bold text-blue">Meet the Providers</p>
-          <h1 className="font-poppins text-[44px] font-bold leading-[1.05] text-navy sm:text-5xl lg:text-[64px] 2xl:text-[80px]">
+          <h1 className="font-poppins text-[36px] font-bold leading-[1.04] text-navy sm:text-5xl lg:text-[52px] xl:text-[58px] 2xl:text-[64px]">
             Compassionate Care Starts With the Right Team
           </h1>
-          <p className="mt-2 font-poppins text-lg font-bold text-navy">Rehydrate. Recover. Recharge.</p>
-          <p className="max-w-[620px] font-poppins text-lg text-navy">
+          <p className="font-poppins text-lg font-bold text-navy">Rehydrate. Recover. Recharge.</p>
+          <p className="max-w-[600px] font-poppins text-base text-navy lg:text-lg">
             Our experienced healthcare professionals are committed to providing personalized care,
             building long-term relationships, and helping patients achieve better health outcomes.
           </p>
-          <div className="mt-6 flex flex-wrap items-center gap-4">
+          <div className="mt-2 flex flex-wrap items-center gap-4">
             <PillButton variant="accent" href={BOOK}>
               Book Appointment
             </PillButton>
@@ -127,15 +127,13 @@ function Hero() {
             </PillButton>
           </div>
         </div>
-      </Container>
 
-      {/* Feature badges */}
-      <Container className="relative z-10 pb-16">
-        <Reveal className="flex flex-wrap items-center justify-center gap-x-6 gap-y-6 lg:gap-x-10">
+        {/* Feature badges — pinned to the bottom of the viewport, single row on desktop */}
+        <Reveal className="mt-auto flex flex-col gap-5 pt-10 sm:grid sm:grid-cols-2 sm:gap-6 lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-0">
           {HERO_BADGES.map((b, i) => (
-            <div key={b.label} className="flex items-center gap-6 lg:gap-10">
+            <div key={b.label} className="flex items-center gap-3 lg:gap-4">
               <Badge icon={b.icon}>{b.label}</Badge>
-              {i < HERO_BADGES.length - 1 && <span className="hidden h-12 w-px bg-navy/15 lg:block" />}
+              {i < HERO_BADGES.length - 1 && <span className="hidden h-12 w-px shrink-0 bg-navy/15 lg:block" />}
             </div>
           ))}
         </Reveal>
