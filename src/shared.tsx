@@ -27,7 +27,7 @@ export const NAV_ITEMS = [
   { label: 'Services', id: 'services', href: '/#services' },
   { label: 'Providers', id: 'providers', href: '/providers' },
   { label: 'Insurance', id: 'insurance', href: '/#insurance' },
-  { label: 'Contact', id: 'contact', href: '/#contact' },
+  { label: 'Contact', id: 'contact', href: '/contact' },
 ]
 const SECTION_IDS = ['home', 'about', 'services', 'providers', 'insurance', 'contact']
 
@@ -121,7 +121,17 @@ export function Container({ children, className = '' }: { children: ReactNode; c
 }
 
 /** Wraps content so it rises + fades into view on scroll. */
-export function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
+export function Reveal({
+  children,
+  className = '',
+  delay = 0,
+  id,
+}: {
+  children: ReactNode
+  className?: string
+  delay?: number
+  id?: string
+}) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
   useEffect(() => {
@@ -140,7 +150,7 @@ export function Reveal({ children, className = '', delay = 0 }: { children: Reac
     return () => obs.disconnect()
   }, [])
   return (
-    <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''} ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+    <div id={id} ref={ref} className={`reveal ${visible ? 'is-visible' : ''} ${className}`} style={{ transitionDelay: `${delay}ms` }}>
       {children}
     </div>
   )
@@ -191,9 +201,13 @@ export function Navbar() {
   const [open, setOpen] = useState(false)
   const [isScrolling, setIsScrolling] = useState(false)
   const location = useLocation()
-  const onProviders = location.pathname.startsWith('/providers')
+  const path = location.pathname
   const scrollActive = useActiveSection(SECTION_IDS)
-  const active = onProviders ? 'providers' : scrollActive
+  const active = path.startsWith('/providers')
+    ? 'providers'
+    : path.startsWith('/contact')
+      ? 'contact'
+      : scrollActive
 
   // While actively scrolling, collapse to a compact links-only bar; expand on idle.
   useEffect(() => {

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import HomePage from './HomePage'
 import ProvidersPage from './ProvidersPage'
+import ContactPage from './ContactPage'
 
 /** Scroll to a #hash target after the page renders (links like /#contact). */
 function ScrollToHash() {
@@ -30,6 +31,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/providers" element={<ProvidersPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </>
   )
