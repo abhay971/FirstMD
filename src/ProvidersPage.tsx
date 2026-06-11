@@ -150,7 +150,7 @@ function TeamIntro() {
   return (
     <Container className="py-20">
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-[39px]">
-        <Reveal className="h-[420px] w-full overflow-hidden rounded-3xl bg-[#d9d9d9] shadow-xl lg:h-[694px]">
+        <Reveal className="aspect-[635/694] w-full max-w-[600px] overflow-hidden rounded-3xl shadow-xl">
           <img src="/assets/team-intro.png" alt="The First MD care team" className="h-full w-full object-cover" />
         </Reveal>
         <Reveal delay={120} className="flex max-w-[600px] flex-col gap-8">
