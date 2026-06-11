@@ -149,9 +149,9 @@ function Hero() {
 function TeamIntro() {
   return (
     <Container className="py-20">
-      <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-[39px]">
-        <Reveal className="aspect-[635/694] w-full max-w-[600px] overflow-hidden rounded-3xl shadow-xl">
-          <img src="/assets/team-intro.png" alt="The First MD care team" className="h-full w-full object-cover" />
+      <div className="grid items-center gap-10 lg:grid-cols-[480px_1fr] lg:gap-[60px]">
+        <Reveal className="aspect-[635/694] w-full max-w-[480px] overflow-hidden rounded-3xl shadow-xl">
+          <img src="/assets/team-photo.png" alt="The First MD care team" className="h-full w-full object-cover" />
         </Reveal>
         <Reveal delay={120} className="flex max-w-[600px] flex-col gap-8">
           <SectionHeading eyebrow="Team Introduction" title="Healthcare Professionals You Can Trust" />
