@@ -327,12 +327,12 @@ function WhyTrust() {
 
           {/* Arch images (figma-shaped, transparent corners) */}
           <Reveal delay={120} className="hidden shrink-0 items-center justify-center gap-4 lg:flex">
-            <div className="relative h-[460px] w-[210px] overflow-hidden rounded-[110px] shadow-2xl">
+            <div className="relative h-[460px] w-[210px] overflow-hidden rounded-[110px] shadow-2xl [transform:scaleX(-1)]">
               <img
                 src="/assets/trust-group.png"
                 alt="First MD physician"
-                className="absolute max-w-none -scale-x-100"
-                style={{ width: '1200px', left: '-663px', top: '-185px' }}
+                className="absolute max-w-none"
+                style={{ width: '717.33%', height: '175.35%', left: '-210.52%', top: '-46.03%' }}
               />
             </div>
             <div className="relative h-[460px] w-[210px] overflow-hidden rounded-[110px] shadow-2xl">
