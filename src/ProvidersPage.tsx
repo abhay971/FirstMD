@@ -73,7 +73,7 @@ function Star() {
     <svg viewBox="0 0 24 24" className="size-6 shrink-0" aria-hidden>
       <path
         d="M12 2.5l2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.9l-5.8 3.05 1.1-6.45-4.7-4.6 6.5-.95z"
-        fill="#00305e"
+        fill="#f5a623"
       />
     </svg>
   )
@@ -101,9 +101,10 @@ function Hero() {
           src="/assets/providers-hero.png"
           alt=""
           style={{ transform: `translate3d(0, ${shift}px, 0)` }}
-          className="absolute inset-y-0 right-0 h-full w-full object-cover object-[center_right] will-change-transform lg:w-[62%]"
+          className="absolute inset-0 h-full w-full object-cover object-[center_22%] will-change-transform"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-page from-20% via-page/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-page from-22% via-page/75 to-transparent to-80%" />
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-b from-transparent to-page" />
       </div>
 
       <Container className="relative z-10 pt-40 pb-10 lg:pt-44">
@@ -285,10 +286,10 @@ function WhyTrust() {
           {/* Arch images */}
           <Reveal delay={120} className="hidden items-center justify-center gap-4 lg:flex">
             <div className="h-[560px] w-[260px] shrink-0 overflow-hidden rounded-[140px] shadow-2xl">
-              <img src="/assets/why-b.png" alt="First MD physician" className="h-full w-full object-cover" />
+              <img src="/assets/trust-group.png" alt="First MD physician" className="h-full w-full scale-110 object-cover object-[28%_center]" />
             </div>
             <div className="h-[560px] w-[260px] shrink-0 overflow-hidden rounded-[140px] shadow-2xl">
-              <img src="/assets/why-c.png" alt="" className="h-full w-full -scale-y-100 object-cover" />
+              <img src="/assets/trust-group.png" alt="First MD physician" className="h-full w-full scale-110 object-cover object-[74%_center]" />
             </div>
           </Reveal>
         </div>
