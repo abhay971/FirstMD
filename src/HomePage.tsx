@@ -216,11 +216,7 @@ function WhyChoose() {
 type Provider = { name: string; title: string; img?: string; bio?: string }
 
 const PROVIDERS: Provider[] = [
-  {
-    name: 'Foram Mehta',
-    title: 'FNP',
-    bio: 'Foram Mehta, FNP brings over 12 years of critical care experience and specializes in primary care, women’s health, medical weight loss, hormone therapy, and aesthetic treatments, delivering personalized, compassionate care.',
-  },
+  { name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-foram-hd.png' },
   { name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-edward.png' },
   { name: 'Manny Trevino', title: 'DC', img: '/assets/prov-manny.png' },
   { name: 'Ranjit Dhelaria', title: 'MD, MRCP', img: '/assets/prov-ranjit.png' },
