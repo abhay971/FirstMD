@@ -351,30 +351,33 @@ function WhyTrust() {
 
 function CtaBanner() {
   return (
-    <Container className="py-20">
+    <Container className="py-16">
       <Reveal>
-        <div className="relative flex flex-col gap-6 overflow-hidden rounded-2xl bg-navy px-8 py-10 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-12">
-          {/* Concentric rings */}
+        <div className="relative rounded-2xl bg-navy px-8 py-8 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-9">
+          {/* Concentric rings — clipped to the banner, centered behind the provider */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
             <img
               aria-hidden
               alt=""
               src="/assets/need-graphic.svg"
-              style={{ right: '8%', top: '50%', transform: 'translateY(-50%)' }}
-              className="absolute hidden w-[520px] max-w-none select-none lg:block"
+              style={{ right: '6%', top: '50%', transform: 'translateY(-50%)' }}
+              className="absolute hidden w-[440px] max-w-none select-none lg:block"
             />
           </div>
-          {/* Doctor */}
-          <img
-            aria-hidden
-            alt=""
-            src="/assets/cta-doctor.png"
-            className="pointer-events-none absolute bottom-0 right-6 hidden h-[110%] w-auto select-none object-contain lg:block"
-          />
 
-          <div className="relative z-10 max-w-[690px]">
-            <h2 className="font-poppins text-3xl font-bold">Ready to Meet Your Provider?</h2>
-            <p className="mt-2 max-w-[620px] font-poppins text-lg text-white/60">
+          {/* Provider — pops above the top edge, clipped at the rounded bottom */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-10 hidden lg:block"
+            style={{ clipPath: 'inset(-70px 0px 0px 0px round 16px)' }}
+          >
+            <img src="/assets/cta-doctor.png" alt="" className="absolute bottom-0 right-[3%] h-[128%] w-auto object-contain" />
+          </div>
+
+          {/* Copy */}
+          <div className="relative z-10 max-w-[600px]">
+            <h2 className="font-poppins text-2xl font-bold lg:text-3xl">Ready to Meet Your Provider?</h2>
+            <p className="mt-2 max-w-[560px] font-poppins text-base text-white/60 lg:text-lg">
               Whether you're looking for a primary care physician, preventive care, or help managing a
               chronic condition, our team is ready to help.
             </p>

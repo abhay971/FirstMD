@@ -77,8 +77,8 @@ function Hero() {
 function NeedCareBanner() {
   return (
     <Container className="pt-16 pb-16">
-      <Reveal className="mx-auto max-w-[1000px]">
-        <div className="relative rounded-2xl bg-navy px-8 py-6 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-7">
+      <Reveal>
+        <div className="relative rounded-2xl bg-navy px-8 py-8 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-9">
           {/* Concentric rings — clipped to the rounded banner, centered behind the providers */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
             <img
