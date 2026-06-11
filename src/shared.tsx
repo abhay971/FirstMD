@@ -13,7 +13,7 @@ import { useLocation } from 'react-router-dom'
 export const ARROW = '→'
 
 /* Real-world action targets ------------------------------------------------ */
-export const BOOK = '/#contact' // primary CTAs go to the Contact section on the home page
+export const BOOK = '/contact' // primary "Book Appointment" CTAs go to the Contact page
 export const PHONE_DISPLAY = '(682) 831-1591'
 export const PHONE_HREF = 'tel:+16828311591'
 export const ADDRESS_LINES = ['208 East TX-114, Suite 300', 'Roanoke, TX 76262']
@@ -25,9 +25,9 @@ export const NAV_ITEMS = [
   { label: 'Home', id: 'home', href: '/' },
   { label: 'About', id: 'about', href: '/#about' },
   { label: 'Services', id: 'services', href: '/#services' },
-  { label: 'Providers', id: 'providers', href: '/providers' },
+  { label: 'Providers', id: 'providers', href: '/#providers' },
   { label: 'Insurance', id: 'insurance', href: '/#insurance' },
-  { label: 'Contact', id: 'contact', href: '/contact' },
+  { label: 'Contact', id: 'contact', href: '/#contact' },
 ]
 const SECTION_IDS = ['home', 'about', 'services', 'providers', 'insurance', 'contact']
 
