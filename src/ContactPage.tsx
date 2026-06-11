@@ -381,19 +381,24 @@ const STEPS = [
 function WhatHappensNext() {
   return (
     <Container className="py-16">
-      <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-[39px]">
-        <Reveal className="h-[420px] w-full overflow-hidden rounded-3xl bg-[#d9d9d9] shadow-xl lg:h-[600px]">
+      <div className="grid items-center gap-10 lg:grid-cols-[480px_1fr] lg:gap-[48px]">
+        <Reveal className="aspect-[603/694] w-full max-w-[480px] overflow-hidden rounded-3xl bg-[#d9d9d9] shadow-xl">
           <img src="/assets/happens-next.png" alt="The First MD team" className="h-full w-full object-cover" />
         </Reveal>
-        <Reveal delay={120} className="flex max-w-[622px] flex-col gap-8">
-          <SectionHeading eyebrow="What Happens Next?" title="After You Submit Your Appointment Request" />
-          <ul className="flex flex-col gap-6">
+        <Reveal delay={120} className="flex max-w-[600px] flex-col gap-7">
+          <div className="flex flex-col gap-2">
+            <p className="font-poppins text-lg font-bold text-blue">What Happens Next?</p>
+            <h2 className="font-poppins text-3xl font-bold leading-[1.1] text-navy sm:text-4xl lg:text-[44px]">
+              After You Submit Your Appointment Request
+            </h2>
+          </div>
+          <ul className="flex flex-col">
             {STEPS.map((step, i) => (
-              <li key={step} className="flex items-center gap-5">
-                <span className="grid size-16 shrink-0 place-items-center rounded-full border-2 border-blue/30 font-poppins text-2xl font-bold text-navy">
+              <li key={step} className={`relative flex items-center gap-5 ${i > 0 ? '-mt-3' : ''}`} style={{ zIndex: i + 1 }}>
+                <span className="grid size-20 shrink-0 place-items-center rounded-full border-[6px] border-navy bg-page font-poppins text-3xl font-bold text-navy lg:size-[88px] lg:text-[34px]">
                   {i + 1}
                 </span>
-                <span className="font-poppins text-lg font-bold text-ink lg:text-xl">{step}</span>
+                <span className="font-poppins text-base font-bold text-ink lg:text-lg">{step}</span>
               </li>
             ))}
           </ul>
@@ -426,7 +431,7 @@ function ScheduleCta() {
             className="pointer-events-none absolute inset-0 z-10 hidden lg:block"
             style={{ clipPath: 'inset(-70px 0px 0px 0px round 16px)' }}
           >
-            <img src="/assets/schedule-doctor.png" alt="" className="absolute bottom-0 right-[4%] h-[128%] w-auto object-contain" />
+            <img src="/assets/schedule-doctor.png" alt="" className="absolute bottom-0 right-[8%] h-[128%] w-auto object-contain" />
           </div>
 
           <div className="relative z-10 max-w-[620px]">
