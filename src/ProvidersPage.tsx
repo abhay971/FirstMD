@@ -27,7 +27,7 @@ function Badge({ icon, children }: { icon: ReactNode; children: ReactNode }) {
   return (
     <div className="flex items-center gap-3">
       <span className="grid size-14 shrink-0 place-items-center rounded-full bg-[#e3eefb] text-blue">{icon}</span>
-      <p className="max-w-[150px] font-poppins text-base font-bold leading-tight text-ink">{children}</p>
+      <p className="whitespace-nowrap font-poppins text-base font-bold leading-tight text-ink">{children}</p>
     </div>
   )
 }
@@ -84,10 +84,46 @@ function Star() {
  * ------------------------------------------------------------------------- */
 
 const HERO_BADGES = [
-  { icon: IconStethoscope, label: 'Experienced Providers' },
-  { icon: IconHeart, label: 'Patient-Focused Care' },
-  { icon: IconCalendar, label: 'Same-Day Appointments' },
-  { icon: IconShield, label: 'Most Major Insurance Accepted' },
+  {
+    icon: IconStethoscope,
+    label: (
+      <>
+        Experienced
+        <br />
+        Providers
+      </>
+    ),
+  },
+  {
+    icon: IconHeart,
+    label: (
+      <>
+        Patient-Focused
+        <br />
+        Care
+      </>
+    ),
+  },
+  {
+    icon: IconCalendar,
+    label: (
+      <>
+        Same-Day
+        <br />
+        Appointments
+      </>
+    ),
+  },
+  {
+    icon: IconShield,
+    label: (
+      <>
+        Most Major
+        <br />
+        Insurance Accepted
+      </>
+    ),
+  },
 ]
 
 function Hero() {
@@ -101,9 +137,9 @@ function Hero() {
           src="/assets/providers-hero.png"
           alt=""
           style={{ transform: `translate3d(0, ${shift}px, 0)` }}
-          className="absolute inset-0 h-full w-full object-cover object-[center_22%] will-change-transform"
+          className="absolute inset-0 h-full w-full object-cover object-[center_30%] will-change-transform"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-page from-22% via-page/75 to-transparent to-80%" />
+        <div className="absolute inset-0 bg-gradient-to-r from-page from-0% via-page/82 via-42% to-transparent to-66%" />
         <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-b from-transparent to-page" />
       </div>
 
