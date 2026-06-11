@@ -302,37 +302,33 @@ const TRUST_POINTS = [
 
 function WhyTrust() {
   return (
-    <section className="relative overflow-hidden bg-navy py-24 text-page">
+    <section className="relative overflow-hidden bg-navy py-16 text-page lg:py-20">
       <Container>
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-[60px]">
-          <Reveal className="flex max-w-[560px] flex-col gap-8">
-            <div className="flex flex-col gap-3">
-              <p className="font-poppins text-lg font-bold">Why Patients Trust First MD</p>
-              <h2 className="font-poppins text-4xl font-bold leading-[1.05] lg:text-[56px]">
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto] lg:gap-16">
+          <Reveal className="flex max-w-[540px] flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <p className="font-poppins text-base font-bold">Why Patients Trust First MD</p>
+              <h2 className="font-poppins text-3xl font-bold leading-[1.08] lg:text-[44px]">
                 More Than Healthcare. A Long-Term Partnership.
               </h2>
             </div>
-            <ul className="flex flex-col gap-6">
+            <ul className="flex flex-col gap-4">
               {TRUST_POINTS.map((p) => (
                 <li key={p.title} className="flex items-start gap-3">
-                  <CheckRing className="mt-1 size-8" />
+                  <CheckRing className="mt-0.5 size-6" />
                   <div>
-                    <p className="font-poppins text-xl font-bold lg:text-2xl">{p.title}</p>
-                    <p className="font-poppins text-base text-page/80">{p.desc}</p>
+                    <p className="font-poppins text-lg font-bold">{p.title}</p>
+                    <p className="font-poppins text-sm text-page/70">{p.desc}</p>
                   </div>
                 </li>
               ))}
             </ul>
           </Reveal>
 
-          {/* Arch images */}
-          <Reveal delay={120} className="hidden items-center justify-center gap-4 lg:flex">
-            <div className="h-[560px] w-[260px] shrink-0 overflow-hidden rounded-[140px] shadow-2xl">
-              <img src="/assets/trust-group.png" alt="First MD physician" className="h-full w-full scale-110 object-cover object-[28%_center]" />
-            </div>
-            <div className="h-[560px] w-[260px] shrink-0 overflow-hidden rounded-[140px] shadow-2xl">
-              <img src="/assets/trust-group.png" alt="First MD physician" className="h-full w-full scale-110 object-cover object-[74%_center]" />
-            </div>
+          {/* Arch images (figma-shaped, transparent corners) */}
+          <Reveal delay={120} className="hidden shrink-0 items-center justify-center gap-4 lg:flex">
+            <img src="/assets/trust-arch-1.png" alt="First MD physician" className="h-[460px] w-auto" />
+            <img src="/assets/trust-arch-2.png" alt="First MD nurse" className="h-[460px] w-auto" />
           </Reveal>
         </div>
       </Container>
