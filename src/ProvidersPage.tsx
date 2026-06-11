@@ -332,7 +332,7 @@ function WhyTrust() {
                 src="/assets/trust-group.png"
                 alt="First MD physician"
                 className="absolute max-w-none"
-                style={{ width: '717.33%', height: '175.35%', left: '-210.52%', top: '-41%' }}
+                style={{ width: '660%', height: '161.3%', left: '-189.5%', top: '-35%' }}
               />
             </div>
             <div className="relative h-[460px] w-[210px] overflow-hidden rounded-[110px] shadow-2xl">
