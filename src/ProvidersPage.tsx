@@ -212,13 +212,15 @@ function TeamIntro() {
  * Provider cards
  * ------------------------------------------------------------------------- */
 
-type Provider = { name: string; title: string; img: string }
+type Crop = { width: string; height: string; left: string; top: string }
+type Provider = { name: string; title: string; img: string; crop: Crop }
 
+// Crops mirror the Figma node placements so each face is framed identically.
 const PROVIDERS: Provider[] = [
-  { name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-photo-1.png' },
-  { name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-photo-2.png' },
-  { name: 'Manny Trevino', title: 'DC', img: '/assets/prov-photo-3.png' },
-  { name: 'Dr. Ranjit Dhelaria', title: 'MD, MRCP (UK)', img: '/assets/prov-photo-4.png' },
+  { name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-src-1.png', crop: { width: '151.08%', height: '248.42%', left: '-25.54%', top: '-68.36%' } },
+  { name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-src-2.png', crop: { width: '100%', height: '128.78%', left: '0%', top: '0%' } },
+  { name: 'Manny Trevino', title: 'DC', img: '/assets/prov-src-3.png', crop: { width: '100%', height: '133.44%', left: '0%', top: '0%' } },
+  { name: 'Dr. Ranjit Dhelaria', title: 'MD, MRCP (UK)', img: '/assets/prov-src-4.png', crop: { width: '119.6%', height: '161.31%', left: '-15.16%', top: '-17.44%' } },
 ]
 
 const PROVIDER_SPECIALTIES = ['Family Medicine', 'Preventive Care', 'Chronic Disease Management']
@@ -226,11 +228,17 @@ const PROVIDER_SPECIALTIES = ['Family Medicine', 'Preventive Care', 'Chronic Dis
 function ProviderCard({ provider }: { provider: Provider }) {
   return (
     <div className="group flex flex-col overflow-hidden rounded-3xl border border-navy bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl">
-      <div className="overflow-hidden bg-navy">
+      <div className="relative aspect-[312/253] w-full overflow-hidden bg-navy">
         <img
           src={provider.img}
           alt={provider.name}
-          className="block w-full transition-transform duration-500 group-hover:scale-105"
+          className="absolute max-w-none"
+          style={{
+            width: provider.crop.width,
+            height: provider.crop.height,
+            left: provider.crop.left,
+            top: provider.crop.top,
+          }}
         />
       </div>
       <div className="flex flex-1 flex-col gap-4 p-6">
