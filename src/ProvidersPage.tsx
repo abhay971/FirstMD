@@ -215,10 +215,10 @@ function TeamIntro() {
 type Provider = { name: string; title: string; img: string }
 
 const PROVIDERS: Provider[] = [
-  { name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-card-1.png' },
-  { name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-card-2.png' },
-  { name: 'Manny Trevino', title: 'DC', img: '/assets/prov-card-3.png' },
-  { name: 'Dr. Ranjit Dhelaria', title: 'MD, MRCP (UK)', img: '/assets/prov-card-4.png' },
+  { name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-photo-1.png' },
+  { name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-photo-2.png' },
+  { name: 'Manny Trevino', title: 'DC', img: '/assets/prov-photo-3.png' },
+  { name: 'Dr. Ranjit Dhelaria', title: 'MD, MRCP (UK)', img: '/assets/prov-photo-4.png' },
 ]
 
 const PROVIDER_SPECIALTIES = ['Family Medicine', 'Preventive Care', 'Chronic Disease Management']
@@ -226,11 +226,11 @@ const PROVIDER_SPECIALTIES = ['Family Medicine', 'Preventive Care', 'Chronic Dis
 function ProviderCard({ provider }: { provider: Provider }) {
   return (
     <div className="group flex flex-col overflow-hidden rounded-3xl border border-navy bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl">
-      <div className="h-[253px] w-full overflow-hidden bg-navy">
+      <div className="overflow-hidden bg-navy">
         <img
           src={provider.img}
           alt={provider.name}
-          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          className="block w-full transition-transform duration-500 group-hover:scale-105"
         />
       </div>
       <div className="flex flex-1 flex-col gap-4 p-6">
