@@ -14,6 +14,7 @@ import {
   Container,
   FAQ,
   Footer,
+  HeroChips,
   MarqueeStrip,
   Navbar,
   PHONE_DISPLAY,
@@ -27,7 +28,7 @@ import {
  * Hero — full-bleed photo, copy left, trust chips along the bottom
  * ------------------------------------------------------------------------- */
 
-const HERO_CHIPS = [
+const HERO_CHIPS: { icon: string; label: [string, string] }[] = [
   { icon: '/assets/chip-newpatient.svg', label: ['New Patient', 'Friendly'] },
   { icon: '/assets/chip-sameday.svg', label: ['Same-Day', 'Appointments'] },
   { icon: '/assets/chip-major-insurance.svg', label: ['Most Major', 'Insurance Accepted'] },
@@ -77,23 +78,7 @@ function Hero() {
         </div>
 
         {/* Trust chips */}
-        <div className="hero-rise flex flex-wrap items-center gap-x-5 gap-y-6 xl:gap-x-9" style={{ animationDelay: '380ms' }}>
-          {HERO_CHIPS.map((chip, i) => (
-            <div key={chip.label.join(' ')} className="flex items-center gap-5 xl:gap-9">
-              {i > 0 && <span className="hidden h-14 w-px bg-navy/15 lg:block xl:h-[68px]" />}
-              <div className="flex items-center gap-3 xl:gap-4">
-                <span className="grid size-14 shrink-0 place-items-center rounded-full bg-white shadow-[0px_8px_18px_rgba(0,48,94,0.10)] xl:size-[68px]">
-                  <img src={chip.icon} alt="" className="size-7 xl:size-8" />
-                </span>
-                <span className="font-poppins text-base font-bold leading-tight text-ink xl:text-xl">
-                  {chip.label[0]}
-                  <br />
-                  {chip.label[1]}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <HeroChips chips={HERO_CHIPS} />
       </Container>
     </section>
   )

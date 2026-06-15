@@ -86,7 +86,7 @@ function NeedCareBanner() {
               aria-hidden
               alt=""
               src="/assets/need-graphic.svg"
-              style={{ right: '-92px', top: '50%', transform: 'translateY(-50%)' }}
+              style={{ right: '55px', top: '50%', transform: 'translateY(-50%)' }}
               className="absolute hidden w-[540px] max-w-none select-none md:block"
             />
           </div>
@@ -95,7 +95,7 @@ function NeedCareBanner() {
           <div className="relative z-10 max-w-[460px]">
             <h2 className="font-poppins text-2xl font-bold lg:text-3xl">Need Care Today?</h2>
             <p className="mt-2 max-w-[420px] font-poppins text-base text-white/60 lg:text-lg">
-              Same-day appointments and walk-in visits available for urgent medical needs.
+              Same day appointments and walk-in visits available for urgent medical needs.
             </p>
             <ArrowLink href={BOOK} className="mt-3 text-base font-bold text-white hover:opacity-90 lg:text-lg">
               Get Care Today
@@ -108,12 +108,12 @@ function NeedCareBanner() {
             className="pointer-events-none absolute inset-0 z-10 hidden md:block"
             style={{ clipPath: 'inset(-300px 0px 0px 0px round 16px)' }}
           >
-            <div className="absolute bottom-0 right-2 flex items-end lg:right-4">
-              <img src="/assets/need-doc-1.png" alt="" className="h-[214px] w-auto lg:h-[258px]" />
+            <div className="absolute -bottom-16 right-2 flex items-end lg:right-6">
+              <img src="/assets/need-doc-1.png" alt="" className="h-[300px] w-auto lg:h-[366px]" />
               <img
                 src="/assets/need-doc-2.png"
                 alt="First MD providers"
-                className="-ml-24 h-[230px] w-auto lg:h-[276px] lg:-ml-32"
+                className="-ml-24 h-[322px] w-auto lg:h-[394px] lg:-ml-40"
               />
             </div>
           </div>
@@ -130,12 +130,12 @@ function NeedCareBanner() {
 const SERVICES = [
   {
     name: 'Integrated Family Medicine & Urgent Care',
-    desc: 'Same-day urgent care plus ongoing primary care for the whole family — all under one roof.',
+    desc: 'Same day urgent care plus ongoing primary care for the whole family all under one roof.',
     href: '/services',
   },
   {
     name: 'Hormone Therapy',
-    desc: 'Bioidentical hormone pellets for steady energy, sleep, focus, and mood — no daily pills.',
+    desc: 'Bioidentical hormone pellets for steady energy, sleep, focus, and mood no daily pills.',
     href: '/services/hormone',
   },
   {

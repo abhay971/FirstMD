@@ -133,7 +133,7 @@ function Hero() {
           </div>
         </div>
 
-        <Reveal className="mt-auto flex flex-col gap-5 pt-10 sm:grid sm:grid-cols-2 sm:gap-6 lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-0">
+        <Reveal className="mt-auto flex flex-col gap-5 rounded-[28px] bg-page/70 px-6 py-5 backdrop-blur-md sm:grid sm:grid-cols-2 sm:gap-6 lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-0">
           {HERO_BADGES.map((b, i) => (
             <div key={i} className="flex items-center gap-3 lg:gap-4">
               <Badge icon={b.icon}>{b.label}</Badge>
