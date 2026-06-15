@@ -13,12 +13,14 @@ import {
   CrossDecor,
   FAQ,
   Footer,
+  HeroChips,
   MarqueeStrip,
   Navbar,
   PHONE_HREF,
   PillButton,
   Providers,
   Reveal,
+  SECTION_TITLE,
   useParallax,
 } from './shared'
 
@@ -26,7 +28,7 @@ import {
  * Hero — full-bleed photo, copy left, trust chips along the bottom
  * ------------------------------------------------------------------------- */
 
-const HERO_CHIPS = [
+const HERO_CHIPS: { icon: string; label: [string, string] }[] = [
   { icon: '/assets/chip-insurance.svg', label: ['Most Major', 'Insurance Accepted'] },
   { icon: '/assets/chip-sameday.svg', label: ['Same-Day', 'Appointments'] },
   { icon: '/assets/chip-providers.svg', label: ['Experienced', 'Providers'] },
@@ -54,7 +56,7 @@ function Hero() {
             Services
           </p>
           <h1
-            className="hero-rise font-poppins text-[40px] font-bold leading-[1.1] text-navy sm:text-5xl lg:text-[56px] xl:text-[64px] 2xl:text-[76px] 2xl:leading-[1.12]"
+            className="hero-rise font-poppins text-[40px] font-bold leading-[1.1] text-navy sm:text-5xl lg:text-[56px] xl:text-[64px] 2xl:text-[72px] 2xl:leading-[1.12]"
             style={{ animationDelay: '80ms' }}
           >
             Hormone Therapy
@@ -75,23 +77,7 @@ function Hero() {
         </div>
 
         {/* Trust chips */}
-        <div className="hero-rise flex flex-wrap items-center gap-x-10 gap-y-6" style={{ animationDelay: '380ms' }}>
-          {HERO_CHIPS.map((chip, i) => (
-            <div key={chip.label.join(' ')} className="flex items-center gap-10">
-              {i > 0 && <span className="hidden h-[68px] w-px bg-navy/15 lg:block" />}
-              <div className="flex items-center gap-4">
-                <span className="grid size-[68px] shrink-0 place-items-center rounded-full bg-white shadow-[0px_8px_18px_rgba(0,48,94,0.10)]">
-                  <img src={chip.icon} alt="" className="size-8" />
-                </span>
-                <span className="font-poppins text-lg font-bold leading-tight text-ink lg:text-xl">
-                  {chip.label[0]}
-                  <br />
-                  {chip.label[1]}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <HeroChips chips={HERO_CHIPS} />
       </Container>
     </section>
   )
@@ -115,9 +101,7 @@ function WhatIs() {
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col gap-6">
-            <h2 className="font-poppins text-[30px] font-bold leading-[1.08] text-navy sm:text-4xl lg:text-[44px] xl:text-[52px]">
-              What Is Hormone Therapy?
-            </h2>
+            <h2 className={`${SECTION_TITLE} text-navy`}>What Is Hormone Therapy?</h2>
             <p className="max-w-[583px] font-poppins text-xl text-ink">
               Hormone therapy helps restore hormones that naturally decline with age. Using bioidentical hormones that
               closely match those produced by your body, treatment can help improve energy, mood, sleep, mental clarity,
@@ -155,9 +139,7 @@ function WhatYouMayNotice() {
       />
       <Container className="relative z-10 py-20 lg:py-24">
         <Reveal className="flex flex-col gap-12">
-          <h2 className="max-w-[794px] font-poppins text-[30px] font-bold leading-[1.08] text-page sm:text-4xl lg:text-[44px] xl:text-[52px] 2xl:text-[60px]">
-            What You May Notice
-          </h2>
+          <h2 className={`${SECTION_TITLE} max-w-[794px] text-page`}>What You May Notice</h2>
           <div className="flex flex-col gap-x-16 gap-y-2 sm:flex-row">
             <ul className="flex list-disc flex-col gap-2 pl-6 font-poppins text-xl text-page">
               {NOTICE_COL_1.map((item) => (
@@ -194,9 +176,7 @@ function HowItWorks() {
       <CrossDecor src="/assets/cross-3.svg" className="right-[-60px] top-[2%] w-[240px]" />
       <Container className="relative z-10 py-20 lg:py-24">
         <Reveal className="flex flex-col gap-12">
-          <h2 className="font-poppins text-[30px] font-bold leading-[1.08] text-navy sm:text-4xl lg:text-[44px] xl:text-[52px] 2xl:text-[60px]">
-            How It Works
-          </h2>
+          <h2 className={`${SECTION_TITLE} text-navy`}>How It Works</h2>
           <div className="grid gap-6 lg:grid-cols-2">
             {STEPS.map((step, i) => (
               <Reveal key={step} delay={(i % 2) * 90}>

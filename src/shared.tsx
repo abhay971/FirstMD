@@ -21,10 +21,20 @@ export const MAPS_HREF =
   'https://www.google.com/maps/dir/?api=1&destination=' +
   encodeURIComponent('208 East TX-114, Suite 300, Roanoke, TX 76262')
 
-export const NAV_ITEMS = [
+/** The four services, used by the navbar Services dropdown. */
+export const SERVICE_LINKS = [
+  { label: 'Family Medicine & Urgent Care', href: '/services' },
+  { label: 'Hormone Therapy', href: '/services/hormone' },
+  { label: 'IV Hydrating Therapy', href: '/services/iv' },
+  { label: 'Peptide Therapy', href: '/contact' },
+]
+
+type NavItem = { label: string; id: string; href: string; children?: { label: string; href: string }[] }
+
+export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', id: 'home', href: '/' },
   { label: 'About', id: 'about', href: '/#about' },
-  { label: 'Services', id: 'services', href: '/#services' },
+  { label: 'Services', id: 'services', href: '/#services', children: SERVICE_LINKS },
   { label: 'Providers', id: 'providers', href: '/#providers' },
   { label: 'Resources', id: 'resources', href: '/resources' },
   { label: 'Insurance', id: 'insurance', href: '/#insurance' },
@@ -164,13 +174,64 @@ export function Reveal({
   )
 }
 
-export function SectionHeading({ eyebrow, title, className = '' }: { eyebrow: string; title: string; className?: string }) {
+/**
+ * Standard section-title sizing. `SECTION_TITLE` is the compact size used across
+ * the service pages (Family Medicine, Hormone, IV) so every section heading
+ * matches. Pair it with a color class (text-navy on light, text-page on navy).
+ */
+export const SECTION_TITLE = 'font-poppins text-[28px] font-bold leading-[1.1] sm:text-[34px] lg:text-[40px] xl:text-[44px]'
+
+export function SectionHeading({
+  eyebrow,
+  title,
+  className = '',
+  size = 'lg',
+}: {
+  eyebrow: string
+  title: string
+  className?: string
+  size?: 'lg' | 'md'
+}) {
   return (
     <div className={`flex flex-col gap-3 ${className}`}>
       <p className="font-poppins text-lg font-bold text-blue">{eyebrow}</p>
-      <h2 className="font-poppins text-[30px] font-bold leading-[1.08] text-navy sm:text-4xl lg:text-[44px] xl:text-[52px] 2xl:text-[60px]">
-        {title}
-      </h2>
+      {size === 'md' ? (
+        <h2 className={`${SECTION_TITLE} text-navy`}>{title}</h2>
+      ) : (
+        <h2 className="font-poppins text-[30px] font-bold leading-[1.08] text-navy sm:text-4xl lg:text-[44px] xl:text-[52px] 2xl:text-[60px]">
+          {title}
+        </h2>
+      )}
+    </div>
+  )
+}
+
+/**
+ * Hero trust-chip row shared by the service pages (Family Medicine, Hormone,
+ * IV). Sizing is tuned so four chips — including longer two-word labels — stay
+ * on a single line at desktop widths, keeping every service hero consistent.
+ */
+export function HeroChips({ chips }: { chips: { icon: string; label: [string, string] }[] }) {
+  return (
+    <div
+      className="hero-rise flex flex-wrap items-center justify-between gap-x-6 gap-y-5 rounded-[28px] bg-page/70 px-6 py-4 backdrop-blur-md"
+      style={{ animationDelay: '380ms' }}
+    >
+      {chips.map((chip, i) => (
+        <div key={chip.label.join(' ')} className="flex items-center gap-6">
+          {i > 0 && <span className="hidden h-[58px] w-px bg-navy/15 lg:block" />}
+          <div className="flex items-center gap-3">
+            <span className="grid size-[58px] shrink-0 place-items-center rounded-full bg-white shadow-[0px_8px_18px_rgba(0,48,94,0.10)]">
+              <img src={chip.icon} alt="" className="size-7" />
+            </span>
+            <span className="font-poppins text-base font-bold leading-tight text-ink lg:text-lg">
+              {chip.label[0]}
+              <br />
+              {chip.label[1]}
+            </span>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
@@ -323,18 +384,40 @@ export function Navbar() {
 
         <ul className="hidden items-center gap-5 font-poppins text-base lg:flex xl:gap-7">
           {NAV_ITEMS.map((item) => (
-            <li key={item.id}>
+            <li key={item.id} className="group/nav relative">
               <a
                 href={item.href}
-                className={`relative py-1 transition-colors hover:text-white ${active === item.id ? 'text-white' : 'text-white/70'}`}
+                className={`relative flex items-center gap-1 py-1 transition-colors hover:text-white ${active === item.id ? 'text-white' : 'text-white/70'}`}
               >
                 {item.label}
+                {item.children && (
+                  <svg viewBox="0 0 24 24" className="size-4 transition-transform duration-200 group-hover/nav:rotate-180" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                )}
                 <span
                   className={`absolute -bottom-1 left-0 h-0.5 rounded-full bg-accent transition-all duration-300 ${
                     active === item.id ? 'w-full' : 'w-0'
                   }`}
                 />
               </a>
+
+              {item.children && (
+                // pt-3 bridges the gap so hover doesn't drop when moving onto the panel
+                <div className="invisible absolute left-1/2 top-full z-50 w-[290px] -translate-x-1/2 translate-y-1 pt-4 opacity-0 transition-all duration-200 group-hover/nav:visible group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:visible group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100">
+                  <div className="flex flex-col gap-0.5 rounded-2xl border border-white/10 bg-navy p-2 shadow-[0_20px_40px_rgba(0,0,0,0.35)]">
+                    {item.children.map((child) => (
+                      <a
+                        key={child.href}
+                        href={child.href}
+                        className="rounded-xl px-4 py-2.5 font-poppins text-sm text-white/75 transition-colors hover:bg-white/10 hover:text-white"
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -366,7 +449,7 @@ export function Navbar() {
       {/* Mobile panel */}
       <div
         className={`pointer-events-auto mx-auto mt-2 w-full max-w-[1272px] origin-top overflow-hidden rounded-3xl border border-white/15 bg-navy px-5 shadow-[0_20px_40px_rgba(0,0,0,0.35)] transition-all duration-300 lg:hidden ${
-          open ? 'max-h-[520px] py-5 opacity-100' : 'max-h-0 border-transparent py-0 opacity-0'
+          open ? 'max-h-[700px] py-5 opacity-100' : 'max-h-0 border-transparent py-0 opacity-0'
         }`}
       >
         <ul className="flex flex-col gap-1">
@@ -381,6 +464,21 @@ export function Navbar() {
               >
                 {item.label}
               </a>
+              {item.children && (
+                <ul className="mb-1 ml-4 flex flex-col gap-0.5 border-l border-white/15 pl-3">
+                  {item.children.map((child) => (
+                    <li key={child.href}>
+                      <a
+                        href={child.href}
+                        onClick={() => setOpen(false)}
+                        className="block rounded-lg px-4 py-2 font-poppins text-base text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                      >
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>
@@ -468,19 +566,19 @@ export function FAQ({ items = FAQS }: { items?: { q: string; a: string }[] }) {
  * Providers preview (used on Home and Services pages)
  * ------------------------------------------------------------------------- */
 
-type Provider = { name: string; title: string; img?: string; bio?: string }
+type Provider = { id: string; name: string; title: string; img?: string; bio?: string }
 
 const PROVIDERS: Provider[] = [
-  { name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-foram-hd.png' },
-  { name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-edward.png' },
-  { name: 'Manny Trevino', title: 'DC', img: '/assets/prov-manny.png' },
-  { name: 'Ranjit Dhelaria', title: 'MD, MRCP', img: '/assets/prov-ranjit.png' },
+  { id: 'foram', name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-foram-hd.png' },
+  { id: 'edward', name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-edward.png' },
+  { id: 'manny', name: 'Manny Trevino', title: 'DC', img: '/assets/prov-manny.png' },
+  { id: 'ranjit', name: 'Ranjit Dhelaria', title: 'MD, MRCP', img: '/assets/prov-ranjit.png' },
 ]
 
 function ProviderCard({ provider }: { provider: Provider }) {
   return (
     <a
-      href="/providers"
+      href={`/providers#${provider.id}`}
       aria-label={`Learn more about ${provider.name}`}
       className="group relative mx-auto block w-full max-w-[306px] transition-transform duration-300 hover:-translate-y-2"
     >

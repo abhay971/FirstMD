@@ -141,7 +141,7 @@ const SERVICES = [
   {
     name: 'IV Hydrating Therapy',
     desc: 'IV vitamin and hydration drips to restore energy, recovery, and wellness fast.',
-    href: BOOK,
+    href: '/services/iv',
   },
   {
     name: 'Peptide Therapy',
@@ -331,7 +331,7 @@ function Contact() {
           </div>
 
           {/* Cards row */}
-          <div className="grid gap-9 lg:grid-cols-[1fr_436px_324px]">
+          <div className="grid gap-9 lg:grid-cols-2">
             {/* Office hours */}
             <div className="flex flex-col justify-center gap-6 rounded-3xl border border-navy bg-white p-10 shadow-sm transition-shadow hover:shadow-lg">
               <div className="flex items-center gap-4">
@@ -368,15 +368,6 @@ function Contact() {
               </a>
             </div>
 
-            {/* CTAs */}
-            <div className="flex flex-col gap-6">
-              <PillButton variant="accent" href={MAPS_HREF} newTab className="h-[91px] w-full">
-                Get Directions
-              </PillButton>
-              <PillButton variant="white" href={PHONE_HREF} className="h-[91px] w-full">
-                Book Appointment
-              </PillButton>
-            </div>
           </div>
         </Reveal>
       </Container>

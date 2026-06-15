@@ -6,6 +6,7 @@ import ContactPage from './ContactPage'
 import ResourcesPage from './ResourcesPage'
 import ServicesPage from './ServicesPage'
 import HormonePage from './HormonePage'
+import IVPage from './IVPage'
 
 /** Scroll to a #hash target after the page renders (links like /#contact). */
 function ScrollToHash() {
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/hormone" element={<HormonePage />} />
+        <Route path="/services/iv" element={<IVPage />} />
         <Route path="/providers" element={<ProvidersPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/resources" element={<ResourcesPage />} />

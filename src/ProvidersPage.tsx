@@ -4,6 +4,7 @@
  */
 
 import type { ReactNode } from 'react'
+import { useLocation } from 'react-router-dom'
 import {
   BOOK,
   CapsuleFrame,
@@ -213,21 +214,26 @@ function TeamIntro() {
  * ------------------------------------------------------------------------- */
 
 type Crop = { width: string; height: string; left: string; top: string }
-type Provider = { name: string; title: string; img: string; crop: Crop }
+type Provider = { id: string; name: string; title: string; img: string; crop: Crop }
 
 // Crops mirror the Figma node placements so each face is framed identically.
 const PROVIDERS: Provider[] = [
-  { name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-src-1.png', crop: { width: '151.08%', height: '248.42%', left: '-25.54%', top: '-68.36%' } },
-  { name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-src-2.png', crop: { width: '100%', height: '128.78%', left: '0%', top: '0%' } },
-  { name: 'Manny Trevino', title: 'DC', img: '/assets/prov-src-3.png', crop: { width: '100%', height: '133.44%', left: '0%', top: '0%' } },
-  { name: 'Dr. Ranjit Dhelaria', title: 'MD, MRCP (UK)', img: '/assets/prov-src-4.png', crop: { width: '119.6%', height: '161.31%', left: '-15.16%', top: '-17.44%' } },
+  { id: 'foram', name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-src-1.png', crop: { width: '151.08%', height: '248.42%', left: '-25.54%', top: '-68.36%' } },
+  { id: 'edward', name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-src-2.png', crop: { width: '100%', height: '128.78%', left: '0%', top: '0%' } },
+  { id: 'manny', name: 'Manny Trevino', title: 'DC', img: '/assets/prov-src-3.png', crop: { width: '100%', height: '133.44%', left: '0%', top: '0%' } },
+  { id: 'ranjit', name: 'Dr. Ranjit Dhelaria', title: 'MD, MRCP (UK)', img: '/assets/prov-src-4.png', crop: { width: '119.6%', height: '161.31%', left: '-15.16%', top: '-17.44%' } },
 ]
 
 const PROVIDER_SPECIALTIES = ['Family Medicine', 'Preventive Care', 'Chronic Disease Management']
 
-function ProviderCard({ provider }: { provider: Provider }) {
+function ProviderCard({ provider, highlighted }: { provider: Provider; highlighted?: boolean }) {
   return (
-    <div className="group flex flex-col overflow-hidden rounded-3xl border border-navy bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl">
+    <div
+      id={provider.id}
+      className={`group flex scroll-mt-28 flex-col overflow-hidden rounded-3xl border bg-white shadow-sm transition-all duration-300 hover:shadow-xl ${
+        highlighted ? 'border-accent ring-4 ring-accent/40 ring-offset-2 ring-offset-page' : 'border-navy'
+      }`}
+    >
       <div className="relative aspect-[312/253] w-full overflow-hidden bg-navy">
         <img
           src={provider.img}
@@ -266,12 +272,13 @@ function ProviderCard({ provider }: { provider: Provider }) {
 }
 
 function ProvidersGrid() {
+  const active = useLocation().hash.replace('#', '')
   return (
     <Container className="py-12">
       <Reveal className="flex flex-col items-center gap-8">
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {PROVIDERS.map((p) => (
-            <ProviderCard key={p.name} provider={p} />
+            <ProviderCard key={p.name} provider={p} highlighted={p.id === active} />
           ))}
         </div>
         <a
