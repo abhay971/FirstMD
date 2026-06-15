@@ -26,8 +26,8 @@ export const NAV_ITEMS = [
   { label: 'About', id: 'about', href: '/#about' },
   { label: 'Services', id: 'services', href: '/#services' },
   { label: 'Providers', id: 'providers', href: '/#providers' },
+  { label: 'Resources', id: 'resources', href: '/resources' },
   { label: 'Insurance', id: 'insurance', href: '/#insurance' },
-  { label: 'Contact', id: 'contact', href: '/#contact' },
 ]
 const SECTION_IDS = ['home', 'about', 'services', 'providers', 'insurance', 'contact']
 
@@ -207,7 +207,9 @@ export function Navbar() {
     ? 'providers'
     : path.startsWith('/contact')
       ? 'contact'
-      : scrollActive
+      : path.startsWith('/resources')
+        ? 'resources'
+        : scrollActive
 
   // While actively scrolling, collapse to a compact links-only bar; expand on idle.
   useEffect(() => {
@@ -237,9 +239,9 @@ export function Navbar() {
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-4 lg:pt-6">
       <nav
-        className={`pointer-events-auto mx-auto flex w-full max-w-[1080px] items-center justify-between gap-6 rounded-[80px] border border-white/60 p-2.5 transition-all duration-300 ${
+        className={`pointer-events-auto mx-auto flex w-full max-w-[1140px] items-center justify-between gap-6 rounded-[80px] border border-white/60 p-2.5 transition-all duration-300 ${
           scrolled ? 'bg-navy shadow-[0_12px_34px_rgba(0,0,0,0.28)]' : 'bg-navy'
-        } ${compact ? 'lg:max-w-[600px] lg:justify-center' : ''}`}
+        } ${compact ? 'lg:max-w-[680px] lg:justify-center' : ''}`}
       >
         <a
           href="/"
@@ -251,7 +253,7 @@ export function Navbar() {
           <img src="/assets/logo-navy.svg" alt="First MD" className="h-7 w-auto lg:h-8" />
         </a>
 
-        <ul className="hidden items-center gap-8 font-poppins text-base lg:flex">
+        <ul className="hidden items-center gap-5 font-poppins text-base lg:flex xl:gap-7">
           {NAV_ITEMS.map((item) => (
             <li key={item.id}>
               <a
@@ -356,7 +358,7 @@ const FAQS = [
   { q: 'What insurance plans do you accept?', a: 'We accept most major insurance providers. Reach out and our team will confirm your coverage.' },
 ]
 
-export function FAQ() {
+export function FAQ({ items = FAQS }: { items?: { q: string; a: string }[] }) {
   return (
     <section className="relative overflow-hidden">
       <SoftTexture />
@@ -365,7 +367,7 @@ export function FAQ() {
         <Reveal className="flex flex-col items-center gap-10">
           <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">FAQ</h2>
           <div className="flex w-full flex-col gap-6">
-            {FAQS.map((faq, i) => (
+            {items.map((faq, i) => (
               <div
                 key={i}
                 tabIndex={0}
@@ -394,6 +396,67 @@ export function FAQ() {
 }
 
 /* ----------------------------------------------------------------------------
+ * Providers preview (used on Home and Services pages)
+ * ------------------------------------------------------------------------- */
+
+type Provider = { name: string; title: string; img?: string; bio?: string }
+
+const PROVIDERS: Provider[] = [
+  { name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-foram-hd.png' },
+  { name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-edward.png' },
+  { name: 'Manny Trevino', title: 'DC', img: '/assets/prov-manny.png' },
+  { name: 'Ranjit Dhelaria', title: 'MD, MRCP', img: '/assets/prov-ranjit.png' },
+]
+
+function ProviderCard({ provider }: { provider: Provider }) {
+  return (
+    <a
+      href="/providers"
+      aria-label={`Learn more about ${provider.name}`}
+      className="group relative mx-auto block w-full max-w-[306px] transition-transform duration-300 hover:-translate-y-2"
+    >
+      <div className="aspect-square w-full overflow-hidden rounded-[30px] bg-navy shadow-lg transition-shadow duration-300 group-hover:shadow-2xl">
+        {provider.img ? (
+          <img
+            src={provider.img}
+            alt={provider.name}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <p className="p-6 pb-16 text-center font-poppins text-sm leading-relaxed text-white">{provider.bio}</p>
+        )}
+      </div>
+      <div className="absolute -bottom-6 left-1/2 w-[197px] max-w-[80%] -translate-x-1/2 rounded-[20px] border border-navy bg-white py-2 text-center shadow-md transition-colors group-hover:border-accent">
+        <p className="font-outfit text-lg font-bold text-navy">{provider.name}</p>
+        <p className="font-outfit text-sm text-navy">{provider.title}</p>
+      </div>
+    </a>
+  )
+}
+
+export function Providers() {
+  return (
+    <section id="providers" className="relative scroll-mt-28 overflow-hidden">
+      <SoftTexture />
+      <CrossDecor src="/assets/cross-2.svg" className="right-[-60px] bottom-[12%] w-[210px]" />
+      <Container className="relative z-10 py-20">
+        <Reveal className="flex flex-col items-center gap-12">
+          <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">Meet our Providers</h2>
+          <div className="grid w-full grid-cols-2 gap-x-4 gap-y-12 lg:grid-cols-4">
+            {PROVIDERS.map((p) => (
+              <ProviderCard key={p.name} provider={p} />
+            ))}
+          </div>
+          <ArrowLink href="/providers" className="mt-4 text-2xl text-navy">
+            View more
+          </ArrowLink>
+        </Reveal>
+      </Container>
+    </section>
+  )
+}
+
+/* ----------------------------------------------------------------------------
  * Footer
  * ------------------------------------------------------------------------- */
 
@@ -404,6 +467,7 @@ const FOOTER_COLS: { heading: string; links: { label: string; href: string }[] }
       { label: 'Home', href: '/' },
       { label: 'Services', href: '/#services' },
       { label: 'Providers', href: '/providers' },
+      { label: 'Patient Resources', href: '/resources' },
       { label: 'Insurance', href: '/#insurance' },
       { label: 'Contact', href: '/#contact' },
     ],
@@ -420,10 +484,10 @@ const FOOTER_COLS: { heading: string; links: { label: string; href: string }[] }
   {
     heading: 'Services',
     links: [
-      { label: 'Family Medicine', href: '/#services' },
-      { label: 'Urgent Care', href: '/#services' },
-      { label: 'IV Hydration', href: '/#services' },
-      { label: 'Chronic Care', href: '/#services' },
+      { label: 'Family Medicine & Urgent Care', href: '/#services' },
+      { label: 'Hormone Therapy', href: '/#services' },
+      { label: 'IV Hydrating Therapy', href: '/#services' },
+      { label: 'Peptide Therapy', href: '/#services' },
     ],
   },
   {

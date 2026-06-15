@@ -59,6 +59,14 @@ summary {
   animation-play-state: paused;
 }
 
+/* Horizontal scrollers (e.g. health-articles row) without a visible scrollbar */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Scroll-reveal — elements rise + fade as they enter the viewport */
 .reveal {
   opacity: 0;

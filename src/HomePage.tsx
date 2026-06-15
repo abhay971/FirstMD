@@ -18,6 +18,7 @@ import {
   PHONE_DISPLAY,
   PHONE_HREF,
   PillButton,
+  Providers,
   Reveal,
   SectionHeading,
   SoftTexture,
@@ -126,7 +127,7 @@ function NeedCareBanner() {
  * Services
  * ------------------------------------------------------------------------- */
 
-const SERVICES = ['Family Medicine', 'Chronic Illness Treatment', 'ProPellet Therapy', 'IV Hydration Therapy', 'On-Site Facilities']
+const SERVICES = ['Integrated Family Medicine & Urgent Care', 'Hormone Therapy', 'IV Hydrating Therapy', 'Peptide Therapy']
 
 function Services() {
   return (
@@ -204,67 +205,6 @@ function WhyChoose() {
             </PillButton>
           </Reveal>
         </div>
-      </Container>
-    </section>
-  )
-}
-
-/* ----------------------------------------------------------------------------
- * Providers (home preview)
- * ------------------------------------------------------------------------- */
-
-type Provider = { name: string; title: string; img?: string; bio?: string }
-
-const PROVIDERS: Provider[] = [
-  { name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-foram-hd.png' },
-  { name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-edward.png' },
-  { name: 'Manny Trevino', title: 'DC', img: '/assets/prov-manny.png' },
-  { name: 'Ranjit Dhelaria', title: 'MD, MRCP', img: '/assets/prov-ranjit.png' },
-]
-
-function ProviderCard({ provider }: { provider: Provider }) {
-  return (
-    <a
-      href="/providers"
-      aria-label={`Learn more about ${provider.name}`}
-      className="group relative mx-auto block w-full max-w-[306px] transition-transform duration-300 hover:-translate-y-2"
-    >
-      <div className="aspect-square w-full overflow-hidden rounded-[30px] bg-navy shadow-lg transition-shadow duration-300 group-hover:shadow-2xl">
-        {provider.img ? (
-          <img
-            src={provider.img}
-            alt={provider.name}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-        ) : (
-          <p className="p-6 pb-16 text-center font-poppins text-sm leading-relaxed text-white">{provider.bio}</p>
-        )}
-      </div>
-      <div className="absolute -bottom-6 left-1/2 w-[197px] max-w-[80%] -translate-x-1/2 rounded-[20px] border border-navy bg-white py-2 text-center shadow-md transition-colors group-hover:border-accent">
-        <p className="font-outfit text-lg font-bold text-navy">{provider.name}</p>
-        <p className="font-outfit text-sm text-navy">{provider.title}</p>
-      </div>
-    </a>
-  )
-}
-
-function Providers() {
-  return (
-    <section id="providers" className="relative scroll-mt-28 overflow-hidden">
-      <SoftTexture />
-      <CrossDecor src="/assets/cross-2.svg" className="right-[-60px] bottom-[12%] w-[210px]" />
-      <Container className="relative z-10 py-20">
-        <Reveal className="flex flex-col items-center gap-12">
-          <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">Meet our Providers</h2>
-          <div className="grid w-full grid-cols-2 gap-x-4 gap-y-12 lg:grid-cols-4">
-            {PROVIDERS.map((p) => (
-              <ProviderCard key={p.name} provider={p} />
-            ))}
-          </div>
-          <ArrowLink href="/providers" className="mt-4 text-2xl text-navy">
-            View more
-          </ArrowLink>
-        </Reveal>
       </Container>
     </section>
   )
