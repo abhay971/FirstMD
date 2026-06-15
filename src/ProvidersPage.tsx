@@ -6,6 +6,7 @@
 import type { ReactNode } from 'react'
 import {
   BOOK,
+  CapsuleFrame,
   Container,
   Footer,
   FAQ,
@@ -16,7 +17,7 @@ import {
   PillButton,
   Reveal,
   SectionHeading,
-  useScrollY,
+  useParallax,
 } from './shared'
 
 /* ----------------------------------------------------------------------------
@@ -127,8 +128,7 @@ const HERO_BADGES = [
 ]
 
 function Hero() {
-  const y = useScrollY()
-  const shift = Math.min(y, 900) * 0.04
+  const heroRef = useParallax<HTMLImageElement>()
 
   return (
     <section className="relative flex min-h-svh flex-col overflow-hidden bg-page">
@@ -136,7 +136,7 @@ function Hero() {
         <img
           src="/assets/providers-hero.png"
           alt=""
-          style={{ transform: `translate3d(0, ${shift}px, 0)` }}
+          ref={heroRef}
           className="absolute inset-0 h-full w-full object-cover object-[center_30%] will-change-transform"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-page from-0% via-page/82 via-42% to-transparent to-66%" />
@@ -325,19 +325,21 @@ function WhyTrust() {
             </ul>
           </Reveal>
 
-          {/* Arch images (figma-shaped, transparent corners) */}
-          <Reveal delay={120} className="hidden shrink-0 items-center justify-center gap-4 lg:flex">
-            <div className="relative h-[460px] w-[210px] overflow-hidden rounded-[110px] shadow-2xl [transform:scaleX(-1)]">
-              <img
-                src="/assets/trust-group.png"
-                alt="First MD physician"
-                className="absolute max-w-none"
-                style={{ width: '660%', height: '161.3%', left: '-189.5%', top: '-35%' }}
-              />
-            </div>
-            <div className="relative h-[460px] w-[210px] overflow-hidden rounded-[110px] shadow-2xl">
+          {/* Capsule collage — staggered stadium photos matching the Services page */}
+          <Reveal delay={120} className="hidden shrink-0 items-center justify-center gap-4 sm:gap-5 lg:flex">
+            <CapsuleFrame className="h-[460px] w-[210px] -translate-y-6" outlineClassName="border-page/40">
+              <div className="absolute inset-0 [transform:scaleX(-1)]">
+                <img
+                  src="/assets/trust-group.png"
+                  alt="First MD physician"
+                  className="absolute max-w-none"
+                  style={{ width: '660%', height: '161.3%', left: '-189.5%', top: '-35%' }}
+                />
+              </div>
+            </CapsuleFrame>
+            <CapsuleFrame sharp="bl" className="h-[460px] w-[210px] translate-y-6" outlineClassName="border-page/40">
               <img src="/assets/trust-nurse.png" alt="First MD nurse" className="h-full w-full -scale-y-100 object-cover object-center" />
-            </div>
+            </CapsuleFrame>
           </Reveal>
         </div>
       </Container>

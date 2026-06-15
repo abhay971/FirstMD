@@ -16,7 +16,7 @@ import {
   PillButton,
   Reveal,
   SectionHeading,
-  useScrollY,
+  useParallax,
 } from './shared'
 
 const FORM = '#appointment-form'
@@ -98,8 +98,7 @@ const HERO_BADGES = [
 ]
 
 function Hero() {
-  const y = useScrollY()
-  const shift = Math.min(y, 900) * 0.04
+  const heroRef = useParallax<HTMLImageElement>()
 
   return (
     <section className="relative flex min-h-svh flex-col overflow-hidden bg-page">
@@ -107,7 +106,7 @@ function Hero() {
         <img
           src="/assets/contact-hero.png"
           alt=""
-          style={{ transform: `translate3d(0, ${shift}px, 0)` }}
+          ref={heroRef}
           className="absolute inset-0 h-full w-full object-cover object-[center_28%] will-change-transform"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-page from-0% via-page/82 via-42% to-transparent to-66%" />

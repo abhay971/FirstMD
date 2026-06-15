@@ -7,6 +7,7 @@ import {
   ARROW,
   ArrowLink,
   BOOK,
+  CapsuleFrame,
   CheckCircle,
   Container,
   CrossDecor,
@@ -22,7 +23,7 @@ import {
   Reveal,
   SectionHeading,
   SoftTexture,
-  useScrollY,
+  useParallax,
 } from './shared'
 
 /* ----------------------------------------------------------------------------
@@ -30,8 +31,7 @@ import {
  * ------------------------------------------------------------------------- */
 
 function Hero() {
-  const y = useScrollY()
-  const shift = Math.min(y, 900) * 0.04 // gentle parallax on the backdrop
+  const heroRef = useParallax<HTMLImageElement>()
 
   return (
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
@@ -39,7 +39,7 @@ function Hero() {
         <img
           src="/assets/hero-bg.png"
           alt=""
-          style={{ transform: `translate3d(0, ${shift}px, 0)` }}
+          ref={heroRef}
           className="absolute inset-x-0 top-[-5%] h-[110%] w-full object-cover object-[center_right] will-change-transform"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-page from-15% to-transparent to-52%" />
@@ -127,7 +127,28 @@ function NeedCareBanner() {
  * Services
  * ------------------------------------------------------------------------- */
 
-const SERVICES = ['Integrated Family Medicine & Urgent Care', 'Hormone Therapy', 'IV Hydrating Therapy', 'Peptide Therapy']
+const SERVICES = [
+  {
+    name: 'Integrated Family Medicine & Urgent Care',
+    desc: 'Same-day urgent care plus ongoing primary care for the whole family — all under one roof.',
+    href: '/services',
+  },
+  {
+    name: 'Hormone Therapy',
+    desc: 'Bioidentical hormone pellets for steady energy, sleep, focus, and mood — no daily pills.',
+    href: '/services/hormone',
+  },
+  {
+    name: 'IV Hydrating Therapy',
+    desc: 'IV vitamin and hydration drips to restore energy, recovery, and wellness fast.',
+    href: BOOK,
+  },
+  {
+    name: 'Peptide Therapy',
+    desc: 'Targeted peptide treatments to support recovery, metabolism, and healthy aging.',
+    href: BOOK,
+  },
+]
 
 function Services() {
   return (
@@ -140,15 +161,29 @@ function Services() {
       <Container className="relative z-10 py-20 lg:py-28">
         <Reveal className="flex max-w-[665px] flex-col gap-8">
           <SectionHeading eyebrow="Our Services" title="Healthcare Services Designed Around Your Family" className="max-w-[640px]" />
-          <ul className="flex w-full max-w-[330px] flex-col">
-            {SERVICES.map((service, i) => (
-              <li key={service}>
-                <a href={BOOK} className="group flex items-center gap-3 py-2 transition-colors">
-                  <span className="size-2 shrink-0 rounded-full bg-blue transition-transform group-hover:scale-125" />
-                  <span className="font-poppins text-lg font-bold text-black transition-colors group-hover:text-blue">{service}</span>
-                  <span className="ml-auto text-blue opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100">{ARROW}</span>
-                </a>
-                {i < SERVICES.length - 1 && <span className="block h-px w-full bg-black/15" />}
+          <ul className="flex w-full max-w-[460px] flex-col">
+            {SERVICES.map((service) => (
+              <li key={service.name} className="group border-b border-black/15 last:border-0">
+                <div className="py-3">
+                  <div className="flex items-center gap-3">
+                    <span className="size-2 shrink-0 rounded-full bg-blue transition-transform group-hover:scale-125" />
+                    <span className="font-poppins text-lg font-bold text-black transition-colors group-hover:text-blue">
+                      {service.name}
+                    </span>
+                  </div>
+                  {/* Reveal description + "Know More" on hover */}
+                  <div className="grid grid-rows-[0fr] transition-all duration-300 ease-out group-hover:grid-rows-[1fr] group-focus-within:grid-rows-[1fr]">
+                    <div className="overflow-hidden">
+                      <p className="pl-5 pt-2 font-poppins text-sm text-black/70">{service.desc}</p>
+                      <ArrowLink
+                        href={service.href}
+                        className="ml-5 mt-2 text-sm font-bold text-blue hover:opacity-90"
+                      >
+                        Know More
+                      </ArrowLink>
+                    </div>
+                  </div>
+                </div>
               </li>
             ))}
           </ul>
@@ -171,19 +206,16 @@ function WhyChoose() {
       <CrossDecor src="/assets/cross-3.svg" className="right-[2%] top-3 w-[260px]" />
       <Container className="relative z-10 py-20">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[119px]">
-          {/* Arch image composition */}
-          <Reveal className="flex items-center justify-center gap-5">
-            {/* Doctor arch with a subtle outline tucked behind for depth */}
-            <div className="relative h-[440px] w-[200px] shrink-0 sm:h-[560px] sm:w-[268px]">
-              <div className="absolute inset-0 -translate-x-2 translate-y-3 rounded-[140px] border border-navy/30" />
-              <div className="absolute inset-0 overflow-hidden rounded-[140px] shadow-[0_20px_40px_rgba(0,0,0,0.12)]">
-                <img src="/assets/why-b.png" alt="First MD physician" className="h-full w-full object-cover" />
-              </div>
-            </div>
-            {/* Anatomy arch — flipped vertically so the figure stands upright */}
-            <div className="hidden h-[440px] w-[200px] shrink-0 overflow-hidden rounded-[140px] shadow-[0_20px_40px_rgba(0,0,0,0.12)] sm:block sm:h-[560px] sm:w-[268px]">
+          {/* Capsule collage — staggered stadium photos matching the Services page */}
+          <Reveal className="flex items-center justify-center gap-4 sm:gap-5">
+            {/* Doctor capsule — nudged up */}
+            <CapsuleFrame className="h-[440px] w-[200px] -translate-y-4 sm:h-[560px] sm:w-[268px] sm:-translate-y-7">
+              <img src="/assets/why-b.png" alt="First MD physician" className="h-full w-full object-cover" />
+            </CapsuleFrame>
+            {/* Anatomy capsule — nudged down, flipped vertically so the figure stands upright */}
+            <CapsuleFrame sharp="bl" className="hidden translate-y-4 sm:block sm:h-[560px] sm:w-[268px] sm:translate-y-7">
               <img src="/assets/why-c.png" alt="" className="h-full w-full -scale-y-100 object-cover" />
-            </div>
+            </CapsuleFrame>
           </Reveal>
 
           {/* Copy */}

@@ -35,23 +35,31 @@ const SECTION_IDS = ['home', 'about', 'services', 'providers', 'insurance', 'con
  * Hooks
  * ------------------------------------------------------------------------- */
 
-/** Tracks vertical scroll position (rAF-throttled) for parallax + navbar state. */
-export function useScrollY() {
-  const [y, setY] = useState(0)
+/**
+ * Gentle vertical parallax applied imperatively to a ref'd element on scroll.
+ * Writes `transform` directly (rAF-throttled) instead of going through React
+ * state, so scrolling never triggers re-renders of the host component tree.
+ */
+export function useParallax<T extends HTMLElement = HTMLElement>(factor = 0.04, max = 900) {
+  const ref = useRef<T>(null)
   useEffect(() => {
     let raf = 0
-    const onScroll = () => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(() => setY(window.scrollY))
+    const apply = () => {
+      raf = 0
+      const el = ref.current
+      if (el) el.style.transform = `translate3d(0, ${Math.min(window.scrollY, max) * factor}px, 0)`
     }
-    onScroll()
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(apply)
+    }
+    apply()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', onScroll)
-      cancelAnimationFrame(raf)
+      if (raf) cancelAnimationFrame(raf)
     }
-  }, [])
-  return y
+  }, [factor, max])
+  return ref
 }
 
 /** Returns the id of the section currently in view (for nav highlighting). */
@@ -191,42 +199,101 @@ export function CrossDecor({ src, className = '' }: { src: string; className?: s
   return <img aria-hidden alt="" src={src} className={`pointer-events-none absolute select-none ${className}`} />
 }
 
+/**
+ * Stadium / "capsule" photo frame matching the Services-page collage: three
+ * corners fully rounded with one corner left square ("sharp"), plus a faint
+ * outline tucked diagonally-opposite behind it for depth. The Services pair is
+ * point-symmetric — the LEFT capsule is sharp at top-right (default), the RIGHT
+ * capsule at bottom-left (set `sharp="bl"`). Sized by the caller via `className`
+ * (explicit height + width); stagger the pair up/down. To flip the photo, wrap
+ * `children` in an inset-0 element carrying the transform — never flip the frame
+ * itself, or the sharp corner moves.
+ */
+const CAPSULE_SHAPES = {
+  tl: 'rounded-tr-full rounded-bl-full rounded-br-full',
+  tr: 'rounded-tl-full rounded-bl-full rounded-br-full',
+  bl: 'rounded-tl-full rounded-tr-full rounded-br-full',
+  br: 'rounded-tl-full rounded-tr-full rounded-bl-full',
+} as const
+// Outline tucked toward the corner diagonally opposite the sharp one.
+const CAPSULE_OUTLINE_OFFSET = {
+  tl: 'translate-x-2 translate-y-3',
+  tr: '-translate-x-2 translate-y-3',
+  bl: 'translate-x-2 -translate-y-3',
+  br: '-translate-x-2 -translate-y-3',
+} as const
+
+export function CapsuleFrame({
+  children,
+  className = '',
+  outlineClassName = 'border-navy/30',
+  sharp = 'tr',
+}: {
+  children: ReactNode
+  className?: string
+  outlineClassName?: string
+  sharp?: keyof typeof CAPSULE_SHAPES
+}) {
+  const shape = CAPSULE_SHAPES[sharp]
+  return (
+    <div className={`relative shrink-0 ${className}`}>
+      <div className={`pointer-events-none absolute inset-0 border ${CAPSULE_OUTLINE_OFFSET[sharp]} ${shape} ${outlineClassName}`} />
+      <div className={`absolute inset-0 overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.12)] ${shape}`}>{children}</div>
+    </div>
+  )
+}
+
 /* ----------------------------------------------------------------------------
  * Navbar (route-aware: anchors scroll on the home page, routes navigate)
  * ------------------------------------------------------------------------- */
 
 export function Navbar() {
-  const y = useScrollY()
-  const scrolled = y > 24
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false) // y > 24 → solid-bar shadow
+  const [past60, setPast60] = useState(false) // y > 60 → eligible to collapse
   const [isScrolling, setIsScrolling] = useState(false)
   const location = useLocation()
   const path = location.pathname
   const scrollActive = useActiveSection(SECTION_IDS)
-  const active = path.startsWith('/providers')
-    ? 'providers'
-    : path.startsWith('/contact')
-      ? 'contact'
-      : path.startsWith('/resources')
-        ? 'resources'
-        : scrollActive
+  const active = path.startsWith('/services')
+    ? 'services'
+    : path.startsWith('/providers')
+      ? 'providers'
+      : path.startsWith('/contact')
+        ? 'contact'
+        : path.startsWith('/resources')
+          ? 'resources'
+          : scrollActive
 
-  // While actively scrolling, collapse to a compact links-only bar; expand on idle.
+  // Single rAF-throttled listener; we only flip booleans, so the bar re-renders
+  // on threshold crossings (and scroll start/stop), never every scroll frame.
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>
+    let raf = 0
+    const apply = () => {
+      raf = 0
+      const y = window.scrollY
+      setScrolled(y > 24)
+      setPast60(y > 60)
+    }
     const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(apply)
       setIsScrolling(true)
       clearTimeout(timer)
       timer = setTimeout(() => setIsScrolling(false), 280)
     }
+    apply()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', onScroll)
       clearTimeout(timer)
+      if (raf) cancelAnimationFrame(raf)
     }
   }, [])
 
-  const compact = isScrolling && y > 60 && !open
+  // While actively scrolling (past the hero), collapse to a compact links-only
+  // bar; expand again when scrolling stops.
+  const compact = isScrolling && past60 && !open
 
   // Lock body scroll while the mobile menu is open.
   useEffect(() => {
@@ -239,14 +306,15 @@ export function Navbar() {
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-4 lg:pt-6">
       <nav
-        className={`pointer-events-auto mx-auto flex w-full max-w-[1140px] items-center justify-between gap-6 rounded-[80px] border border-white/60 p-2.5 transition-all duration-300 ${
-          scrolled ? 'bg-navy shadow-[0_12px_34px_rgba(0,0,0,0.28)]' : 'bg-navy'
-        } ${compact ? 'lg:max-w-[680px] lg:justify-center' : ''}`}
+        className={`pointer-events-auto relative mx-auto flex w-full max-w-[1140px] items-center justify-between gap-6 rounded-[80px] border border-white/60 bg-navy p-2.5 transition-[max-width,box-shadow] duration-300 ease-out lg:min-h-[70px] lg:justify-center ${
+          scrolled ? 'shadow-[0_12px_34px_rgba(0,0,0,0.28)]' : 'shadow-none'
+        } ${compact ? 'lg:max-w-[680px]' : ''}`}
       >
+        {/* Logo: in-flow on mobile, absolute on lg so it can fade (opacity only) without animating layout */}
         <a
           href="/"
-          className={`flex h-11 shrink-0 items-center justify-center overflow-hidden rounded-[36px] bg-white px-5 transition-all duration-300 hover:scale-[1.03] lg:h-12 ${
-            compact ? 'lg:max-w-0 lg:px-0 lg:opacity-0' : 'lg:max-w-[180px] lg:px-5'
+          className={`flex h-11 shrink-0 items-center justify-center overflow-hidden rounded-[36px] bg-white px-5 transition-[opacity,transform] duration-300 ease-out hover:scale-[1.03] lg:absolute lg:inset-y-0 lg:left-2.5 lg:my-auto lg:h-12 ${
+            compact ? 'lg:pointer-events-none lg:opacity-0' : 'lg:opacity-100'
           }`}
           aria-label="First MD — home"
         >
@@ -271,10 +339,11 @@ export function Navbar() {
           ))}
         </ul>
 
+        {/* Book button: absolute on lg so it fades (opacity only), no layout animation */}
         <a
           href={BOOK}
-          className={`hidden shrink-0 overflow-hidden rounded-full border-4 border-white/10 bg-white py-2.5 font-poppins text-sm font-bold text-navy shadow-[0px_12px_10px_rgba(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-50 lg:inline-flex ${
-            compact ? 'lg:max-w-0 lg:border-0 lg:px-0 lg:opacity-0' : 'lg:max-w-[220px] lg:px-6'
+          className={`hidden shrink-0 items-center justify-center rounded-full border-4 border-white/10 bg-white py-2.5 font-poppins text-sm font-bold text-navy shadow-[0px_12px_10px_rgba(0,0,0,0.1)] transition-[opacity,transform,background-color] duration-300 ease-out hover:-translate-y-0.5 hover:bg-slate-50 lg:absolute lg:inset-y-0 lg:right-2.5 lg:my-auto lg:inline-flex lg:h-12 lg:px-6 ${
+            compact ? 'lg:pointer-events-none lg:opacity-0' : 'lg:opacity-100'
           }`}
         >
           Book Appointment
@@ -478,7 +547,6 @@ const FOOTER_COLS: { heading: string; links: { label: string; href: string }[] }
       { label: 'HIPAA Privacy Policy', href: '#' },
       { label: 'Accessibility Statement', href: '#' },
       { label: 'Sitemap', href: '#' },
-      { label: 'Contact', href: '/#contact' },
     ],
   },
   {
@@ -505,7 +573,7 @@ export function Footer() {
       <Container className="relative z-10">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-5 lg:gap-8">
           {FOOTER_COLS.map((col, i) => (
-            <ul key={i} className="flex flex-col gap-2 font-poppins text-xl">
+            <ul key={i} className="flex flex-col gap-2 font-poppins text-base">
               {col.heading && <li className="font-bold">{col.heading}</li>}
               {col.links.map((link) => (
                 <li key={link.label}>
@@ -516,7 +584,7 @@ export function Footer() {
               ))}
             </ul>
           ))}
-          <address className="flex flex-col gap-6 font-poppins text-xl not-italic lg:items-end lg:text-right">
+          <address className="flex flex-col gap-4 font-poppins text-base not-italic">
             <p className="font-bold">Contact</p>
             <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" className="hover:underline">
               {ADDRESS_LINES.map((line) => (
@@ -528,7 +596,7 @@ export function Footer() {
             <a href={PHONE_HREF} className="hover:underline">
               Phone: {PHONE_DISPLAY}
             </a>
-            <div className="text-base text-white/80">
+            <div className="text-sm text-white/80">
               <p>Copyright © 2026</p>
               <p>First MD Family Walk-In Clinic</p>
               <p>All Rights Reserved</p>

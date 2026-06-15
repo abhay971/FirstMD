@@ -20,7 +20,7 @@ import {
   PHONE_HREF,
   PillButton,
   Reveal,
-  useScrollY,
+  useParallax,
 } from './shared'
 
 /* ----------------------------------------------------------------------------
@@ -35,8 +35,7 @@ const HERO_CHIPS = [
 ]
 
 function Hero() {
-  const y = useScrollY()
-  const shift = Math.min(y, 900) * 0.04 // gentle parallax on the backdrop
+  const heroRef = useParallax<HTMLImageElement>()
 
   return (
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
@@ -44,7 +43,7 @@ function Hero() {
         <img
           src="/assets/resources-hero.png"
           alt=""
-          style={{ transform: `translate3d(0, ${shift}px, 0)` }}
+          ref={heroRef}
           className="absolute inset-x-0 top-[-5%] h-[110%] w-full object-cover object-[center_right] will-change-transform"
         />
         {/* Figma stacks two white washes: a wide veil over most of the photo + a stronger one on the left half */}
