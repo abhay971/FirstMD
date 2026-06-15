@@ -3,7 +3,7 @@
  * Shared chrome (Navbar, Marquee, FAQ, Footer) + primitives come from ./shared.
  */
 
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { useLocation } from 'react-router-dom'
 import {
   BOOK,
@@ -272,7 +272,17 @@ function ProviderCard({ provider, highlighted }: { provider: Provider; highlight
 }
 
 function ProvidersGrid() {
-  const active = useLocation().hash.replace('#', '')
+  const hash = useLocation().hash.replace('#', '')
+  const [active, setActive] = useState('')
+
+  // Highlight the deep-linked provider, then clear it after 5 seconds.
+  useEffect(() => {
+    if (!hash) return
+    setActive(hash)
+    const t = setTimeout(() => setActive(''), 5000)
+    return () => clearTimeout(t)
+  }, [hash])
+
   return (
     <Container className="py-12">
       <Reveal className="flex flex-col items-center gap-8">
