@@ -26,7 +26,7 @@ export const SERVICE_LINKS = [
   { label: 'Family Medicine & Urgent Care', href: '/services' },
   { label: 'Hormone Therapy', href: '/services/hormone' },
   { label: 'IV Hydrating Therapy', href: '/services/iv' },
-  { label: 'Peptide Therapy', href: '/contact' },
+  { label: 'Peptide Therapy', href: '/services/peptide' },
 ]
 
 type NavItem = { label: string; id: string; href: string; children?: { label: string; href: string }[] }
@@ -649,12 +649,7 @@ const FOOTER_COLS: { heading: string; links: { label: string; href: string }[] }
   },
   {
     heading: 'Services',
-    links: [
-      { label: 'Family Medicine & Urgent Care', href: '/#services' },
-      { label: 'Hormone Therapy', href: '/#services' },
-      { label: 'IV Hydrating Therapy', href: '/#services' },
-      { label: 'Peptide Therapy', href: '/#services' },
-    ],
+    links: SERVICE_LINKS,
   },
   {
     heading: 'Privacy Policy',

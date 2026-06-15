@@ -146,7 +146,7 @@ const SERVICES = [
   {
     name: 'Peptide Therapy',
     desc: 'Targeted peptide treatments to support recovery, metabolism, and healthy aging.',
-    href: BOOK,
+    href: '/services/peptide',
   },
 ]
 
