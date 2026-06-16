@@ -27,9 +27,9 @@ import {
 
 function Badge({ icon, children }: { icon: ReactNode; children: ReactNode }) {
   return (
-    <div className="flex items-center gap-3">
-      <span className="grid size-14 shrink-0 place-items-center rounded-full bg-[#e3eefb] text-blue">{icon}</span>
-      <p className="whitespace-nowrap font-poppins text-base font-bold leading-tight text-ink">{children}</p>
+    <div className="flex items-center gap-2.5 sm:gap-3">
+      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-[#e3eefb] text-blue sm:size-14">{icon}</span>
+      <p className="font-poppins text-sm font-bold leading-tight text-ink sm:whitespace-nowrap sm:text-base">{children}</p>
     </div>
   )
 }
@@ -173,7 +173,7 @@ function Hero() {
 
         {/* Feature badges — pinned to the bottom of the viewport, single row on desktop */}
         <div
-          className="hero-rise mt-auto flex flex-col gap-5 rounded-[28px] bg-page/70 px-6 py-5 backdrop-blur-md sm:grid sm:grid-cols-2 sm:gap-6 lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-0"
+          className="hero-rise mt-auto grid grid-cols-2 gap-x-3 gap-y-5 rounded-[28px] bg-page/70 px-5 py-5 backdrop-blur-md sm:gap-x-6 sm:gap-y-6 sm:px-6 lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-0"
           style={{ animationDelay: '380ms' }}
         >
           {HERO_BADGES.map((b, i) => (
