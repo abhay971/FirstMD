@@ -132,8 +132,14 @@ function Hero() {
   const heroRef = useParallax<HTMLImageElement>()
 
   return (
-    <section className="relative flex min-h-svh flex-col overflow-hidden bg-page">
-      <div className="pointer-events-none absolute inset-0">
+    <section className="relative flex flex-col overflow-hidden bg-page lg:min-h-svh">
+      {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
+      <div className="relative lg:hidden">
+        <img src="/assets/providers-hero.png" alt="" className="block w-full object-cover" />
+        <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
+      </div>
+      {/* Desktop: full-bleed background photo with text overlaid */}
+      <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
           src="/assets/providers-hero.png"
           alt=""
@@ -144,7 +150,7 @@ function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-b from-transparent to-page" />
       </div>
 
-      <Container className="relative z-10 flex flex-1 flex-col pt-32 pb-8 lg:pt-36">
+      <Container className="relative z-10 flex flex-col gap-8 py-10 lg:flex-1 lg:gap-0 lg:pt-36 lg:pb-8">
         <div className="hero-rise flex max-w-[680px] flex-col gap-4" style={{ animationDelay: '60ms' }}>
           <p className="font-poppins text-lg font-bold text-blue">Meet the Providers</p>
           <h1 className="font-poppins text-[36px] font-bold leading-[1.04] text-navy sm:text-5xl lg:text-[52px] xl:text-[58px] 2xl:text-[64px]">
@@ -166,14 +172,17 @@ function Hero() {
         </div>
 
         {/* Feature badges — pinned to the bottom of the viewport, single row on desktop */}
-        <Reveal className="mt-auto flex flex-col gap-5 rounded-[28px] bg-page/70 px-6 py-5 backdrop-blur-md sm:grid sm:grid-cols-2 sm:gap-6 lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-0">
+        <div
+          className="hero-rise mt-auto flex flex-col gap-5 rounded-[28px] bg-page/70 px-6 py-5 backdrop-blur-md sm:grid sm:grid-cols-2 sm:gap-6 lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-0"
+          style={{ animationDelay: '380ms' }}
+        >
           {HERO_BADGES.map((b, i) => (
             <div key={i} className="flex items-center gap-3 lg:gap-4">
               <Badge icon={b.icon}>{b.label}</Badge>
               {i < HERO_BADGES.length - 1 && <span className="hidden h-12 w-px shrink-0 bg-navy/15 lg:block" />}
             </div>
           ))}
-        </Reveal>
+        </div>
       </Container>
     </section>
   )
@@ -185,7 +194,7 @@ function Hero() {
 
 function TeamIntro() {
   return (
-    <Container className="py-20">
+    <Container className="py-14 lg:py-20">
       <div className="grid items-center gap-10 lg:grid-cols-[480px_1fr] lg:gap-[60px]">
         <Reveal className="aspect-[635/694] w-full max-w-[480px] overflow-hidden rounded-3xl shadow-xl">
           <img src="/assets/team-photo.png" alt="The First MD care team" className="h-full w-full object-cover" />
@@ -218,7 +227,6 @@ type Provider = { id: string; name: string; title: string; img: string; crop: Cr
 
 // Crops mirror the Figma node placements so each face is framed identically.
 const PROVIDERS: Provider[] = [
-  { id: 'foram', name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-src-1.png', crop: { width: '151.08%', height: '248.42%', left: '-25.54%', top: '-68.36%' } },
   { id: 'edward', name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-src-2.png', crop: { width: '100%', height: '128.78%', left: '0%', top: '0%' } },
   { id: 'manny', name: 'Manny Trevino', title: 'DC', img: '/assets/prov-src-3.png', crop: { width: '100%', height: '133.44%', left: '0%', top: '0%' } },
   { id: 'ranjit', name: 'Dr. Ranjit Dhelaria', title: 'MD, MRCP (UK)', img: '/assets/prov-src-4.png', crop: { width: '119.6%', height: '161.31%', left: '-15.16%', top: '-17.44%' } },
@@ -286,7 +294,7 @@ function ProvidersGrid() {
   return (
     <Container className="py-12">
       <Reveal className="flex flex-col items-center gap-8">
-        <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PROVIDERS.map((p) => (
             <ProviderCard key={p.name} provider={p} highlighted={p.id === active} />
           ))}
@@ -319,7 +327,7 @@ const TRUST_POINTS = [
 
 function WhyTrust() {
   return (
-    <section className="relative overflow-hidden bg-navy py-16 text-page lg:py-20">
+    <section className="relative overflow-hidden bg-navy py-12 text-page lg:py-20">
       <Container>
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto] lg:gap-16">
           <Reveal className="flex max-w-[540px] flex-col gap-6">
@@ -370,9 +378,9 @@ function WhyTrust() {
 
 function CtaBanner() {
   return (
-    <Container className="py-16">
+    <Container className="py-12 lg:py-16">
       <Reveal>
-        <div className="relative rounded-2xl bg-navy px-8 py-8 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-9">
+        <div className="relative rounded-2xl bg-navy px-6 py-8 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-9">
           {/* Concentric rings — clipped to the banner, centered behind the provider */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
             <img

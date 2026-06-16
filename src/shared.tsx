@@ -214,17 +214,17 @@ export function SectionHeading({
 export function HeroChips({ chips }: { chips: { icon: string; label: [string, string] }[] }) {
   return (
     <div
-      className="hero-rise flex flex-wrap items-center justify-between gap-x-6 gap-y-5 rounded-[28px] bg-page/70 px-6 py-4 backdrop-blur-md"
+      className="hero-rise grid grid-cols-2 items-center gap-x-3 gap-y-5 rounded-[28px] bg-page/70 px-5 py-4 backdrop-blur-md sm:gap-x-6 sm:gap-y-5 lg:flex lg:flex-wrap lg:justify-between lg:px-6"
       style={{ animationDelay: '380ms' }}
     >
       {chips.map((chip, i) => (
         <div key={chip.label.join(' ')} className="flex items-center gap-6">
           {i > 0 && <span className="hidden h-[58px] w-px bg-navy/15 lg:block" />}
-          <div className="flex items-center gap-3">
-            <span className="grid size-[58px] shrink-0 place-items-center rounded-full bg-white shadow-[0px_8px_18px_rgba(0,48,94,0.10)]">
-              <img src={chip.icon} alt="" className="size-7" />
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white shadow-[0px_8px_18px_rgba(0,48,94,0.10)] sm:size-12 lg:size-[58px]">
+              <img src={chip.icon} alt="" className="size-5 sm:size-6 lg:size-7" />
             </span>
-            <span className="font-poppins text-base font-bold leading-tight text-ink lg:text-lg">
+            <span className="font-poppins text-sm font-bold leading-tight text-ink sm:text-base lg:text-lg">
               {chip.label[0]}
               <br />
               {chip.label[1]}
@@ -250,7 +250,7 @@ export function SoftTexture() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
       <img src="/assets/section-texture.png" alt="" className="h-full w-full object-cover opacity-70" />
-      <div className="absolute inset-0 bg-gradient-to-b from-page/70 via-transparent to-page/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-page via-transparent to-page" />
     </div>
   )
 }
@@ -501,11 +501,11 @@ export function Navbar() {
 export function MarqueeStrip() {
   const phrase = 'Trusted by Families Across Roanoke & Nearby Communities'
   return (
-    <div className="flex h-[119px] items-center overflow-hidden bg-navy">
-      <div className="marquee-track animate-marquee flex shrink-0 items-center gap-7 whitespace-nowrap pr-7">
+    <div className="flex h-[72px] items-center overflow-hidden bg-navy lg:h-[119px]">
+      <div className="marquee-track animate-marquee flex shrink-0 items-center gap-5 whitespace-nowrap pr-5 lg:gap-7 lg:pr-7">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="flex items-center gap-7">
-            <span className="font-poppins text-2xl font-bold text-white">{phrase}</span>
+          <div key={i} className="flex items-center gap-5 lg:gap-7">
+            <span className="font-poppins text-lg font-bold text-white lg:text-2xl">{phrase}</span>
             <span className="size-2 shrink-0 rounded-full bg-white/80" />
           </div>
         ))}
@@ -530,27 +530,27 @@ export function FAQ({ items = FAQS }: { items?: { q: string; a: string }[] }) {
     <section className="relative overflow-hidden">
       <SoftTexture />
       <CrossDecor src="/assets/cross-1.svg" className="left-[-50px] bottom-[14%] w-[260px]" />
-      <Container className="relative z-10 py-20 lg:py-24">
-        <Reveal className="flex flex-col items-center gap-10">
+      <Container className="relative z-10 py-14 lg:py-24">
+        <Reveal className="flex flex-col items-center gap-8 lg:gap-10">
           <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">FAQ</h2>
-          <div className="flex w-full flex-col gap-6">
+          <div className="flex w-full flex-col gap-4 lg:gap-6">
             {items.map((faq, i) => (
               <div
                 key={i}
                 tabIndex={0}
-                className="group rounded-3xl bg-white px-8 py-6 shadow-sm outline-none transition-colors duration-300 hover:bg-blue hover:shadow-lg focus-within:bg-blue focus-within:shadow-lg"
+                className="group rounded-3xl bg-white px-6 py-5 shadow-sm outline-none transition-colors duration-300 hover:bg-blue hover:shadow-lg focus-within:bg-blue focus-within:shadow-lg lg:px-8 lg:py-6"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <span className="font-poppins text-xl font-bold text-navy transition-colors group-hover:text-white group-focus-within:text-white">
+                  <span className="font-poppins text-lg font-bold text-navy transition-colors group-hover:text-white group-focus-within:text-white lg:text-xl">
                     {faq.q}
                   </span>
-                  <span className="grid size-10 shrink-0 place-items-center rounded-full text-3xl font-light text-navy transition-transform duration-300 group-hover:rotate-45 group-hover:text-white group-focus-within:rotate-45 group-focus-within:text-white">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-full text-2xl font-light text-navy transition-transform duration-300 group-hover:rotate-45 group-hover:text-white group-focus-within:rotate-45 group-focus-within:text-white lg:size-10 lg:text-3xl">
                     +
                   </span>
                 </div>
                 <div className="grid grid-rows-[0fr] transition-all duration-300 group-hover:grid-rows-[1fr] group-focus-within:grid-rows-[1fr]">
                   <div className="overflow-hidden">
-                    <p className="mt-3 max-w-[640px] font-poppins text-xl text-white/80">{faq.a}</p>
+                    <p className="mt-3 max-w-[640px] font-poppins text-lg text-white/80 lg:text-xl">{faq.a}</p>
                   </div>
                 </div>
               </div>
@@ -569,7 +569,6 @@ export function FAQ({ items = FAQS }: { items?: { q: string; a: string }[] }) {
 type Provider = { id: string; name: string; title: string; img?: string; bio?: string }
 
 const PROVIDERS: Provider[] = [
-  { id: 'foram', name: 'Foram Mehta', title: 'FNP', img: '/assets/prov-foram-hd.png' },
   { id: 'edward', name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-edward.png' },
   { id: 'manny', name: 'Manny Trevino', title: 'DC', img: '/assets/prov-manny.png' },
   { id: 'ranjit', name: 'Ranjit Dhelaria', title: 'MD, MRCP', img: '/assets/prov-ranjit.png' },
@@ -593,8 +592,8 @@ function ProviderCard({ provider }: { provider: Provider }) {
           <p className="p-6 pb-16 text-center font-poppins text-sm leading-relaxed text-white">{provider.bio}</p>
         )}
       </div>
-      <div className="absolute -bottom-6 left-1/2 w-[197px] max-w-[80%] -translate-x-1/2 rounded-[20px] border border-navy bg-white py-2 text-center shadow-md transition-colors group-hover:border-accent">
-        <p className="font-outfit text-lg font-bold text-navy">{provider.name}</p>
+      <div className="absolute -bottom-6 left-1/2 w-[197px] max-w-[90%] -translate-x-1/2 rounded-[20px] border border-navy bg-white px-2 py-2 text-center shadow-md transition-colors group-hover:border-accent">
+        <p className="font-outfit text-base font-bold leading-tight text-navy lg:text-lg">{provider.name}</p>
         <p className="font-outfit text-sm text-navy">{provider.title}</p>
       </div>
     </a>
@@ -606,10 +605,10 @@ export function Providers() {
     <section id="providers" className="relative scroll-mt-28 overflow-hidden">
       <SoftTexture />
       <CrossDecor src="/assets/cross-2.svg" className="right-[-60px] bottom-[12%] w-[210px]" />
-      <Container className="relative z-10 py-20">
+      <Container className="relative z-10 py-14 lg:py-20">
         <Reveal className="flex flex-col items-center gap-12">
           <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">Meet our Providers</h2>
-          <div className="grid w-full grid-cols-2 gap-x-4 gap-y-12 lg:grid-cols-4">
+          <div className="grid w-full grid-cols-2 gap-x-4 gap-y-12 lg:grid-cols-3">
             {PROVIDERS.map((p) => (
               <ProviderCard key={p.name} provider={p} />
             ))}
@@ -662,7 +661,7 @@ const FOOTER_COLS: { heading: string; links: { label: string; href: string }[] }
 
 export function Footer() {
   return (
-    <footer className="relative mt-10 overflow-hidden rounded-t-3xl bg-navy pt-20 pb-44 text-white">
+    <footer className="relative overflow-hidden rounded-t-3xl bg-navy pt-16 pb-32 text-white lg:pt-20 lg:pb-44">
       <Container className="relative z-10">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-5 lg:gap-8">
           {FOOTER_COLS.map((col, i) => (
@@ -700,7 +699,7 @@ export function Footer() {
 
       <p
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-[30%] select-none text-center font-outfit text-[20vw] font-bold leading-none text-white/10"
+        className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-[10%] select-none text-center font-outfit text-[20vw] font-bold leading-none text-white/10 lg:translate-y-[30%]"
       >
         FIRST MD
       </p>

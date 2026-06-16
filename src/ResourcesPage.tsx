@@ -40,7 +40,13 @@ function Hero() {
 
   return (
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
-      <div className="pointer-events-none absolute inset-0">
+      {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
+      <div className="relative lg:hidden">
+        <img src="/assets/resources-hero.png" alt="" className="block w-full object-cover" />
+        <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
+      </div>
+      {/* Desktop: full-bleed background photo with text overlaid */}
+      <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
           src="/assets/resources-hero.png"
           alt=""
@@ -52,7 +58,7 @@ function Hero() {
         <div className="absolute inset-y-0 left-0 w-[57%] bg-gradient-to-r from-white to-transparent" />
       </div>
 
-      <Container className="relative flex min-h-svh flex-col justify-center gap-14 pt-40 pb-16">
+      <Container className="relative flex flex-col gap-10 py-10 lg:min-h-svh lg:justify-center lg:gap-14 lg:pt-40 lg:pb-16">
         <div className="flex max-w-[703px] flex-col gap-3">
           <p className="hero-rise font-poppins text-xl font-bold text-navy lg:text-2xl" style={{ animationDelay: '20ms' }}>
             Patient Resources
@@ -138,7 +144,7 @@ function WhatToExpect() {
     'relative flex flex-col gap-5 rounded-[32px] bg-white p-8 shadow-[0px_12px_30px_rgba(0,48,94,0.08)]'
 
   return (
-    <section className="relative overflow-hidden bg-page pt-16 lg:pt-20">
+    <section className="relative overflow-hidden bg-page pt-12 lg:pt-20">
       <Container className="relative z-10">
         <Reveal className="flex flex-col items-center gap-4 text-center">
           <h2 className="font-poppins text-[30px] font-bold leading-[1.08] text-navy sm:text-4xl lg:text-[44px] xl:text-[52px] 2xl:text-[60px]">
@@ -344,9 +350,9 @@ function HealthArticles() {
 
 function ReadyBanner() {
   return (
-    <Container className="pb-16">
+    <Container className="pb-12 lg:pb-16">
       <Reveal>
-        <div className="relative rounded-3xl bg-navy px-8 py-9 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:min-h-[240px] lg:px-14 lg:py-10">
+        <div className="relative rounded-3xl bg-navy px-6 py-9 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:min-h-[240px] lg:px-14 lg:py-10">
           {/* Concentric rings — clipped to the rounded banner, centered behind the doctor */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl">
             <img

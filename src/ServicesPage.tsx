@@ -43,7 +43,13 @@ function Hero() {
 
   return (
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
-      <div className="pointer-events-none absolute inset-0">
+      {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
+      <div className="relative lg:hidden">
+        <img src="/assets/services-hero.png" alt="" className="block w-full object-cover" />
+        <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
+      </div>
+      {/* Desktop: full-bleed background photo with text overlaid */}
+      <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
           src="/assets/services-hero.png"
           alt=""
@@ -53,7 +59,7 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-page from-25% to-transparent to-65%" />
       </div>
 
-      <Container className="relative flex min-h-svh flex-col justify-center gap-14 pt-40 pb-16">
+      <Container className="relative flex flex-col gap-10 py-10 lg:min-h-svh lg:justify-center lg:gap-14 lg:pt-40 lg:pb-16">
         <div className="flex max-w-[676px] flex-col gap-3">
           <p className="hero-rise font-poppins text-xl font-bold text-navy lg:text-2xl" style={{ animationDelay: '20ms' }}>
             Services
@@ -91,7 +97,7 @@ function Hero() {
 function WhatIs() {
   return (
     <section id="family-medicine" className="relative scroll-mt-28 overflow-hidden">
-      <Container className="relative z-10 py-20 lg:py-24">
+      <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[40px]">
           <Reveal className="flex justify-center lg:justify-start">
             <img
@@ -156,7 +162,7 @@ function WellnessCare() {
   return (
     <section id="services" className="relative scroll-mt-28 overflow-hidden">
       <CrossDecor src="/assets/cross-3.svg" className="right-[-60px] top-[2%] w-[240px]" />
-      <Container className="relative z-10 py-16 lg:py-20">
+      <Container className="relative z-10 py-12 lg:py-20">
         <Reveal className="flex flex-col gap-9">
           <h2 className={`${SECTION_TITLE} text-navy`}>Wellness &amp; Preventive Care</h2>
           <div className="grid gap-5 lg:grid-cols-2">
@@ -204,7 +210,7 @@ function Conditions() {
         src="/assets/fm-conditions-graphic.svg"
         className="pointer-events-none absolute right-[-20px] top-1/2 hidden w-[440px] -translate-y-1/2 select-none lg:block xl:w-[520px]"
       />
-      <Container className="relative z-10 py-20 lg:py-24">
+      <Container className="relative z-10 py-14 lg:py-24">
         <Reveal className="flex flex-col gap-12 lg:gap-16">
           <div className="flex flex-col gap-3">
             <p className="font-poppins text-lg font-bold text-page">Conditions We Treat</p>
@@ -241,7 +247,7 @@ function StartWithUs() {
   return (
     <section id="insurance" className="relative scroll-mt-28 overflow-hidden">
       <CrossDecor src="/assets/cross-1.svg" className="left-[-80px] bottom-[6%] w-[280px]" />
-      <Container className="relative z-10 py-20 lg:py-24">
+      <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[40px]">
           <Reveal className="flex flex-col gap-8">
             <SectionHeading eyebrow="Start with us" title="Insurance Made Simple" size="md" className="max-w-[550px]" />

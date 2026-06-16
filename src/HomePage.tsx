@@ -35,7 +35,13 @@ function Hero() {
 
   return (
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
-      <div className="pointer-events-none absolute inset-0">
+      {/* Mobile: full-bleed banner photo (flush to top, soft wash like desktop) */}
+      <div className="relative lg:hidden">
+        <img src="/assets/hero-bg.png" alt="" className="block w-full object-cover" />
+        <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
+      </div>
+      {/* Desktop: full-bleed background photo with text overlaid */}
+      <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
           src="/assets/hero-bg.png"
           alt=""
@@ -45,7 +51,7 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-page from-15% to-transparent to-52%" />
       </div>
 
-      <Container className="relative flex min-h-svh items-center pt-40 pb-24">
+      <Container className="relative flex flex-col py-10 lg:min-h-svh lg:flex-row lg:items-center lg:pt-40 lg:pb-24">
         <div className="flex max-w-[560px] flex-col gap-6">
           <h1
             className="hero-rise font-poppins text-[40px] font-bold leading-[1.08] text-navy sm:text-5xl lg:max-w-[560px] lg:text-[52px] lg:leading-[1.05] xl:text-[64px] 2xl:text-[76px] 2xl:leading-[1.06]"
@@ -77,9 +83,9 @@ function Hero() {
 
 function NeedCareBanner() {
   return (
-    <Container className="pt-16 pb-16">
+    <Container className="py-12 lg:py-16">
       <Reveal>
-        <div className="relative rounded-2xl bg-navy px-8 py-8 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-9">
+        <div className="relative rounded-2xl bg-navy px-6 py-8 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-9">
           {/* Concentric rings — clipped to the rounded banner, centered behind the providers */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
             <img
@@ -158,7 +164,7 @@ function Services() {
         <div className="absolute inset-0 bg-gradient-to-r from-page from-0% via-page/25 via-55% to-transparent to-100%" />
       </div>
 
-      <Container className="relative z-10 py-20 lg:py-28">
+      <Container className="relative z-10 py-14 lg:py-28">
         <Reveal className="flex max-w-[665px] flex-col gap-8">
           <SectionHeading eyebrow="Our Services" title="Healthcare Services Designed Around Your Family" className="max-w-[640px]" />
           <ul className="flex w-full max-w-[460px] flex-col">
@@ -204,7 +210,7 @@ function WhyChoose() {
     <section id="about" className="relative scroll-mt-28 overflow-hidden">
       <SoftTexture />
       <CrossDecor src="/assets/cross-3.svg" className="right-[2%] top-3 w-[260px]" />
-      <Container className="relative z-10 py-20">
+      <Container className="relative z-10 py-14 lg:py-20">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[119px]">
           {/* Capsule collage — staggered stadium photos matching the Services page */}
           <Reveal className="flex items-center justify-center gap-4 sm:gap-5">
@@ -258,7 +264,7 @@ function Insurance() {
   return (
     <section id="insurance" className="relative scroll-mt-28 overflow-hidden bg-white">
       <CrossDecor src="/assets/cross-3.svg" className="left-[-70px] top-[15%] w-[180px] opacity-70" />
-      <Container className="relative z-10 py-20 lg:py-24">
+      <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-[653px_1fr] lg:gap-[83px]">
           <Reveal className="flex flex-col gap-8">
             <SectionHeading eyebrow="Insurance" title="Insurance Made Simple" className="max-w-[450px]" />
@@ -298,7 +304,7 @@ function Contact() {
   return (
     <section id="contact" className="relative scroll-mt-28 overflow-hidden bg-white">
       <CrossDecor src="/assets/cross-2.svg" className="right-[-60px] top-[16%] w-[200px] opacity-70" />
-      <Container className="relative z-10 py-20">
+      <Container className="relative z-10 py-14 lg:py-20">
         <Reveal className="flex flex-col gap-10">
           {/* Intro: map + copy */}
           <div className="grid items-stretch gap-10 lg:grid-cols-2">
@@ -333,7 +339,7 @@ function Contact() {
           {/* Cards row */}
           <div className="grid gap-9 lg:grid-cols-2">
             {/* Office hours */}
-            <div className="flex flex-col justify-center gap-6 rounded-3xl border border-navy bg-white p-10 shadow-sm transition-shadow hover:shadow-lg">
+            <div className="flex flex-col justify-center gap-6 rounded-3xl border border-navy bg-white p-7 shadow-sm transition-shadow hover:shadow-lg lg:p-10">
               <div className="flex items-center gap-4">
                 <img src="/assets/icon-schedule.svg" alt="" className="size-9" />
                 <p className="font-poppins text-2xl font-bold text-navy">Office Hours</p>
@@ -352,7 +358,7 @@ function Contact() {
             </div>
 
             {/* Urgent care */}
-            <div className="flex flex-col justify-center gap-6 rounded-3xl border border-accent bg-accent-soft p-10 shadow-sm transition-shadow hover:shadow-lg">
+            <div className="flex flex-col justify-center gap-6 rounded-3xl border border-accent bg-accent-soft p-7 shadow-sm transition-shadow hover:shadow-lg lg:p-10">
               <div className="flex items-center gap-4">
                 <img src="/assets/icon-hospital.svg" alt="" className="size-9" />
                 <p className="font-poppins text-2xl font-bold text-accent">Urgent Care</p>

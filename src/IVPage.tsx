@@ -42,7 +42,13 @@ function Hero() {
 
   return (
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
-      <div className="pointer-events-none absolute inset-0">
+      {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
+      <div className="relative lg:hidden">
+        <img src="/assets/svc-iv-hero.png" alt="" className="block w-full object-cover" />
+        <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
+      </div>
+      {/* Desktop: full-bleed background photo with text overlaid */}
+      <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
           ref={heroRef}
           src="/assets/svc-iv-hero.png"
@@ -52,7 +58,7 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-page from-25% to-transparent to-65%" />
       </div>
 
-      <Container className="relative flex min-h-svh flex-col justify-center gap-14 pt-40 pb-16">
+      <Container className="relative flex flex-col gap-10 py-10 lg:min-h-svh lg:justify-center lg:gap-14 lg:pt-40 lg:pb-16">
         <div className="flex max-w-[676px] flex-col gap-3">
           <p className="hero-rise font-poppins text-xl font-bold text-navy lg:text-2xl" style={{ animationDelay: '20ms' }}>
             Services
@@ -92,7 +98,7 @@ function Hero() {
 function WhatIs() {
   return (
     <section id="iv" className="relative scroll-mt-28 overflow-hidden">
-      <Container className="relative z-10 py-20 lg:py-24">
+      <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[40px]">
           <Reveal className="flex justify-center lg:justify-start">
             <img
@@ -139,7 +145,7 @@ function WhyChoose() {
   return (
     <section id="services" className="relative scroll-mt-28 overflow-hidden">
       <CrossDecor src="/assets/cross-3.svg" className="right-[-60px] top-[2%] w-[240px]" />
-      <Container className="relative z-10 py-20 lg:py-24">
+      <Container className="relative z-10 py-14 lg:py-24">
         <Reveal className="flex flex-col gap-12">
           <h2 className={`${SECTION_TITLE} text-navy`}>Why People Choose IV</h2>
           <div className="grid gap-6 lg:grid-cols-2">
@@ -171,7 +177,7 @@ function Customized() {
         src="/assets/fm-conditions-graphic.svg"
         className="pointer-events-none absolute right-[-20px] top-1/2 hidden w-[440px] -translate-y-1/2 select-none lg:block xl:w-[520px]"
       />
-      <Container className="relative z-10 py-20 lg:py-24">
+      <Container className="relative z-10 py-14 lg:py-24">
         <Reveal className="flex max-w-[820px] flex-col gap-6">
           <h2 className={`${SECTION_TITLE} text-page`}>Customized For You</h2>
           <p className="font-poppins text-xl text-page">
@@ -199,7 +205,7 @@ function TreatmentInfo() {
   return (
     <section id="insurance" className="relative scroll-mt-28 overflow-hidden">
       <CrossDecor src="/assets/cross-1.svg" className="left-[-80px] bottom-[6%] w-[280px]" />
-      <Container className="relative z-10 py-20 lg:py-24">
+      <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[40px]">
           <Reveal className="flex flex-col gap-8">
             <SectionHeading eyebrow="Feel Better, Faster" title="Insurance & Treatment Information" size="md" className="max-w-[550px]" />

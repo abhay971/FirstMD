@@ -101,8 +101,14 @@ function Hero() {
   const heroRef = useParallax<HTMLImageElement>()
 
   return (
-    <section className="relative flex min-h-svh flex-col overflow-hidden bg-page">
-      <div className="pointer-events-none absolute inset-0">
+    <section className="relative flex flex-col overflow-hidden bg-page lg:min-h-svh">
+      {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
+      <div className="relative lg:hidden">
+        <img src="/assets/contact-hero.png" alt="" className="block w-full object-cover" />
+        <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
+      </div>
+      {/* Desktop: full-bleed background photo with text overlaid */}
+      <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
           src="/assets/contact-hero.png"
           alt=""
@@ -113,7 +119,7 @@ function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-b from-transparent to-page" />
       </div>
 
-      <Container className="relative z-10 flex flex-1 flex-col pt-32 pb-8 lg:pt-36">
+      <Container className="relative z-10 flex flex-col gap-8 py-10 lg:flex-1 lg:gap-0 lg:pt-36 lg:pb-8">
         <div className="hero-rise flex max-w-[700px] flex-col gap-3" style={{ animationDelay: '60ms' }}>
           <p className="font-poppins text-lg font-bold text-blue">Contact &amp; Book Online</p>
           <h1 className="font-poppins text-[36px] font-bold leading-[1.04] text-navy sm:text-5xl lg:text-[56px] xl:text-[64px] 2xl:text-[72px]">
@@ -133,14 +139,17 @@ function Hero() {
           </div>
         </div>
 
-        <Reveal className="mt-auto flex flex-col gap-5 rounded-[28px] bg-page/70 px-6 py-5 backdrop-blur-md sm:grid sm:grid-cols-2 sm:gap-6 lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-0">
+        <div
+          className="hero-rise mt-auto flex flex-col gap-5 rounded-[28px] bg-page/70 px-6 py-5 backdrop-blur-md sm:grid sm:grid-cols-2 sm:gap-6 lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-0"
+          style={{ animationDelay: '380ms' }}
+        >
           {HERO_BADGES.map((b, i) => (
             <div key={i} className="flex items-center gap-3 lg:gap-4">
               <Badge icon={b.icon}>{b.label}</Badge>
               {i < HERO_BADGES.length - 1 && <span className="hidden h-12 w-px shrink-0 bg-navy/15 lg:block" />}
             </div>
           ))}
-        </Reveal>
+        </div>
       </Container>
     </section>
   )
@@ -152,7 +161,7 @@ function Hero() {
 
 function QuickCards() {
   return (
-    <section className="bg-navy py-16">
+    <section className="bg-navy py-12 lg:py-16">
       <Container>
         <Reveal className="grid gap-6 lg:grid-cols-3">
           {/* Call */}
@@ -225,7 +234,7 @@ const inputCls =
 
 function AppointmentForm() {
   return (
-    <Container className="py-16">
+    <Container className="py-12 lg:py-16">
       <Reveal className="scroll-mt-28 flex flex-col gap-10 rounded-3xl bg-white p-8 shadow-sm lg:p-16" id="appointment-form">
         <div>
           <h2 className="font-poppins text-3xl font-bold text-black lg:text-4xl">Request Appointment</h2>
@@ -286,7 +295,7 @@ const HOURS: [string, string][] = [
 
 function ClinicVisit() {
   return (
-    <Container className="py-16">
+    <Container className="py-12 lg:py-16">
       <Reveal className="flex flex-col gap-10">
         <div className="grid items-stretch gap-10 lg:grid-cols-2">
           <a
@@ -318,7 +327,7 @@ function ClinicVisit() {
         </div>
 
         <div className="grid gap-9 lg:grid-cols-2">
-          <div className="flex flex-col justify-center gap-6 rounded-3xl border border-navy bg-white p-10 shadow-sm transition-shadow hover:shadow-lg">
+          <div className="flex flex-col justify-center gap-6 rounded-3xl border border-navy bg-white p-7 shadow-sm transition-shadow hover:shadow-lg lg:p-10">
             <div className="flex items-center gap-4">
               <img src="/assets/icon-schedule.svg" alt="" className="size-9" />
               <p className="font-poppins text-2xl font-bold text-navy">Office Hours</p>
@@ -336,7 +345,7 @@ function ClinicVisit() {
             </dl>
           </div>
 
-          <div className="flex flex-col justify-center gap-6 rounded-3xl border border-accent bg-accent-soft p-10 shadow-sm transition-shadow hover:shadow-lg">
+          <div className="flex flex-col justify-center gap-6 rounded-3xl border border-accent bg-accent-soft p-7 shadow-sm transition-shadow hover:shadow-lg lg:p-10">
             <div className="flex items-center gap-4">
               <img src="/assets/icon-hospital.svg" alt="" className="size-9" />
               <p className="font-poppins text-2xl font-bold text-accent">Urgent Care</p>
@@ -371,7 +380,7 @@ const STEPS = [
 
 function WhatHappensNext() {
   return (
-    <Container className="py-16">
+    <Container className="py-12 lg:py-16">
       <div className="grid items-center gap-10 lg:grid-cols-[480px_1fr] lg:gap-[48px]">
         <Reveal className="aspect-[603/694] w-full max-w-[480px] overflow-hidden rounded-3xl bg-[#d9d9d9] shadow-xl">
           <img src="/assets/happens-next.png" alt="The First MD team" className="h-full w-full object-cover" />
@@ -405,9 +414,9 @@ function WhatHappensNext() {
 
 function ScheduleCta() {
   return (
-    <Container className="py-16">
+    <Container className="py-12 lg:py-16">
       <Reveal>
-        <div className="relative rounded-2xl bg-navy px-8 py-8 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-9">
+        <div className="relative rounded-2xl bg-navy px-6 py-8 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-9">
           <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
             <img
               aria-hidden
