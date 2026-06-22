@@ -12,6 +12,7 @@ import {
   ARROW,
   BOOK,
   Container,
+  CrossDecor,
   FAQ,
   Footer,
   HeroChips,
@@ -21,6 +22,7 @@ import {
   PHONE_HREF,
   PillButton,
   Reveal,
+  SectionHeading,
   useParallax,
 } from './shared'
 
@@ -345,6 +347,48 @@ function HealthArticles() {
 }
 
 /* ----------------------------------------------------------------------------
+ * Insurance — checklist + photo (mirrors the home Insurance section)
+ * ------------------------------------------------------------------------- */
+
+const INSURANCE_POINTS = [
+  'Same-Day Appointments',
+  'Most Major Insurance Accepted',
+  'Comprehensive Family Care',
+  'On-Site Diagnostics',
+  'Patient-First Approach',
+]
+
+function Insurance() {
+  return (
+    <section id="insurance" className="relative scroll-mt-28 overflow-hidden bg-white">
+      <CrossDecor src="/assets/cross-3.svg" className="left-[-70px] top-[15%] w-[180px] opacity-70" />
+      <Container className="relative z-10 py-14 lg:py-24">
+        <div className="grid items-center gap-12 lg:grid-cols-[653px_1fr] lg:gap-[83px]">
+          <Reveal className="flex flex-col gap-8">
+            <SectionHeading eyebrow="Insurance" title="Insurance Made Simple" className="max-w-[450px]" />
+            <ul className="flex flex-col gap-4">
+              {INSURANCE_POINTS.map((point) => (
+                <li key={point} className="flex items-center gap-3 font-poppins text-xl font-bold text-navy">
+                  <span className="size-2 shrink-0 rounded-full bg-navy" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+            <PillButton variant="accent" href={BOOK} className="w-fit">
+              Verify Insurance Coverage {ARROW}
+            </PillButton>
+          </Reveal>
+
+          <Reveal delay={120} className="h-[420px] w-full overflow-hidden rounded-2xl bg-[#d9d9d9] shadow-xl lg:h-[810px]">
+            <img src="/assets/insurance.png" alt="Insurance support at First MD" className="h-full w-full object-cover" />
+          </Reveal>
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+/* ----------------------------------------------------------------------------
  * "Ready to Get Started?" banner
  * ------------------------------------------------------------------------- */
 
@@ -430,6 +474,7 @@ export default function ResourcesPage() {
         <WhatToExpect />
         <FormsAndTelehealth />
         <HealthArticles />
+        <Insurance />
         <ReadyBanner />
         <FAQ items={RESOURCE_FAQS} />
       </main>

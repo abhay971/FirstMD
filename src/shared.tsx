@@ -635,22 +635,15 @@ const FOOTER_COLS: { heading: string; links: { label: string; href: string }[] }
     ],
   },
   {
-    heading: '',
-    links: [
-      { label: 'HIPAA Privacy Policy', href: '/privacy-policy' },
-      { label: 'Accessibility Statement', href: '#' },
-      { label: 'Sitemap', href: '#' },
-    ],
-  },
-  {
     heading: 'Services',
     links: SERVICE_LINKS,
   },
   {
     heading: 'Privacy Policy',
     links: [
-      { label: 'Terms', href: '#' },
-      { label: 'Copyright', href: '#' },
+      { label: 'HIPAA Privacy Policy', href: '/privacy-policy' },
+      { label: 'Accessibility Statement', href: '/accessibility' },
+      { label: 'Sitemap', href: '#' },
     ],
   },
 ]
@@ -659,7 +652,7 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden rounded-t-3xl bg-navy pt-16 pb-32 text-white lg:pt-20 lg:pb-44">
       <Container className="relative z-10">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-5 lg:gap-8">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:flex lg:justify-between lg:gap-8">
           {FOOTER_COLS.map((col, i) => (
             <ul key={i} className="flex flex-col gap-2 font-poppins text-base">
               {col.heading && <li className="font-bold">{col.heading}</li>}

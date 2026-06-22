@@ -9,6 +9,7 @@ import HormonePage from './HormonePage'
 import IVPage from './IVPage'
 import PeptidePage from './PeptidePage'
 import PrivacyPolicyPage from './PrivacyPolicyPage'
+import AccessibilityPage from './AccessibilityPage'
 
 /** Scroll to a #hash target after the page renders (links like /#contact). */
 function ScrollToHash() {
@@ -44,6 +45,7 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/accessibility" element={<AccessibilityPage />} />
       </Routes>
     </>
   )
