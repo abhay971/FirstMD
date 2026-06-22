@@ -19,7 +19,6 @@ import {
   Navbar,
   PHONE_HREF,
   PillButton,
-  Providers,
   Reveal,
   SECTION_TITLE,
   SectionHeading,
@@ -273,7 +272,6 @@ export default function IVPage() {
         <WhatIs />
         <WhyChoose />
         <Customized />
-        <Providers />
         <TreatmentInfo />
         <FAQ items={IV_FAQS} />
       </main>

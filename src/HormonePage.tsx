@@ -18,7 +18,6 @@ import {
   Navbar,
   PHONE_HREF,
   PillButton,
-  Providers,
   Reveal,
   SECTION_TITLE,
   useParallax,
@@ -235,7 +234,6 @@ export default function HormonePage() {
         <WhatIs />
         <WhatYouMayNotice />
         <HowItWorks />
-        <Providers />
         <FAQ items={HORMONE_FAQS} />
       </main>
       <Footer />

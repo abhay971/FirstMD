@@ -228,52 +228,50 @@ type Provider = { id: string; name: string; title: string; img: string; crop: Cr
 // Crops mirror the Figma node placements so each face is framed identically.
 const PROVIDERS: Provider[] = [
   { id: 'edward', name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-src-2.png', crop: { width: '100%', height: '128.78%', left: '0%', top: '0%' } },
-  { id: 'manny', name: 'Manny Trevino', title: 'DC', img: '/assets/prov-src-3.png', crop: { width: '100%', height: '133.44%', left: '0%', top: '0%' } },
-  { id: 'ranjit', name: 'Dr. Ranjit Dhelaria', title: 'MD, MRCP (UK)', img: '/assets/prov-src-4.png', crop: { width: '119.6%', height: '161.31%', left: '-15.16%', top: '-17.44%' } },
 ]
 
 const PROVIDER_SPECIALTIES = ['Family Medicine', 'Preventive Care', 'Chronic Disease Management']
 
-function ProviderCard({ provider, highlighted }: { provider: Provider; highlighted?: boolean }) {
+function ProviderFeature({ provider, highlighted }: { provider: Provider; highlighted?: boolean }) {
   return (
     <div
       id={provider.id}
-      className={`group flex scroll-mt-28 flex-col overflow-hidden rounded-3xl border bg-white shadow-sm transition-all duration-300 hover:shadow-xl ${
+      className={`group flex scroll-mt-28 flex-col overflow-hidden rounded-3xl border bg-white shadow-sm transition-all duration-300 hover:shadow-xl lg:flex-row lg:items-stretch ${
         highlighted ? 'border-accent ring-4 ring-accent/40 ring-offset-2 ring-offset-page' : 'border-navy'
       }`}
     >
-      <div className="relative aspect-[312/253] w-full overflow-hidden bg-navy">
+      {/* Photo — fixed aspect on mobile, stretches alongside the details on desktop */}
+      <div className="relative aspect-[312/253] w-full shrink-0 overflow-hidden bg-navy lg:aspect-auto lg:min-h-[440px] lg:w-[46%]">
         <img
           src={provider.img}
           alt={provider.name}
-          className="absolute max-w-none"
-          style={{
-            width: provider.crop.width,
-            height: provider.crop.height,
-            left: provider.crop.left,
-            top: provider.crop.top,
-          }}
+          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
         />
       </div>
-      <div className="flex flex-1 flex-col gap-4 p-6">
+
+      {/* Details */}
+      <div className="flex flex-1 flex-col gap-6 p-7 lg:p-12">
         <div>
-          <p className="font-poppins text-2xl font-bold text-navy">{provider.name}</p>
-          <p className="font-poppins text-lg font-bold text-navy">{provider.title}</p>
+          <p className="font-poppins text-3xl font-bold text-navy lg:text-4xl">{provider.name}</p>
+          <p className="font-poppins text-xl font-bold text-navy">{provider.title}</p>
         </div>
         <span className="block h-px w-full bg-navy/15" />
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-3">
           {PROVIDER_SPECIALTIES.map((s) => (
-            <li key={s} className="flex items-start gap-3 font-poppins text-base text-navy">
+            <li key={s} className="flex items-start gap-3 font-poppins text-lg text-navy">
               <CheckRing />
               {s}
             </li>
           ))}
         </ul>
-        <span className="mt-auto block h-px w-full bg-navy/15" />
+        <span className="block h-px w-full bg-navy/15" />
         <div className="flex items-center gap-3">
           <Star />
           <span className="font-poppins text-lg text-navy">20+ Years Experience</span>
         </div>
+        <PillButton variant="accent" href={BOOK} className="mt-1 self-start">
+          Book Appointment
+        </PillButton>
       </div>
     </div>
   )
@@ -293,18 +291,10 @@ function ProvidersGrid() {
 
   return (
     <Container className="py-12">
-      <Reveal className="flex flex-col items-center gap-8">
-        <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {PROVIDERS.map((p) => (
-            <ProviderCard key={p.name} provider={p} highlighted={p.id === active} />
-          ))}
-        </div>
-        <a
-          href="#"
-          className="rounded-full bg-navy px-6 py-4 font-poppins text-base text-page transition-transform hover:-translate-y-0.5"
-        >
-          View All providers
-        </a>
+      <Reveal className="mx-auto w-full max-w-[920px]">
+        {PROVIDERS.map((p) => (
+          <ProviderFeature key={p.name} provider={p} highlighted={p.id === active} />
+        ))}
       </Reveal>
     </Container>
   )

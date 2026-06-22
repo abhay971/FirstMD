@@ -20,7 +20,6 @@ import {
   PHONE_DISPLAY,
   PHONE_HREF,
   PillButton,
-  Providers,
   Reveal,
   SECTION_TITLE,
   SectionHeading,
@@ -310,7 +309,6 @@ export default function ServicesPage() {
         <WhatIs />
         <WellnessCare />
         <Conditions />
-        <Providers />
         <StartWithUs />
         <FAQ items={SERVICE_FAQS} />
       </main>

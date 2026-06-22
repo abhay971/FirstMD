@@ -19,7 +19,6 @@ import {
   Navbar,
   PHONE_HREF,
   PillButton,
-  Providers,
   Reveal,
   SECTION_TITLE,
   SectionHeading,
@@ -237,7 +236,6 @@ export default function PeptidePage() {
         <MarqueeStrip />
         <Benefits />
         <WhyDifferent />
-        <Providers />
         <TreatmentInfo />
         <FAQ items={PEPTIDE_FAQS} />
       </main>

@@ -37,7 +37,6 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Services', id: 'services', href: '/#services', children: SERVICE_LINKS },
   { label: 'Providers', id: 'providers', href: '/#providers' },
   { label: 'Resources', id: 'resources', href: '/resources' },
-  { label: 'Insurance', id: 'insurance', href: '/#insurance' },
 ]
 const SECTION_IDS = ['home', 'about', 'services', 'providers', 'insurance', 'contact']
 
@@ -570,8 +569,6 @@ type Provider = { id: string; name: string; title: string; img?: string; bio?: s
 
 const PROVIDERS: Provider[] = [
   { id: 'edward', name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-edward.png' },
-  { id: 'manny', name: 'Manny Trevino', title: 'DC', img: '/assets/prov-manny.png' },
-  { id: 'ranjit', name: 'Ranjit Dhelaria', title: 'MD, MRCP', img: '/assets/prov-ranjit.png' },
 ]
 
 function ProviderCard({ provider }: { provider: Provider }) {
@@ -608,7 +605,7 @@ export function Providers() {
       <Container className="relative z-10 py-14 lg:py-20">
         <Reveal className="flex flex-col items-center gap-12">
           <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">Meet our Providers</h2>
-          <div className="grid w-full grid-cols-2 gap-x-4 gap-y-12 lg:grid-cols-3">
+          <div className="grid w-full grid-cols-1 justify-items-center gap-x-4 gap-y-12">
             {PROVIDERS.map((p) => (
               <ProviderCard key={p.name} provider={p} />
             ))}
@@ -631,7 +628,6 @@ const FOOTER_COLS: { heading: string; links: { label: string; href: string }[] }
     heading: 'Quick Links',
     links: [
       { label: 'Home', href: '/' },
-      { label: 'Services', href: '/#services' },
       { label: 'Providers', href: '/providers' },
       { label: 'Patient Resources', href: '/resources' },
       { label: 'Insurance', href: '/#insurance' },
@@ -641,7 +637,7 @@ const FOOTER_COLS: { heading: string; links: { label: string; href: string }[] }
   {
     heading: '',
     links: [
-      { label: 'HIPAA Privacy Policy', href: '#' },
+      { label: 'HIPAA Privacy Policy', href: '/privacy-policy' },
       { label: 'Accessibility Statement', href: '#' },
       { label: 'Sitemap', href: '#' },
     ],

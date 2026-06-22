@@ -226,7 +226,7 @@ function WhyChoose() {
 
           {/* Copy */}
           <Reveal delay={120} className="flex flex-col gap-8">
-            <SectionHeading eyebrow="Why to us" title="Why Families Choose First MD" className="max-w-[550px]" />
+            <SectionHeading eyebrow="Why to choose us?" title="Why Families Choose First MD" className="max-w-[550px]" />
             <p className="max-w-[505px] font-poppins text-xl text-ink">
               We take time to understand your health concerns and provide treatment tailored to your needs.
             </p>
