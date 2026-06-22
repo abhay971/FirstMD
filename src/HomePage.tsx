@@ -136,7 +136,7 @@ function NeedCareBanner() {
 const SERVICES = [
   {
     name: 'Integrated Family Medicine & Urgent Care',
-    desc: 'Same day urgent care plus ongoing primary care for the whole family all under one roof.',
+    desc: 'Same day urgent care plus ongoing primary care.',
     href: '/services',
   },
   {
@@ -238,9 +238,9 @@ function WhyChoose() {
                 </li>
               ))}
             </ul>
-            <PillButton variant="accent" href="/#services" className="w-[307px] max-w-full">
+            {/* <PillButton variant="accent" href="/#services" className="w-[307px] max-w-full">
               Explore More {ARROW}
-            </PillButton>
+            </PillButton> */}
           </Reveal>
         </div>
       </Container>
