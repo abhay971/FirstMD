@@ -2,7 +2,7 @@
  * Shared building blocks used across pages (Home, Providers, …):
  * constants, hooks, primitives, and the site-wide Navbar / Marquee / FAQ / Footer.
  *
- * Palette: navy #00305E (primary), blue #005BA8 (secondary), red #E3173E (accent),
+ * Palette: navy #00305E (primary), blue #005BA8 (secondary), magenta #EC0080 (accent),
  * ink #121212 (body), page background #F3F9FF.
  */
 
@@ -108,7 +108,7 @@ export function PillButton({ children, variant = 'accent', className = '', href 
   const base =
     'group inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-poppins text-lg font-bold whitespace-nowrap transition-all duration-200 hover:-translate-y-1 hover:shadow-xl active:translate-y-0'
   const variants = {
-    accent: 'bg-accent text-white border-4 border-white/10 shadow-[0px_12px_10px_rgba(0,0,0,0.1)] hover:bg-[#c81235]',
+    accent: 'bg-accent text-white border-4 border-white/10 shadow-[0px_12px_10px_rgba(0,0,0,0.1)] hover:bg-[#c4006a]',
     white: 'bg-white text-navy border-4 border-black/10 shadow-[0px_12px_10px_rgba(0,0,0,0.1)] hover:bg-slate-50',
     outline: 'border-2 border-navy text-navy hover:bg-navy hover:text-white',
   }

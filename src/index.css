@@ -3,8 +3,8 @@
 @theme {
   --color-navy: #00305e; /* Primary blue — headings, navbar, footer */
   --color-blue: #005ba8; /* Secondary blue — eyebrow labels */
-  --color-accent: #e3173e; /* Accent red — primary CTAs */
-  --color-accent-soft: #fef5f8; /* Soft red tint — urgent-care card */
+  --color-accent: #ec0080; /* Accent magenta — primary CTAs */
+  --color-accent-soft: #fdeef6; /* Soft magenta tint — urgent-care card */
   --color-ink: #121212; /* Charcoal body text */
   --color-page: #f3f9ff; /* Page background */
 
