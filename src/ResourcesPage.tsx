@@ -208,14 +208,8 @@ function WhatToExpect() {
 }
 
 /* ----------------------------------------------------------------------------
- * New Patient Forms + Telehealth Made Easy — navy band
+ * Telehealth Made Easy — full-width navy band: 2×2 steps + tips bar
  * ------------------------------------------------------------------------- */
-
-const FORMS = [
-  { title: 'New Patient Registration', desc: 'Basic contact and health information.' },
-  { title: 'Medical History Form', desc: 'Help us better understand your health background.' },
-  { title: 'Consent Forms', desc: 'Required documents for treatment and care.' },
-]
 
 const TELEHEALTH_STEPS = [
   'Schedule your telehealth appointment.',
@@ -231,79 +225,41 @@ const TELEHEALTH_TIPS = [
   'Quiet environment',
 ]
 
-function FormsAndTelehealth() {
+function Telehealth() {
   return (
     <section className="relative overflow-hidden bg-navy">
       <Container className="relative z-10 py-14 lg:py-16">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-[43px]">
-          {/* New Patient Forms */}
-          <Reveal className="flex flex-col gap-8">
-            <div className="flex flex-col gap-1">
-              <h2 className="font-poppins text-3xl font-bold text-page lg:text-[32px]">New Patient Forms</h2>
-              <p className="max-w-[470px] font-poppins text-base text-page/60 lg:text-lg">
-                Download and complete your forms before your appointment to help reduce wait times.
-              </p>
-            </div>
+        <Reveal className="flex flex-col gap-10">
+          <div className="flex flex-col gap-1">
+            <h2 className="font-poppins text-3xl font-bold text-page lg:text-[32px]">Telehealth Made Easy</h2>
+            <p className="font-poppins text-base text-page/60 lg:text-lg">
+              Connect with your provider from the comfort of your home.
+            </p>
+          </div>
 
-            <div className="flex flex-col gap-7">
-              {FORMS.map((form) => (
-                <div key={form.title} className="flex items-center gap-6">
-                  <img
-                    src="/assets/res-form-stack.png"
-                    alt=""
-                    className="h-[112px] w-[100px] shrink-0 rounded-xl object-cover"
-                  />
-                  <div className="flex flex-col gap-3.5">
-                    <div className="flex flex-col">
-                      <h3 className="font-poppins text-lg font-bold text-white lg:text-xl">{form.title}</h3>
-                      <p className="font-poppins text-base text-white/60 lg:text-lg">{form.desc}</p>
-                    </div>
-                    <a
-                      href="#"
-                      className="inline-flex h-10 w-fit items-center justify-center gap-2 rounded-full border border-page px-6 font-poppins text-base font-bold text-white shadow-[0px_12px_20px_rgba(0,0,0,0.1)] transition-colors hover:bg-white/10 lg:text-lg"
-                    >
-                      <img src="/assets/icon-download.svg" alt="" className="size-5" />
-                      Download
-                    </a>
-                  </div>
-                </div>
+          {/* Numbered steps — 2×2 grid on desktop */}
+          <ol className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:gap-x-16 lg:gap-y-10">
+            {TELEHEALTH_STEPS.map((step, i) => (
+              <li key={step} className="flex items-center gap-5">
+                <span className="grid size-16 shrink-0 place-items-center rounded-full border-[5px] border-navy bg-page font-poppins text-[26px] font-bold text-navy lg:size-[72px] lg:border-[6px] lg:text-[30px]">
+                  {i + 1}
+                </span>
+                <p className="font-poppins text-base text-white lg:text-lg">{step}</p>
+              </li>
+            ))}
+          </ol>
+
+          {/* Tips bar */}
+          <div className="flex flex-col gap-3 rounded-3xl bg-blue px-8 py-6 lg:px-10">
+            <p className="font-poppins text-base font-bold text-white lg:text-lg">Tips for a Successful Visit</p>
+            <span className="block h-px w-full bg-white/40" />
+            <ul className="grid list-disc grid-cols-2 gap-x-8 gap-y-1.5 pl-5 font-poppins text-sm text-white lg:grid-cols-4 lg:text-base">
+              {TELEHEALTH_TIPS.map((tip) => (
+                <li key={tip}>{tip}</li>
               ))}
-            </div>
-          </Reveal>
-
-          {/* Telehealth Made Easy */}
-          <Reveal delay={120} className="flex flex-col gap-8">
-            <div className="flex flex-col gap-1">
-              <h2 className="font-poppins text-3xl font-bold text-page lg:text-[32px]">Telehealth Made Easy</h2>
-              <p className="max-w-[470px] font-poppins text-base text-page/60 lg:text-lg">
-                Connect with your provider from the comfort of your home.
-              </p>
-            </div>
-
-            {/* Numbered steps — circles overlap; the navy border (invisible on the navy
-                band) carves the even notched spacing seen in the design */}
-            <ol className="flex flex-col">
-              {TELEHEALTH_STEPS.map((step, i) => (
-                <li key={step} className={`relative flex items-center gap-5 ${i > 0 ? '-mt-3.5' : ''}`}>
-                  <span className="grid size-16 shrink-0 place-items-center rounded-full border-[5px] border-navy bg-page font-poppins text-[26px] font-bold text-navy lg:size-[72px] lg:border-[6px] lg:text-[30px]">
-                    {i + 1}
-                  </span>
-                  <p className="font-poppins text-base text-white lg:text-lg">{step}</p>
-                </li>
-              ))}
-            </ol>
-
-            <div className="flex flex-col gap-3 rounded-3xl bg-blue px-8 py-6 lg:px-10">
-              <p className="font-poppins text-base font-bold text-white lg:text-lg">Tips for a Successful Visit</p>
-              <span className="block h-px w-full bg-white" />
-              <ul className="grid list-disc grid-cols-1 gap-x-8 gap-y-1.5 pl-5 font-poppins text-sm text-white sm:grid-cols-2 lg:text-base">
-                {TELEHEALTH_TIPS.map((tip) => (
-                  <li key={tip}>{tip}</li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        </div>
+            </ul>
+          </div>
+        </Reveal>
       </Container>
     </section>
   )
@@ -472,7 +428,7 @@ export default function ResourcesPage() {
         <Hero />
         <MarqueeStrip />
         <WhatToExpect />
-        <FormsAndTelehealth />
+        <Telehealth />
         <HealthArticles />
         <Insurance />
         <ReadyBanner />
