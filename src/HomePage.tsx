@@ -108,20 +108,17 @@ function NeedCareBanner() {
             </ArrowLink>
           </div>
 
-          {/* Providers — overlapping, clipped to the banner bottom, heads popping above the top */}
+          {/* Family cut-out — clipped to the banner bottom, heads popping above the top */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 z-10 hidden md:block"
-            style={{ clipPath: 'inset(-300px 0px 0px 0px round 16px)' }}
+            style={{ clipPath: 'inset(-220px 0px 0px 0px round 16px)' }}
           >
-            <div className="absolute -bottom-16 right-2 flex items-end lg:right-6">
-              <img src="/assets/need-doc-1.png" alt="" className="h-[300px] w-auto lg:h-[366px]" />
-              <img
-                src="/assets/need-doc-2.png"
-                alt="First MD providers"
-                className="-ml-24 h-[322px] w-auto lg:h-[394px] lg:-ml-40"
-              />
-            </div>
+            <img
+              src="/assets/need-family.png"
+              alt="First MD providers"
+              className="absolute -bottom-12 right-2 h-[380px] w-auto max-w-none lg:right-8 lg:-bottom-16 lg:h-[470px]"
+            />
           </div>
         </div>
       </Reveal>
