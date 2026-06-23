@@ -165,7 +165,7 @@ function WhatToExpect() {
         <img
           src="/assets/res-visit-doctor.png"
           alt="A First MD provider welcoming you with a clipboard"
-          className="relative mx-auto block h-[420px] w-auto lg:absolute lg:bottom-0 lg:left-1/2 lg:z-10 lg:h-[540px] lg:-translate-x-1/2"
+          className="relative mx-auto block h-[520px] w-auto lg:absolute lg:-bottom-24 lg:left-1/2 lg:z-10 lg:h-[680px] lg:-translate-x-1/2"
         />
 
         <div className="relative flex flex-col gap-8 px-6 pb-16 lg:absolute lg:inset-x-0 lg:top-[80px] lg:flex-row lg:items-start lg:justify-between lg:px-0 lg:pb-0">
