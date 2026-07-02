@@ -6,6 +6,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { useLocation } from 'react-router-dom'
 import {
+  ARROW,
   BOOK,
   CapsuleFrame,
   Container,
@@ -222,56 +223,145 @@ function TeamIntro() {
  * Provider cards
  * ------------------------------------------------------------------------- */
 
-type Crop = { width: string; height: string; left: string; top: string }
-type Provider = { id: string; name: string; title: string; img: string; crop: Crop }
+type Provider = {
+  id: string
+  name: string
+  title: string
+  img: string
+  specialties: string[]
+  experience: string
+  bio: string[]
+}
 
-// Crops mirror the Figma node placements so each face is framed identically.
 const PROVIDERS: Provider[] = [
-  { id: 'edward', name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-src-2.png', crop: { width: '100%', height: '128.78%', left: '0%', top: '0%' } },
+  {
+    id: 'edward',
+    name: 'Edward Martinez',
+    title: 'PA-C · Co-Founder',
+    img: '/assets/prov-src-2.png',
+    specialties: ['Family & Internal Medicine', 'Bioidentical Hormone Therapy', 'Peptide Therapy'],
+    experience: '20+ Years Experience',
+    bio: [
+      'Edward Martinez is a licensed Physician Associate and co-founder of First MD. He started in healthcare after graduating with a BSN from Texas Tech University in 1997. After several years as a registered nurse, he continued his education and graduated with a PA degree from University of Texas - Pan American in 2004. Edward has experience in a variety of disciplines including surgery, internal medicine and family medicine. He is constantly learning how to better care for his patients and is certified in bio-identical hormone replacement therapy and has peptide therapy certification by the International Peptide Society. With a focus on disease prevention, he is also a member of the American Academy of Anti-Aging Medicine and pursuing a functional medicine certification.',
+      'Edward considers it a privilege to collaborate with you in your healthcare journey. He is thorough in his assessments and takes the time to listen to your concerns in order to develop a personalized treatment plan.',
+      'Edward enjoys teaching and is a preceptor for Nurse Practitioner and PA students from regional universities. He lives locally, enjoys spending time with his family and reading about science-related topics. He is a health and fitness enthusiast and a 2-time Ironman finisher.',
+    ],
+  },
+  {
+    id: 'courtney',
+    name: 'Courtney',
+    title: 'FNP',
+    img: '/assets/prov-courtney.png',
+    specialties: ['Primary & Urgent Care', 'Family Medicine', 'Patient Education'],
+    experience: '12+ Years Experience',
+    bio: [
+      "Courtney is a Family Nurse Practitioner who graduated from Texas Woman's University. With more than 12 years of experience as a critical care RN, she brings a strong clinical foundation and compassionate approach to patient care. Currently specializing in primary and urgent care, Courtney is dedicated to providing thorough, personalized treatment while prioritizing patient well-being and optimal health outcomes.",
+      'Known for a personable and attentive bedside manner, Courtney values building trusting relationships with patients and creating an environment where individuals feel heard and supported. She is passionate about patient education and believes informed patients are empowered to make confident decisions about their health. By combining evidence-based practice with compassionate care, Courtney strives to help patients achieve long-term wellness and improved quality of life.',
+    ],
+  },
 ]
 
-const PROVIDER_SPECIALTIES = ['Family Medicine', 'Preventive Care', 'Chronic Disease Management']
-
-function ProviderFeature({ provider, highlighted }: { provider: Provider; highlighted?: boolean }) {
+/** Compact clickable tile — opens the provider's popup. */
+function ProviderTile({ provider, onOpen }: { provider: Provider; onOpen: () => void }) {
   return (
-    <div
+    <button
       id={provider.id}
-      className={`group flex scroll-mt-28 flex-col overflow-hidden rounded-3xl border bg-white shadow-sm transition-all duration-300 hover:shadow-xl lg:flex-row lg:items-stretch ${
-        highlighted ? 'border-accent ring-4 ring-accent/40 ring-offset-2 ring-offset-page' : 'border-navy'
-      }`}
+      type="button"
+      onClick={onOpen}
+      aria-label={`View ${provider.name}'s profile`}
+      className="group flex scroll-mt-28 flex-col overflow-hidden rounded-3xl border border-navy bg-white text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
     >
-      {/* Photo — fixed aspect on mobile, stretches alongside the details on desktop */}
-      <div className="relative aspect-[312/253] w-full shrink-0 overflow-hidden bg-navy lg:aspect-auto lg:min-h-[440px] lg:w-[46%]">
+      <div className="relative h-[360px] overflow-hidden bg-gradient-to-b from-blue to-navy">
         <img
           src={provider.img}
           alt={provider.name}
-          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          className="absolute inset-0 mx-auto h-full w-auto max-w-none object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.04]"
         />
       </div>
-
-      {/* Details */}
-      <div className="flex flex-1 flex-col gap-6 p-7 lg:p-12">
+      <div className="flex items-center justify-between gap-4 p-6">
         <div>
-          <p className="font-poppins text-3xl font-bold text-navy lg:text-4xl">{provider.name}</p>
-          <p className="font-poppins text-xl font-bold text-navy">{provider.title}</p>
+          <p className="font-poppins text-xl font-bold text-navy">{provider.name}</p>
+          <p className="font-poppins text-base font-bold text-blue">{provider.title}</p>
         </div>
-        <span className="block h-px w-full bg-navy/15" />
-        <ul className="flex flex-col gap-3">
-          {PROVIDER_SPECIALTIES.map((s) => (
-            <li key={s} className="flex items-start gap-3 font-poppins text-lg text-navy">
-              <CheckRing />
-              {s}
-            </li>
-          ))}
-        </ul>
-        <span className="block h-px w-full bg-navy/15" />
-        <div className="flex items-center gap-3">
-          <Star />
-          <span className="font-poppins text-lg text-navy">20+ Years Experience</span>
+        <span className="whitespace-nowrap font-poppins text-sm font-bold text-blue transition-colors group-hover:text-navy">
+          View profile {ARROW}
+        </span>
+      </div>
+    </button>
+  )
+}
+
+/** Full-detail popup for a provider. */
+function ProviderModal({ provider, onClose }: { provider: Provider; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [onClose])
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-label={provider.name}>
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-navy/60 backdrop-blur-sm" onClick={onClose} />
+
+      {/* Card */}
+      <div className="relative z-10 flex max-h-[90vh] w-full max-w-[900px] flex-col overflow-hidden rounded-3xl bg-white shadow-2xl lg:flex-row lg:items-stretch">
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="absolute right-4 top-4 z-20 grid size-10 place-items-center rounded-full bg-white/85 text-navy shadow-md backdrop-blur transition-colors hover:bg-white"
+        >
+          <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+
+        {/* Photo */}
+        <div className="relative h-[300px] shrink-0 overflow-hidden bg-gradient-to-b from-blue to-navy sm:h-[380px] lg:h-auto lg:w-[42%]">
+          <img
+            src={provider.img}
+            alt={provider.name}
+            className="absolute inset-0 mx-auto h-full w-auto max-w-none object-contain object-bottom"
+          />
         </div>
-        <PillButton variant="accent" href={BOOK} className="mt-1 self-start">
-          Book Appointment
-        </PillButton>
+
+        {/* Content (scrolls if long) */}
+        <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-7 lg:p-10">
+          <div>
+            <p className="font-poppins text-3xl font-bold text-navy">{provider.name}</p>
+            <p className="font-poppins text-lg font-bold text-blue">{provider.title}</p>
+          </div>
+          <div className="flex flex-col gap-3">
+            {provider.bio.map((para, i) => (
+              <p key={i} className="font-poppins text-base leading-relaxed text-ink">
+                {para}
+              </p>
+            ))}
+          </div>
+          <span className="block h-px w-full bg-navy/15" />
+          <ul className="flex flex-col gap-2.5">
+            {provider.specialties.map((s) => (
+              <li key={s} className="flex items-start gap-3 font-poppins text-base text-navy">
+                <CheckRing />
+                {s}
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center gap-3">
+            <Star />
+            <span className="font-poppins text-lg text-navy">{provider.experience}</span>
+          </div>
+          <PillButton variant="accent" href={BOOK} className="mt-1 self-start">
+            Book Appointment
+          </PillButton>
+        </div>
       </div>
     </div>
   )
@@ -279,23 +369,23 @@ function ProviderFeature({ provider, highlighted }: { provider: Provider; highli
 
 function ProvidersGrid() {
   const hash = useLocation().hash.replace('#', '')
-  const [active, setActive] = useState('')
+  const [activeId, setActiveId] = useState<string | null>(null)
 
-  // Highlight the deep-linked provider, then clear it after 5 seconds.
+  // Deep link (e.g. /providers#courtney) auto-opens that provider's popup.
   useEffect(() => {
-    if (!hash) return
-    setActive(hash)
-    const t = setTimeout(() => setActive(''), 5000)
-    return () => clearTimeout(t)
+    if (hash && PROVIDERS.some((p) => p.id === hash)) setActiveId(hash)
   }, [hash])
+
+  const active = PROVIDERS.find((p) => p.id === activeId) ?? null
 
   return (
     <Container className="py-12">
-      <Reveal className="mx-auto w-full max-w-[920px]">
+      <Reveal className="mx-auto grid w-full max-w-[840px] grid-cols-1 gap-8 sm:grid-cols-2">
         {PROVIDERS.map((p) => (
-          <ProviderFeature key={p.name} provider={p} highlighted={p.id === active} />
+          <ProviderTile key={p.id} provider={p} onOpen={() => setActiveId(p.id)} />
         ))}
       </Reveal>
+      {active && <ProviderModal provider={active} onClose={() => setActiveId(null)} />}
     </Container>
   )
 }
