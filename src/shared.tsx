@@ -35,7 +35,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', id: 'home', href: '/' },
   { label: 'About', id: 'about', href: '/#about' },
   { label: 'Services', id: 'services', href: '/#services', children: SERVICE_LINKS },
-  { label: 'Providers', id: 'providers', href: '/#providers' },
+  { label: 'Providers', id: 'providers', href: '/providers' },
   { label: 'Resources', id: 'resources', href: '/resources' },
 ]
 const SECTION_IDS = ['home', 'about', 'services', 'providers', 'insurance', 'contact']
