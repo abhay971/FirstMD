@@ -275,7 +275,7 @@ function ProviderTile({ provider, onOpen }: { provider: Provider; onOpen: () => 
         <img
           src={provider.img}
           alt={provider.name}
-          className="absolute inset-0 mx-auto h-full w-auto max-w-none object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.04]"
+          className="absolute inset-0 h-full w-full object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.04]"
         />
       </div>
       <div className="flex items-center justify-between gap-4 p-6">
@@ -311,7 +311,7 @@ function ProviderModal({ provider, onClose }: { provider: Provider; onClose: () 
       <div className="absolute inset-0 bg-navy/60 backdrop-blur-sm" onClick={onClose} />
 
       {/* Card */}
-      <div className="relative z-10 flex max-h-[90vh] w-full max-w-[900px] flex-col overflow-hidden rounded-3xl bg-white shadow-2xl lg:flex-row lg:items-stretch">
+      <div className="relative z-10 flex max-h-[90vh] w-full max-w-[1120px] flex-col overflow-hidden rounded-3xl bg-white shadow-2xl lg:flex-row lg:items-stretch">
         <button
           type="button"
           onClick={onClose}
@@ -324,11 +324,11 @@ function ProviderModal({ provider, onClose }: { provider: Provider; onClose: () 
         </button>
 
         {/* Photo */}
-        <div className="relative h-[300px] shrink-0 overflow-hidden bg-gradient-to-b from-blue to-navy sm:h-[380px] lg:h-auto lg:w-[42%]">
+        <div className="relative h-[300px] shrink-0 overflow-hidden bg-gradient-to-b from-blue to-navy sm:h-[380px] lg:h-auto lg:w-[44%]">
           <img
             src={provider.img}
             alt={provider.name}
-            className="absolute inset-0 mx-auto h-full w-auto max-w-none object-contain object-bottom"
+            className="absolute inset-0 h-full w-full object-contain object-bottom"
           />
         </div>
 
