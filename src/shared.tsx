@@ -21,12 +21,13 @@ export const MAPS_HREF =
   'https://www.google.com/maps/dir/?api=1&destination=' +
   encodeURIComponent('208 East TX-114, Suite 300, Roanoke, TX 76262')
 
-/** The four services, used by the navbar Services dropdown. */
+/** The five services, used by the navbar Services dropdown. */
 export const SERVICE_LINKS = [
   { label: 'Family Medicine & Urgent Care', href: '/services' },
   { label: 'Hormone Therapy', href: '/services/hormone' },
   { label: 'IV Hydrating Therapy', href: '/services/iv' },
   { label: 'Peptide Therapy', href: '/services/peptide' },
+  { label: 'Medical Aesthetics & Wellness', href: '/services/aesthetics' },
 ]
 
 type NavItem = { label: string; id: string; href: string; children?: { label: string; href: string }[] }
