@@ -50,7 +50,7 @@ function Stadium({
       {outline && (
         <div aria-hidden className="pointer-events-none absolute inset-0 -translate-x-[13px] translate-y-[13px] rounded-full border border-navy/40" />
       )}
-      <div className="absolute inset-0 overflow-hidden rounded-full shadow-[0_20px_40px_rgba(0,0,0,0.10)]">
+      <div className="absolute inset-0 overflow-hidden rounded-full">
         <img src={src} alt={alt} className={`h-full w-full object-cover ${pos}`} />
       </div>
     </div>
@@ -190,7 +190,7 @@ function AdvancedTechnology() {
           <div className="grid gap-6 lg:grid-cols-2">
             {DEVICES.map((device, i) => (
               <Reveal key={device.name} delay={i * 90}>
-                <div className="flex h-full flex-col gap-6 rounded-3xl border border-blue/40 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0px_18px_36px_rgba(0,48,94,0.14)] sm:flex-row sm:items-center lg:p-7">
+                <div className="flex h-full flex-col gap-6 rounded-3xl border border-navy bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0px_18px_36px_rgba(0,48,94,0.14)] sm:flex-row sm:items-center lg:p-7">
                   <img
                     src={device.img}
                     alt={device.name}
@@ -268,7 +268,7 @@ function Treatments() {
           <div className="grid items-start gap-6 lg:grid-cols-2">
             {TREATMENT_GROUPS.map((group, i) => (
               <Reveal key={group.title} delay={(i % 2) * 90}>
-                <div className="flex flex-col gap-5 rounded-3xl border border-blue/40 bg-white p-6 lg:p-8">
+                <div className="flex flex-col gap-5 rounded-3xl border border-navy bg-white p-6 lg:p-8">
                   <h3 className="font-poppins text-2xl font-bold text-blue lg:text-[32px]">{group.title}</h3>
                   <ul className="flex flex-col gap-4">
                     {group.items.map((item) => (
@@ -325,7 +325,7 @@ function HydraFacialCollection() {
                   className={`flex h-full flex-col gap-6 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0px_18px_36px_rgba(0,48,94,0.14)] lg:p-8 ${
                     tier.featured
                       ? 'border-2 border-t-8 border-blue bg-white'
-                      : 'border border-blue/50 bg-gradient-to-br from-white to-accent-soft'
+                      : 'border border-blue bg-gradient-to-br from-white to-accent-soft'
                   }`}
                 >
                   <div className="flex flex-col gap-1">
@@ -373,7 +373,7 @@ function WhyChoose() {
       <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[100px]">
           <Reveal className="flex flex-col gap-8">
-            <h2 className={`${BIG_TITLE} max-w-[550px] text-navy`}>Why Choose First MD Wellness</h2>
+            <h2 className={`${BIG_TITLE} max-w-[470px] text-navy`}>Why Choose First MD Wellness</h2>
             <ul className="flex flex-col gap-4">
               {WHY_POINTS.map((point) => (
                 <li key={point} className="flex items-center gap-3">
@@ -389,10 +389,10 @@ function WhyChoose() {
             <Stadium
               src="/assets/aes-why-1.png"
               alt="A First MD physician caring for a young patient"
-              pos="object-[40%_center]"
+              pos="object-[24%_center]"
               outline
             />
-            <Stadium src="/assets/aes-why-2.jpg" alt="A provider checking a patient's blood sugar" pos="object-[55%_center]" />
+            <Stadium src="/assets/aes-why-2.jpg" alt="A provider checking a patient's blood sugar" pos="object-[43%_center]" />
           </Reveal>
         </div>
       </Container>
