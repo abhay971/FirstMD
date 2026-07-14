@@ -39,11 +39,13 @@ function Stadium({
   alt,
   pos = 'object-center',
   outline = false,
+  flip = false,
 }: {
   src: string
   alt: string
   pos?: string
   outline?: boolean
+  flip?: boolean
 }) {
   return (
     <div className="relative h-[400px] w-[180px] shrink-0 sm:h-[646px] sm:w-[290px]">
@@ -51,7 +53,7 @@ function Stadium({
         <div aria-hidden className="pointer-events-none absolute inset-0 -translate-x-[13px] translate-y-[13px] rounded-full border border-navy/40" />
       )}
       <div className="absolute inset-0 overflow-hidden rounded-full">
-        <img src={src} alt={alt} className={`h-full w-full object-cover ${pos}`} />
+        <img src={src} alt={alt} className={`h-full w-full object-cover ${pos} ${flip ? '-scale-x-100' : ''}`} />
       </div>
     </div>
   )
@@ -265,10 +267,10 @@ function Treatments() {
       <Container className="relative z-10 py-14 lg:py-24">
         <Reveal className="flex flex-col gap-10 lg:gap-14">
           <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">Explore Our Treatments</h2>
-          <div className="grid items-start gap-6 lg:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-2">
             {TREATMENT_GROUPS.map((group, i) => (
-              <Reveal key={group.title} delay={(i % 2) * 90}>
-                <div className="flex flex-col gap-5 rounded-3xl border border-navy bg-white p-6 lg:p-8">
+              <Reveal key={group.title} delay={(i % 2) * 90} className="h-full">
+                <div className="flex h-full flex-col gap-5 rounded-3xl border border-navy bg-white p-6 lg:p-8">
                   <h3 className="font-poppins text-2xl font-bold text-blue lg:text-[32px]">{group.title}</h3>
                   <ul className="flex flex-col gap-4">
                     {group.items.map((item) => (
@@ -389,10 +391,11 @@ function WhyChoose() {
             <Stadium
               src="/assets/aes-why-1.png"
               alt="A First MD physician caring for a young patient"
-              pos="object-[24%_center]"
+              pos="object-[48%_center]"
+              flip
               outline
             />
-            <Stadium src="/assets/aes-why-2.jpg" alt="A provider checking a patient's blood sugar" pos="object-[43%_center]" />
+            <Stadium src="/assets/aes-why-2.jpg" alt="A provider checking a patient's blood sugar" pos="object-[40%_center]" />
           </Reveal>
         </div>
       </Container>
