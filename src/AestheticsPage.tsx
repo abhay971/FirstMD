@@ -111,7 +111,7 @@ function Expertise() {
               <img
                 src="/assets/aes-expertise-2.png"
                 alt="A patient's skin being examined before treatment"
-                className="h-full w-full object-cover object-[38%_center]"
+                className="h-full w-full object-cover object-[62%_center]"
               />
             </CapsuleFrame>
           </Reveal>
