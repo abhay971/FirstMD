@@ -9,7 +9,6 @@
 
 import {
   BOOK,
-  CapsuleFrame,
   CheckCircle,
   Container,
   CrossDecor,
@@ -20,10 +19,43 @@ import {
   Navbar,
   PillButton,
   Reveal,
-  SECTION_TITLE,
   SoftTexture,
   useParallax,
 } from './shared'
+
+/**
+ * Large left-aligned section heading used on this page (the Figma design uses
+ * 60px headings here, larger than the compact SECTION_TITLE of other pages).
+ */
+const BIG_TITLE = 'font-poppins text-[32px] font-bold leading-[1.2] sm:text-[40px] lg:text-[52px] xl:text-[60px]'
+
+/**
+ * Stadium photo matching this page's Figma collages: fully rounded capsule
+ * (290x646 in the design), photos in a pair sit TOP-ALIGNED with a 23px gap,
+ * and the left one carries a thin outline offset toward its bottom-left.
+ */
+function Stadium({
+  src,
+  alt,
+  pos = 'object-center',
+  outline = false,
+}: {
+  src: string
+  alt: string
+  pos?: string
+  outline?: boolean
+}) {
+  return (
+    <div className="relative h-[400px] w-[180px] shrink-0 sm:h-[646px] sm:w-[290px]">
+      {outline && (
+        <div aria-hidden className="pointer-events-none absolute inset-0 -translate-x-[13px] translate-y-[13px] rounded-full border border-navy/40" />
+      )}
+      <div className="absolute inset-0 overflow-hidden rounded-full shadow-[0_20px_40px_rgba(0,0,0,0.10)]">
+        <img src={src} alt={alt} className={`h-full w-full object-cover ${pos}`} />
+      </div>
+    </div>
+  )
+}
 
 /* ----------------------------------------------------------------------------
  * Hero — full-bleed photo, copy left, trust chips along the bottom
@@ -98,28 +130,25 @@ function Expertise() {
     <section id="aesthetics" className="relative scroll-mt-28 overflow-hidden">
       <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[64px]">
-          {/* Capsule collage — staggered stadium photos matching the other pages */}
-          <Reveal className="flex items-center justify-center gap-4 sm:gap-5">
-            <CapsuleFrame className="h-[440px] w-[200px] -translate-y-4 sm:h-[560px] sm:w-[268px] sm:-translate-y-7">
-              <img
-                src="/assets/aes-expertise-1.png"
-                alt="A First MD aesthetician performing a facial treatment"
-                className="h-full w-full object-cover object-[60%_center]"
-              />
-            </CapsuleFrame>
-            <CapsuleFrame sharp="bl" className="hidden translate-y-4 sm:block sm:h-[560px] sm:w-[268px] sm:translate-y-7">
-              <img
-                src="/assets/aes-expertise-2.png"
-                alt="A patient's skin being examined before treatment"
-                className="h-full w-full object-cover object-[62%_center]"
-              />
-            </CapsuleFrame>
+          {/* Stadium collage — two top-aligned capsules, outline behind the left one */}
+          <Reveal className="flex items-start justify-center gap-3 sm:gap-[23px] lg:justify-start">
+            <Stadium
+              src="/assets/aes-expertise-1.png"
+              alt="A First MD aesthetician performing a facial treatment"
+              pos="object-[60%_center]"
+              outline
+            />
+            <Stadium
+              src="/assets/aes-expertise-2.png"
+              alt="A patient's skin being examined before treatment"
+              pos="object-[62%_center]"
+            />
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col gap-6">
             <div className="flex flex-col gap-3">
-              <p className="font-poppins text-lg font-bold text-blue">Wellness Clinic</p>
-              <h2 className={`${SECTION_TITLE} max-w-[639px] text-navy`}>Medical Aesthetics Backed by Medical Expertise</h2>
+              <p className="font-poppins text-xl font-bold text-blue lg:text-2xl">Wellness Clinic</p>
+              <h2 className={`${BIG_TITLE} max-w-[639px] text-navy`}>Medical Aesthetics Backed by Medical Expertise</h2>
             </div>
             <p className="max-w-[583px] font-poppins text-xl text-ink">
               Unlike traditional spas, every treatment at First MD Wellness Clinic is performed under the supervision of
@@ -157,7 +186,7 @@ function AdvancedTechnology() {
     <section className="relative scroll-mt-28 overflow-hidden">
       <Container className="relative z-10 py-14 lg:py-24">
         <Reveal className="flex flex-col gap-10 lg:gap-14">
-          <h2 className={`${SECTION_TITLE} text-center text-navy`}>Advanced Technology</h2>
+          <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">Advanced Technology</h2>
           <div className="grid gap-6 lg:grid-cols-2">
             {DEVICES.map((device, i) => (
               <Reveal key={device.name} delay={i * 90}>
@@ -169,7 +198,7 @@ function AdvancedTechnology() {
                   />
                   <div className="flex flex-col items-start gap-4">
                     <div className="flex flex-col gap-2">
-                      <h3 className="font-poppins text-2xl font-bold text-navy lg:text-[28px]">{device.name}</h3>
+                      <h3 className="font-poppins text-2xl font-bold text-navy lg:text-[32px]">{device.name}</h3>
                       <p className="font-poppins text-base text-ink/80 lg:text-lg">{device.desc}</p>
                     </div>
                     <a
@@ -235,18 +264,18 @@ function Treatments() {
       <CrossDecor src="/assets/cross-1.svg" className="left-[-50px] bottom-[8%] w-[240px]" />
       <Container className="relative z-10 py-14 lg:py-24">
         <Reveal className="flex flex-col gap-10 lg:gap-14">
-          <h2 className={`${SECTION_TITLE} text-center text-navy`}>Explore Our Treatments</h2>
+          <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">Explore Our Treatments</h2>
           <div className="grid items-start gap-6 lg:grid-cols-2">
             {TREATMENT_GROUPS.map((group, i) => (
               <Reveal key={group.title} delay={(i % 2) * 90}>
                 <div className="flex flex-col gap-5 rounded-3xl border border-blue/40 bg-white p-6 lg:p-8">
-                  <h3 className="font-poppins text-2xl font-bold text-blue lg:text-[28px]">{group.title}</h3>
-                  <ul className="flex flex-col gap-1.5">
+                  <h3 className="font-poppins text-2xl font-bold text-blue lg:text-[32px]">{group.title}</h3>
+                  <ul className="flex flex-col gap-4">
                     {group.items.map((item) => (
-                      <li key={item.label} className="group flex items-center justify-between gap-3 rounded-xl px-2 py-1.5 transition-colors hover:bg-page">
-                        <span className="flex items-center gap-4">
+                      <li key={item.label} className="group flex h-8 items-center justify-between gap-3">
+                        <span className="flex items-center gap-6">
                           <img src={item.icon} alt="" className="size-8 shrink-0" />
-                          <span className="font-poppins text-base text-ink lg:text-lg">{item.label}</span>
+                          <span className="font-poppins text-lg text-ink lg:text-xl">{item.label}</span>
                         </span>
                         <svg
                           viewBox="0 0 24 24"
@@ -288,7 +317,7 @@ function HydraFacialCollection() {
     <section id="hydrafacial" className="relative scroll-mt-28 overflow-hidden">
       <Container className="relative z-10 py-14 lg:py-24">
         <Reveal className="flex flex-col gap-10 lg:gap-14">
-          <h2 className={`${SECTION_TITLE} text-center text-navy`}>HydraFacial Collection</h2>
+          <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">HydraFacial Collection</h2>
           <div className="grid items-stretch gap-6 lg:grid-cols-3 lg:gap-8">
             {TIERS.map((tier, i) => (
               <Reveal key={tier.name} delay={i * 90} className="h-full">
@@ -301,7 +330,7 @@ function HydraFacialCollection() {
                 >
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center justify-between gap-3">
-                      <h3 className="font-poppins text-[28px] font-bold text-blue">{tier.name}</h3>
+                      <h3 className="font-poppins text-[28px] font-bold text-blue lg:text-[32px]">{tier.name}</h3>
                       {tier.featured && (
                         <span className="rounded-full border border-accent/30 bg-accent/10 px-3 py-1 font-poppins text-xs font-bold text-accent">
                           Most complete
@@ -344,29 +373,26 @@ function WhyChoose() {
       <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[100px]">
           <Reveal className="flex flex-col gap-8">
-            <h2 className={`${SECTION_TITLE} max-w-[550px] text-navy`}>Why Choose First MD Wellness</h2>
+            <h2 className={`${BIG_TITLE} max-w-[550px] text-navy`}>Why Choose First MD Wellness</h2>
             <ul className="flex flex-col gap-4">
               {WHY_POINTS.map((point) => (
                 <li key={point} className="flex items-center gap-3">
                   <CheckCircle />
-                  <span className="font-poppins text-lg font-bold text-ink lg:text-xl">{point}</span>
+                  <span className="font-poppins text-xl font-bold text-ink lg:text-2xl">{point}</span>
                 </li>
               ))}
             </ul>
           </Reveal>
 
-          {/* Capsule collage — staggered stadium photos matching the other pages */}
-          <Reveal delay={120} className="flex items-center justify-center gap-4 sm:gap-5">
-            <CapsuleFrame className="h-[440px] w-[200px] -translate-y-4 sm:h-[560px] sm:w-[268px] sm:-translate-y-7">
-              <img
-                src="/assets/aes-why-1.png"
-                alt="A First MD physician caring for a young patient"
-                className="h-full w-full object-cover object-[40%_center]"
-              />
-            </CapsuleFrame>
-            <CapsuleFrame sharp="bl" className="hidden translate-y-4 sm:block sm:h-[560px] sm:w-[268px] sm:translate-y-7">
-              <img src="/assets/aes-why-2.jpg" alt="" className="h-full w-full object-cover object-[55%_center]" />
-            </CapsuleFrame>
+          {/* Stadium collage — two top-aligned capsules, outline behind the left one */}
+          <Reveal delay={120} className="flex items-start justify-center gap-3 sm:gap-[23px] lg:justify-end">
+            <Stadium
+              src="/assets/aes-why-1.png"
+              alt="A First MD physician caring for a young patient"
+              pos="object-[40%_center]"
+              outline
+            />
+            <Stadium src="/assets/aes-why-2.jpg" alt="A provider checking a patient's blood sugar" pos="object-[55%_center]" />
           </Reveal>
         </div>
       </Container>
