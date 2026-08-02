@@ -151,11 +151,6 @@ const SERVICES = [
     desc: 'Targeted peptide treatments to support recovery, metabolism, and healthy aging.',
     href: '/services/peptide',
   },
-  {
-    name: 'Medical Aesthetics & Wellness',
-    desc: 'Physician-supervised aesthetic treatments — from HydraFacial to Morpheus8 — for healthier, glowing skin.',
-    href: '/services/aesthetics',
-  },
 ]
 
 function Services() {
