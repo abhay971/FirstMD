@@ -644,7 +644,6 @@ const FOOTER_COLS: { heading: string; links: { label: string; href: string }[] }
     links: [
       { label: 'HIPAA Privacy Policy', href: '/privacy-policy' },
       { label: 'Accessibility Statement', href: '/accessibility' },
-      { label: 'Sitemap', href: '#' },
     ],
   },
 ]
