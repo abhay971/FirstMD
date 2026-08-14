@@ -27,6 +27,7 @@ export const SERVICE_LINKS = [
   { label: 'Hormone Therapy', href: '/services/hormone' },
   { label: 'IV Hydrating Therapy', href: '/services/iv' },
   { label: 'Peptide Therapy', href: '/services/peptide' },
+  { label: 'Chiropractic Care', href: '/services/chiropractic' },
 ]
 
 type NavItem = { label: string; id: string; href: string; children?: { label: string; href: string }[] }

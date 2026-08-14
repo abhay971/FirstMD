@@ -9,6 +9,7 @@ import HormonePage from './HormonePage'
 import IVPage from './IVPage'
 import PeptidePage from './PeptidePage'
 import AestheticsPage from './AestheticsPage'
+import ChiropracticPage from './ChiropracticPage'
 import PrivacyPolicyPage from './PrivacyPolicyPage'
 import AccessibilityPage from './AccessibilityPage'
 
@@ -43,6 +44,7 @@ export default function App() {
         <Route path="/services/iv" element={<IVPage />} />
         <Route path="/services/peptide" element={<PeptidePage />} />
         <Route path="/services/aesthetics" element={<AestheticsPage />} />
+        <Route path="/services/chiropractic" element={<ChiropracticPage />} />
         <Route path="/providers" element={<ProvidersPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/resources" element={<ResourcesPage />} />
