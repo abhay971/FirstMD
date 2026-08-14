@@ -20,6 +20,7 @@ import {
   PHONE_HREF,
   PillButton,
   Reveal,
+  SECTION_TITLE,
   SectionHeading,
   useParallax,
 } from './shared'
@@ -106,7 +107,7 @@ function WhatIs() {
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col gap-8">
-            <SectionHeading eyebrow="What Is Chiropractic Care?" title="Move Better. Feel Better." className="max-w-[613px]" />
+            <SectionHeading eyebrow="What Is Chiropractic Care?" title="Move Better. Feel Better." size="md" className="max-w-[613px]" />
             <div className="flex max-w-[602px] flex-col gap-5 font-poppins text-xl text-navy">
               <p>
                 Chiropractic care uses hands-on techniques to address problems involving the spine, joints, and muscles.
@@ -166,15 +167,15 @@ function Services() {
     <section id="treatments" className="relative scroll-mt-28 overflow-hidden">
       <CrossDecor src="/assets/cross-3.svg" className="right-[-60px] top-[2%] w-[240px]" />
       <Container className="relative z-10 py-14 lg:py-24">
-        <Reveal className="flex flex-col gap-10 lg:gap-14">
-          <h2 className="font-poppins text-4xl font-bold text-navy lg:text-6xl">Chiropractic Services</h2>
+        <Reveal className="flex flex-col gap-12">
+          <h2 className={`${SECTION_TITLE} text-navy`}>Chiropractic Services</h2>
           <div className="grid gap-6 lg:grid-cols-2">
             {SERVICES.map((card, i) => (
               <Reveal key={card.title} delay={(i % 2) * 90} className="h-full">
-                <div className="flex h-full items-center gap-6 rounded-3xl border border-navy bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0px_18px_36px_rgba(0,48,94,0.14)] lg:p-10">
-                  <img src={card.icon} alt="" className="size-14 shrink-0 lg:size-16" />
+                <div className="flex h-full items-center gap-6 rounded-3xl border border-navy bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0px_18px_36px_rgba(0,48,94,0.14)] lg:p-7">
+                  <img src={card.icon} alt="" className="size-14 shrink-0" />
                   <div className="flex flex-col gap-1">
-                    <h3 className="font-poppins text-xl font-bold text-navy lg:text-[28px] lg:leading-[1.3]">{card.title}</h3>
+                    <h3 className="font-poppins text-xl font-bold leading-[1.3] text-navy lg:text-2xl">{card.title}</h3>
                     <p className="font-poppins text-base text-ink lg:text-lg">{card.desc}</p>
                   </div>
                 </div>
@@ -206,17 +207,15 @@ function Conditions() {
         className="pointer-events-none absolute right-[-8px] top-1/2 hidden w-[440px] -translate-y-1/2 -scale-x-100 select-none opacity-20 lg:block xl:w-[512px]"
       />
       <Container className="relative z-10 py-14 lg:py-24">
-        <Reveal className="flex flex-col gap-10 lg:gap-16">
+        <Reveal className="flex flex-col gap-10 lg:gap-12">
           <div className="flex flex-col gap-3">
-            <p className="font-poppins text-lg font-bold text-page/90 lg:text-2xl">Conditions We Help Address</p>
-            <h2 className="font-poppins text-[30px] font-bold leading-[1.08] text-page sm:text-4xl lg:text-[44px] xl:text-[52px] 2xl:text-[60px]">
-              Care for Pain &amp; Movement
-            </h2>
+            <p className="font-poppins text-lg font-bold text-page/90">Conditions We Help Address</p>
+            <h2 className={`${SECTION_TITLE} text-page`}>Care for Pain &amp; Movement</h2>
           </div>
           <div className="flex flex-col gap-10 sm:flex-row lg:gap-16">
             <div className="flex flex-col gap-4">
-              <h3 className="font-poppins text-2xl font-bold text-white lg:text-[32px]">Pain &amp; Discomfort</h3>
-              <ul className="flex list-disc flex-col gap-1.5 pl-6 font-poppins text-lg text-page lg:text-xl">
+              <h3 className="font-poppins text-xl font-bold text-white lg:text-2xl">Pain &amp; Discomfort</h3>
+              <ul className="flex list-disc flex-col gap-2 pl-6 font-poppins text-xl text-page">
                 {PAIN_CONDITIONS.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -224,8 +223,8 @@ function Conditions() {
             </div>
             <div aria-hidden className="hidden w-px self-stretch bg-white/40 sm:block" />
             <div className="flex flex-col gap-4">
-              <h3 className="font-poppins text-2xl font-bold text-white lg:text-[32px]">Injuries &amp; Mobility</h3>
-              <ul className="flex list-disc flex-col gap-1.5 pl-6 font-poppins text-lg text-page lg:text-xl">
+              <h3 className="font-poppins text-xl font-bold text-white lg:text-2xl">Injuries &amp; Mobility</h3>
+              <ul className="flex list-disc flex-col gap-2 pl-6 font-poppins text-xl text-page">
                 {MOBILITY_CONDITIONS.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -256,7 +255,7 @@ function WhyChoose() {
       <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[83px]">
           <Reveal className="flex justify-center lg:justify-start">
-            <div className="max-h-[560px] w-full max-w-[656px] overflow-hidden rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.12)] lg:max-h-none">
+            <div className="max-h-[560px] w-full max-w-[656px] overflow-hidden rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.12)] lg:max-h-[640px]">
               <img
                 src="/assets/svc-chiro-why.png"
                 alt="A First MD chiropractor adjusting a patient's neck and shoulders"
@@ -267,11 +266,9 @@ function WhyChoose() {
 
           <Reveal delay={120} className="flex flex-col gap-8">
             <div className="flex flex-col gap-3">
-              <p className="font-poppins text-lg font-bold text-blue lg:text-2xl">WHY CHOOSE FIRST MD</p>
-              <h2 className="max-w-[653px] font-poppins text-[30px] font-bold leading-[1.08] text-navy sm:text-4xl lg:text-[44px] xl:text-[52px]">
-                Care That Goes Beyond the Pain
-              </h2>
-              <p className="max-w-[653px] font-poppins text-lg text-ink lg:text-xl">
+              <p className="font-poppins text-lg font-bold text-blue">WHY CHOOSE FIRST MD</p>
+              <h2 className={`${SECTION_TITLE} max-w-[653px] text-navy`}>Care That Goes Beyond the Pain</h2>
+              <p className="max-w-[653px] font-poppins text-xl text-ink">
                 We focus on understanding the source of your discomfort and creating a care approach around your
                 individual needs — not simply treating the symptoms.
               </p>
@@ -315,7 +312,7 @@ function Insurance() {
       <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[104px]">
           <Reveal className="flex flex-col gap-8">
-            <SectionHeading eyebrow="Insurance Made Simple" title="We Make Care Easy" className="max-w-[550px]" />
+            <SectionHeading eyebrow="Insurance Made Simple" title="We Make Care Easy" size="md" className="max-w-[550px]" />
             <p className="max-w-[550px] font-poppins text-xl text-ink">
               We can help you understand your care options, insurance coverage, and what to expect before starting
               treatment.
