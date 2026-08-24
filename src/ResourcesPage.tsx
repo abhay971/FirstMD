@@ -163,9 +163,9 @@ function WhatToExpect() {
         <ExpectRings />
 
         <img
-          src="/assets/res-visit-doctor.png"
-          alt="A First MD provider welcoming you with a clipboard"
-          className="relative mx-auto block h-[520px] w-auto lg:absolute lg:-bottom-24 lg:left-1/2 lg:z-10 lg:h-[680px] lg:-translate-x-1/2"
+          src="/assets/res-visit-shield.png"
+          alt=""
+          className="relative mx-auto block h-[300px] w-auto drop-shadow-[0_24px_40px_rgba(0,48,94,0.25)] lg:absolute lg:left-1/2 lg:top-1/2 lg:z-10 lg:h-[420px] lg:-translate-x-1/2 lg:-translate-y-1/2"
         />
 
         <div className="relative flex flex-col gap-8 px-6 pb-16 lg:absolute lg:inset-x-0 lg:top-[80px] lg:flex-row lg:items-start lg:justify-between lg:px-0 lg:pb-0">
