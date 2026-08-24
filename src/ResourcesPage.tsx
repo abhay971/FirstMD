@@ -44,13 +44,13 @@ function Hero() {
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
       {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
       <div className="relative lg:hidden">
-        <img src="/assets/resources-hero.png" alt="" className="block w-full object-cover" />
+        <img src="/assets/resources-hero.webp" alt="" className="block w-full object-cover" />
         <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
       </div>
       {/* Desktop: full-bleed background photo with text overlaid */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
-          src="/assets/resources-hero.png"
+          src="/assets/resources-hero.webp"
           alt=""
           ref={heroRef}
           className="absolute inset-x-0 top-[-5%] h-[110%] w-full object-cover object-[center_right] will-change-transform"
@@ -162,8 +162,8 @@ function WhatToExpect() {
       <div className="relative mt-12 lg:mt-0 lg:h-[580px]">
         <ExpectRings />
 
-        <img
-          src="/assets/res-visit-shield.png"
+        <img loading="lazy"
+          src="/assets/res-visit-shield.webp"
           alt=""
           className="relative mx-auto block h-[300px] w-auto drop-shadow-[0_24px_40px_rgba(0,48,94,0.25)] lg:absolute lg:left-1/2 lg:top-1/2 lg:z-10 lg:h-[420px] lg:-translate-x-1/2 lg:-translate-y-1/2"
         />
@@ -336,7 +336,7 @@ function Insurance() {
           </Reveal>
 
           <Reveal delay={120} className="h-[420px] w-full overflow-hidden rounded-2xl bg-[#d9d9d9] shadow-xl lg:h-[810px]">
-            <img src="/assets/insurance.png" alt="Insurance support at First MD" className="h-full w-full object-cover" />
+            <img loading="lazy" src="/assets/insurance.webp" alt="Insurance support at First MD" className="h-full w-full object-cover" />
           </Reveal>
         </div>
       </Container>
@@ -387,8 +387,8 @@ function ReadyBanner() {
             className="pointer-events-none absolute inset-0 z-10 hidden lg:block"
             style={{ clipPath: 'inset(-300px 0px 0px 0px round 24px)' }}
           >
-            <img
-              src="/assets/res-cta-doctor.png"
+            <img loading="lazy"
+              src="/assets/res-cta-doctor.webp"
               alt=""
               className="absolute bottom-0 right-12 h-[330px] w-auto"
             />

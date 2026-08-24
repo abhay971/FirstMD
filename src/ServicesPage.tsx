@@ -45,13 +45,13 @@ function Hero() {
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
       {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
       <div className="relative lg:hidden">
-        <img src="/assets/services-hero.png" alt="" className="block w-full object-cover" />
+        <img src="/assets/services-hero.webp" alt="" className="block w-full object-cover" />
         <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
       </div>
       {/* Desktop: full-bleed background photo with text overlaid */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
-          src="/assets/services-hero.png"
+          src="/assets/services-hero.webp"
           alt=""
           ref={heroRef}
           className="absolute inset-x-0 top-[-5%] h-[110%] w-full object-cover object-[center_right] will-change-transform"
@@ -103,15 +103,15 @@ function WhatIs() {
           <Reveal className="flex justify-center lg:justify-start">
             <div className="flex w-full max-w-[616px] items-start gap-5 sm:gap-6">
               <CapsuleFrame className="aspect-[585/1300] w-[calc(50%-10px)] translate-y-3 sm:w-[calc(50%-12px)]">
-                <img
-                  src="/assets/fm-intro-doctor.jpg"
+                <img loading="lazy"
+                  src="/assets/fm-intro-doctor.webp"
                   alt="A First MD provider sheltering a paper family with caring hands"
                   className="h-full w-full object-cover object-center"
                 />
               </CapsuleFrame>
               <CapsuleFrame sharp="bl" outlineClassName="border-transparent" className="aspect-[577/1320] w-[calc(50%-10px)] sm:w-[calc(50%-12px)]">
-                <img
-                  src="/assets/fm-intro-family.png"
+                <img loading="lazy"
+                  src="/assets/fm-intro-family.webp"
                   alt="A paper family standing in front of a red heart"
                   className="h-full w-full object-cover object-center"
                 />
@@ -181,7 +181,7 @@ function WellnessCare() {
             {SERVICES.map((card, i) => (
               <Reveal key={card.title} delay={(i % 2) * 90}>
                 <div className="flex h-full items-center gap-5 rounded-3xl border border-navy bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0px_18px_36px_rgba(0,48,94,0.14)] lg:p-7">
-                  <img src={card.icon} alt="" className="size-14 shrink-0" />
+                  <img loading="lazy" src={card.icon} alt="" className="size-14 shrink-0" />
                   <div className="flex flex-col gap-0.5">
                     <h3 className="font-poppins text-xl font-bold leading-[1.25] text-navy lg:text-2xl">{card.title}</h3>
                     <p className="font-poppins text-base text-ink lg:text-lg">{card.desc}</p>
@@ -283,15 +283,15 @@ function StartWithUs() {
           <Reveal delay={120} className="flex justify-center lg:justify-end">
             <div className="flex w-full max-w-[616px] items-start gap-5 sm:gap-6">
               <CapsuleFrame className="aspect-[585/1300] w-[calc(50%-10px)] translate-y-3 sm:w-[calc(50%-12px)]">
-                <img
-                  src="/assets/svc-insurance-stethoscope.jpg"
+                <img loading="lazy"
+                  src="/assets/svc-insurance-stethoscope.webp"
                   alt="A stethoscope and a red heart on a blue background"
                   className="h-full w-full object-cover object-center"
                 />
               </CapsuleFrame>
               <CapsuleFrame sharp="bl" outlineClassName="border-transparent" className="aspect-[577/1320] w-[calc(50%-10px)] sm:w-[calc(50%-12px)]">
-                <img
-                  src="/assets/svc-insurance-glucose.png"
+                <img loading="lazy"
+                  src="/assets/svc-insurance-glucose.webp"
                   alt="A provider checking a patient's blood sugar"
                   className="h-full w-full object-cover object-center"
                 />

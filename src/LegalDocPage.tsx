@@ -129,8 +129,8 @@ function ClinicVisit() {
             className="group relative block h-[280px] w-full overflow-hidden rounded-3xl shadow-lg lg:h-[358px]"
             aria-label="Open directions in Google Maps"
           >
-            <img
-              src="/assets/contact-map.png"
+            <img loading="lazy"
+              src="/assets/contact-map.webp"
               alt="Map to First MD clinic"
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />

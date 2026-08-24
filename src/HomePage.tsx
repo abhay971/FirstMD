@@ -37,13 +37,13 @@ function Hero() {
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
       {/* Mobile: full-bleed banner photo (flush to top, soft wash like desktop) */}
       <div className="relative lg:hidden">
-        <img src="/assets/hero-bg.png" alt="" className="block w-full object-cover" />
+        <img src="/assets/hero-bg.webp" alt="" className="block w-full object-cover" />
         <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
       </div>
       {/* Desktop: full-bleed background photo with text overlaid */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
-          src="/assets/hero-bg.png"
+          src="/assets/hero-bg.webp"
           alt=""
           ref={heroRef}
           className="absolute inset-x-0 top-[-5%] h-[110%] w-full object-cover object-[center_right] will-change-transform"
@@ -114,8 +114,8 @@ function NeedCareBanner() {
             className="pointer-events-none absolute inset-0 z-10 hidden md:block"
             style={{ clipPath: 'inset(-220px 0px 0px 0px round 16px)' }}
           >
-            <img
-              src="/assets/need-family.png"
+            <img loading="lazy"
+              src="/assets/need-family.webp"
               alt="First MD providers"
               className="absolute -bottom-12 right-2 h-[380px] w-auto max-w-none lg:right-8 lg:-bottom-16 lg:h-[470px]"
             />
@@ -162,7 +162,7 @@ function Services() {
   return (
     <section id="services" className="relative scroll-mt-28 overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
-        <img src="/assets/services-bp-check.jpg" alt="" className="h-full w-full object-cover object-[70%_center]" />
+        <img loading="lazy" src="/assets/services-bp-check.webp" alt="" className="h-full w-full object-cover object-[70%_center]" />
         <div className="absolute inset-0 bg-gradient-to-r from-page from-0% via-page/25 via-55% to-transparent to-100%" />
       </div>
 
@@ -218,11 +218,11 @@ function WhyChoose() {
           <Reveal className="flex items-center justify-center gap-4 sm:gap-5">
             {/* Doctor capsule — nudged up */}
             <CapsuleFrame className="h-[440px] w-[200px] -translate-y-4 sm:h-[560px] sm:w-[268px] sm:-translate-y-7">
-              <img src="/assets/why-stethoscope.jpg" alt="A First MD provider holding out a stethoscope" className="h-full w-full object-cover object-center" />
+              <img loading="lazy" src="/assets/why-stethoscope.webp" alt="A First MD provider holding out a stethoscope" className="h-full w-full object-cover object-center" />
             </CapsuleFrame>
             {/* Anatomy capsule — nudged down, flipped vertically so the figure stands upright */}
             <CapsuleFrame sharp="bl" className="hidden translate-y-4 sm:block sm:h-[560px] sm:w-[268px] sm:translate-y-7">
-              <img src="/assets/why-c.png" alt="" className="h-full w-full -scale-y-100 object-cover" />
+              <img loading="lazy" src="/assets/why-c.webp" alt="" className="h-full w-full -scale-y-100 object-cover" />
             </CapsuleFrame>
           </Reveal>
 
@@ -284,7 +284,7 @@ function Insurance() {
           </Reveal>
 
           <Reveal delay={120} className="h-[420px] w-full overflow-hidden rounded-2xl bg-[#d9d9d9] shadow-xl lg:h-[810px]">
-            <img src="/assets/insurance.png" alt="Insurance support at First MD" className="h-full w-full object-cover" />
+            <img loading="lazy" src="/assets/insurance.webp" alt="Insurance support at First MD" className="h-full w-full object-cover" />
           </Reveal>
         </div>
       </Container>
@@ -317,8 +317,8 @@ function Contact() {
               className="group relative block h-[280px] w-full overflow-hidden rounded-3xl shadow-lg lg:h-[358px]"
               aria-label="Open directions in Google Maps"
             >
-              <img
-                src="/assets/contact-map.png"
+              <img loading="lazy"
+                src="/assets/contact-map.webp"
                 alt="Map to First MD clinic"
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />

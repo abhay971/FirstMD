@@ -43,14 +43,14 @@ function Hero() {
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
       {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
       <div className="relative lg:hidden">
-        <img src="/assets/svc-iv-hero.png" alt="" className="block w-full object-cover" />
+        <img src="/assets/svc-iv-hero.webp" alt="" className="block w-full object-cover" />
         <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
       </div>
       {/* Desktop: full-bleed background photo with text overlaid */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
           ref={heroRef}
-          src="/assets/svc-iv-hero.png"
+          src="/assets/svc-iv-hero.webp"
           alt=""
           className="absolute inset-x-0 top-[-5%] h-[110%] w-full object-cover object-[center_right] will-change-transform"
         />
@@ -100,8 +100,8 @@ function WhatIs() {
       <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[40px]">
           <Reveal className="flex justify-center lg:justify-start">
-            <img
-              src="/assets/svc-iv-pills.png"
+            <img loading="lazy"
+              src="/assets/svc-iv-pills.webp"
               alt="A patient receiving IV hydration therapy with a First MD nurse"
               className="h-auto w-full max-w-[616px]"
             />
@@ -151,7 +151,7 @@ function WhyChoose() {
             {BENEFITS.map((card, i) => (
               <Reveal key={card.title} delay={(i % 2) * 90}>
                 <div className="flex h-full items-center gap-6 rounded-3xl border border-navy bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0px_18px_36px_rgba(0,48,94,0.14)] lg:p-7">
-                  <img src={card.icon} alt="" className="size-14 shrink-0" />
+                  <img loading="lazy" src={card.icon} alt="" className="size-14 shrink-0" />
                   <h3 className="font-poppins text-xl font-bold leading-[1.3] text-navy lg:text-2xl">{card.title}</h3>
                 </div>
               </Reveal>
@@ -226,8 +226,8 @@ function TreatmentInfo() {
           </Reveal>
 
           <Reveal delay={120} className="flex justify-center lg:justify-end">
-            <img
-              src="/assets/svc-iv-insurance-pills.png"
+            <img loading="lazy"
+              src="/assets/svc-iv-insurance-pills.webp"
               alt="First MD medical team supporting IV hydration patients"
               className="h-auto w-full max-w-[616px]"
             />

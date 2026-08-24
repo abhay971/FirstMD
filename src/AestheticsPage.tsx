@@ -53,7 +53,7 @@ function Stadium({
         <div aria-hidden className="pointer-events-none absolute inset-0 -translate-x-[13px] translate-y-[13px] rounded-full border border-navy/40" />
       )}
       <div className="absolute inset-0 overflow-hidden rounded-full">
-        <img src={src} alt={alt} className={`h-full w-full object-cover ${pos} ${flip ? '-scale-x-100' : ''}`} />
+        <img loading="lazy" src={src} alt={alt} className={`h-full w-full object-cover ${pos} ${flip ? '-scale-x-100' : ''}`} />
       </div>
     </div>
   )
@@ -77,13 +77,13 @@ function Hero() {
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
       {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
       <div className="relative lg:hidden">
-        <img src="/assets/aes-hero.png" alt="" className="block w-full object-cover" />
+        <img src="/assets/aes-hero.webp" alt="" className="block w-full object-cover" />
         <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
       </div>
       {/* Desktop: full-bleed background photo with text overlaid */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
-          src="/assets/aes-hero.png"
+          src="/assets/aes-hero.webp"
           alt=""
           ref={heroRef}
           className="absolute inset-x-0 top-[-5%] h-[110%] w-full object-cover object-[center_right] will-change-transform"
@@ -135,13 +135,13 @@ function Expertise() {
           {/* Stadium collage — two top-aligned capsules, outline behind the left one */}
           <Reveal className="flex items-start justify-center gap-3 sm:gap-[23px] lg:justify-start">
             <Stadium
-              src="/assets/aes-expertise-1.png"
+              src="/assets/aes-expertise-1.webp"
               alt="A First MD aesthetician performing a facial treatment"
               pos="object-[60%_center]"
               outline
             />
             <Stadium
-              src="/assets/aes-expertise-2.png"
+              src="/assets/aes-expertise-2.webp"
               alt="A patient's skin being examined before treatment"
               pos="object-[62%_center]"
             />
@@ -172,13 +172,13 @@ const DEVICES = [
   {
     name: 'HydraFacial™',
     desc: 'Deep cleansing, exfoliation, extraction, and hydration for healthier, glowing skin.',
-    img: '/assets/aes-hydrafacial.png',
+    img: '/assets/aes-hydrafacial.webp',
     href: '#hydrafacial',
   },
   {
     name: 'InMode Optimas™',
     desc: 'Featuring Morpheus8 RF Microneedling, IPL Photofacials, and Laser Treatments for visible skin transformation.',
-    img: '/assets/aes-inmode.png',
+    img: '/assets/aes-inmode.webp',
     href: '#treatments',
   },
 ]
@@ -193,7 +193,7 @@ function AdvancedTechnology() {
             {DEVICES.map((device, i) => (
               <Reveal key={device.name} delay={i * 90}>
                 <div className="flex h-full flex-col gap-6 rounded-3xl border border-navy bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0px_18px_36px_rgba(0,48,94,0.14)] sm:flex-row sm:items-center lg:p-7">
-                  <img
+                  <img loading="lazy"
                     src={device.img}
                     alt={device.name}
                     className="mx-auto h-[260px] w-auto shrink-0 object-contain sm:mx-0 sm:h-[280px]"
@@ -276,7 +276,7 @@ function Treatments() {
                     {group.items.map((item) => (
                       <li key={item.label} className="group flex h-8 items-center justify-between gap-3">
                         <span className="flex items-center gap-6">
-                          <img src={item.icon} alt="" className="size-8 shrink-0" />
+                          <img loading="lazy" src={item.icon} alt="" className="size-8 shrink-0" />
                           <span className="font-poppins text-lg text-ink lg:text-xl">{item.label}</span>
                         </span>
                         <svg
@@ -389,13 +389,13 @@ function WhyChoose() {
           {/* Stadium collage — two top-aligned capsules, outline behind the left one */}
           <Reveal delay={120} className="flex items-start justify-center gap-3 sm:gap-[23px] lg:justify-end">
             <Stadium
-              src="/assets/aes-why-1.png"
+              src="/assets/aes-why-1.webp"
               alt="A First MD physician caring for a young patient"
               pos="object-[48%_center]"
               flip
               outline
             />
-            <Stadium src="/assets/aes-why-2.jpg" alt="A provider checking a patient's blood sugar" pos="object-[40%_center]" />
+            <Stadium src="/assets/aes-why-2.webp" alt="A provider checking a patient's blood sugar" pos="object-[40%_center]" />
           </Reveal>
         </div>
       </Container>

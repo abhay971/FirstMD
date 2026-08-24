@@ -42,13 +42,13 @@ function Hero() {
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
       {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
       <div className="relative lg:hidden">
-        <img src="/assets/svc-hormone-hero.png" alt="" className="block w-full object-cover" />
+        <img src="/assets/svc-hormone-hero.webp" alt="" className="block w-full object-cover" />
         <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
       </div>
       {/* Desktop: full-bleed background photo with text overlaid */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
-          src="/assets/svc-hormone-hero.png"
+          src="/assets/svc-hormone-hero.webp"
           alt=""
           ref={heroRef}
           className="absolute inset-x-0 top-[-5%] h-[110%] w-full object-cover object-[center_right] will-change-transform"
@@ -102,15 +102,15 @@ function WhatIs() {
           <Reveal className="flex justify-center lg:justify-start">
             <div className="flex w-full max-w-[616px] items-start gap-5 sm:gap-6">
               <CapsuleFrame className="aspect-[585/1300] w-[calc(50%-10px)] translate-y-3 sm:w-[calc(50%-12px)]">
-                <img
-                  src="/assets/svc-hormone-medication.jpg"
+                <img loading="lazy"
+                  src="/assets/svc-hormone-medication.webp"
                   alt="A provider pouring medication into a patient's hand"
                   className="h-full w-full object-cover object-[50%_40%]"
                 />
               </CapsuleFrame>
               <CapsuleFrame sharp="bl" outlineClassName="border-transparent" className="aspect-[577/1320] w-[calc(50%-10px)] sm:w-[calc(50%-12px)]">
-                <img
-                  src="/assets/svc-hormone-hologram.png"
+                <img loading="lazy"
+                  src="/assets/svc-hormone-hologram.webp"
                   alt="A provider holding a glowing medical cross hologram"
                   className="h-full w-full object-cover object-center"
                 />

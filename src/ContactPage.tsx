@@ -104,13 +104,13 @@ function Hero() {
     <section className="relative flex flex-col overflow-hidden bg-page lg:min-h-svh">
       {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
       <div className="relative lg:hidden">
-        <img src="/assets/contact-hero.png" alt="" className="block w-full object-cover" />
+        <img src="/assets/contact-hero.webp" alt="" className="block w-full object-cover" />
         <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
       </div>
       {/* Desktop: full-bleed background photo with text overlaid */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
-          src="/assets/contact-hero.png"
+          src="/assets/contact-hero.webp"
           alt=""
           ref={heroRef}
           className="absolute inset-0 h-full w-full object-cover object-[center_28%] will-change-transform"
@@ -305,8 +305,8 @@ function ClinicVisit() {
             className="group relative block h-[280px] w-full overflow-hidden rounded-3xl shadow-lg lg:h-[358px]"
             aria-label="Open directions in Google Maps"
           >
-            <img
-              src="/assets/contact-map.png"
+            <img loading="lazy"
+              src="/assets/contact-map.webp"
               alt="Map to First MD clinic"
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
@@ -383,7 +383,7 @@ function WhatHappensNext() {
     <Container className="py-12 lg:py-16">
       <div className="grid items-center gap-10 lg:grid-cols-[480px_1fr] lg:gap-[48px]">
         <Reveal className="aspect-[603/694] w-full max-w-[480px] overflow-hidden rounded-3xl bg-[#d9d9d9] shadow-xl">
-          <img src="/assets/happens-next.png" alt="The First MD team" className="h-full w-full object-cover" />
+          <img loading="lazy" src="/assets/happens-next.webp" alt="The First MD team" className="h-full w-full object-cover" />
         </Reveal>
         <Reveal delay={120} className="flex max-w-[600px] flex-col gap-7">
           <div className="flex flex-col gap-2">
@@ -431,7 +431,7 @@ function ScheduleCta() {
             className="pointer-events-none absolute inset-0 z-10 hidden lg:block"
             style={{ clipPath: 'inset(-70px 0px 0px 0px round 16px)' }}
           >
-            <img src="/assets/schedule-doctor.png" alt="" className="absolute bottom-0 right-[8%] h-[128%] w-auto object-contain" />
+            <img loading="lazy" src="/assets/schedule-doctor.webp" alt="" className="absolute bottom-0 right-[8%] h-[128%] w-auto object-contain" />
           </div>
 
           <div className="relative z-10 max-w-[620px]">

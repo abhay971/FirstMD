@@ -44,14 +44,14 @@ function Hero() {
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
       {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
       <div className="relative lg:hidden">
-        <img src="/assets/svc-peptide-hero.png" alt="" className="block w-full object-cover" />
+        <img src="/assets/svc-peptide-hero.webp" alt="" className="block w-full object-cover" />
         <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
       </div>
       {/* Desktop: full-bleed background photo with text overlaid */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
           ref={heroRef}
-          src="/assets/svc-peptide-hero.png"
+          src="/assets/svc-peptide-hero.webp"
           alt=""
           className="absolute inset-x-0 top-[-5%] h-[110%] w-full object-cover object-[center_right] will-change-transform"
         />
@@ -117,7 +117,7 @@ function Benefits() {
             {BENEFITS.map((card, i) => (
               <Reveal key={card.title} delay={(i % 2) * 90}>
                 <div className="flex h-full items-center gap-6 rounded-3xl border border-navy bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0px_18px_36px_rgba(0,48,94,0.14)] lg:p-7">
-                  <img src={card.icon} alt="" className="size-14 shrink-0" />
+                  <img loading="lazy" src={card.icon} alt="" className="size-14 shrink-0" />
                   <h3 className="font-poppins text-xl font-bold leading-[1.3] text-navy lg:text-2xl">{card.title}</h3>
                 </div>
               </Reveal>
@@ -195,15 +195,15 @@ function TreatmentInfo() {
           <Reveal delay={120} className="flex justify-center lg:justify-end">
             <div className="flex w-full max-w-[616px] items-start gap-5 sm:gap-6">
               <CapsuleFrame className="aspect-[585/1300] w-[calc(50%-10px)] translate-y-3 sm:w-[calc(50%-12px)]">
-                <img
-                  src="/assets/svc-insurance-stethoscope.jpg"
+                <img loading="lazy"
+                  src="/assets/svc-insurance-stethoscope.webp"
                   alt="A stethoscope and a red heart on a blue background"
                   className="h-full w-full object-cover object-center"
                 />
               </CapsuleFrame>
               <CapsuleFrame sharp="bl" outlineClassName="border-transparent" className="aspect-[577/1320] w-[calc(50%-10px)] sm:w-[calc(50%-12px)]">
-                <img
-                  src="/assets/svc-insurance-glucose.png"
+                <img loading="lazy"
+                  src="/assets/svc-insurance-glucose.webp"
                   alt="A provider checking a patient's blood sugar"
                   className="h-full w-full object-cover object-center"
                 />

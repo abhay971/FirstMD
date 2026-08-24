@@ -222,7 +222,7 @@ export function HeroChips({ chips }: { chips: { icon: string; label: [string, st
           {i > 0 && <span className="hidden h-[58px] w-px bg-navy/15 lg:block" />}
           <div className="flex items-center gap-2.5 sm:gap-3">
             <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white shadow-[0px_8px_18px_rgba(0,48,94,0.10)] sm:size-12 lg:size-[58px]">
-              <img src={chip.icon} alt="" className="size-5 sm:size-6 lg:size-7" />
+              <img loading="lazy" src={chip.icon} alt="" className="size-5 sm:size-6 lg:size-7" />
             </span>
             <span className="font-poppins text-sm font-bold leading-tight text-ink sm:text-base lg:text-lg">
               {chip.label[0]}
@@ -249,7 +249,7 @@ export function CheckCircle({ className = 'size-8' }: { className?: string }) {
 export function SoftTexture() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      <img src="/assets/section-texture.png" alt="" className="h-full w-full object-cover opacity-70" />
+      <img loading="lazy" src="/assets/section-texture.webp" alt="" className="h-full w-full object-cover opacity-70" />
       <div className="absolute inset-0 bg-gradient-to-b from-page via-transparent to-page" />
     </div>
   )
@@ -257,7 +257,7 @@ export function SoftTexture() {
 
 /** Decorative light-blue medical "plus" motif anchored to a section edge. */
 export function CrossDecor({ src, className = '' }: { src: string; className?: string }) {
-  return <img aria-hidden alt="" src={src} className={`pointer-events-none absolute select-none ${className}`} />
+  return <img loading="lazy" aria-hidden alt="" src={src} className={`pointer-events-none absolute select-none ${className}`} />
 }
 
 /**
@@ -569,8 +569,8 @@ export function FAQ({ items = FAQS }: { items?: { q: string; a: string }[] }) {
 type Provider = { id: string; name: string; title: string; img?: string; bio?: string }
 
 const PROVIDERS: Provider[] = [
-  { id: 'edward', name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-edward.png' },
-  { id: 'courtney', name: 'Courtney', title: 'FNP', img: '/assets/prov-courtney.png' },
+  { id: 'edward', name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-edward.webp' },
+  { id: 'courtney', name: 'Courtney', title: 'FNP', img: '/assets/prov-courtney.webp' },
   {
     id: 'deevers',
     name: 'Dr. Robert Deevers',
@@ -588,7 +588,7 @@ function ProviderCard({ provider }: { provider: Provider }) {
     >
       <div className="aspect-square w-full overflow-hidden rounded-[30px] bg-navy shadow-lg transition-shadow duration-300 group-hover:shadow-2xl">
         {provider.img ? (
-          <img
+          <img loading="lazy"
             src={provider.img}
             alt={provider.name}
             className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"

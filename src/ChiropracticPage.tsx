@@ -43,13 +43,13 @@ function Hero() {
     <section id="home" className="relative scroll-mt-0 overflow-hidden bg-page">
       {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
       <div className="relative lg:hidden">
-        <img src="/assets/svc-chiro-hero.png" alt="" className="block w-full object-cover" />
+        <img src="/assets/svc-chiro-hero.webp" alt="" className="block w-full object-cover" />
         <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
       </div>
       {/* Desktop: full-bleed background photo with text overlaid */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
-          src="/assets/svc-chiro-hero.png"
+          src="/assets/svc-chiro-hero.webp"
           alt=""
           ref={heroRef}
           className="absolute inset-x-0 top-[-5%] h-[110%] w-full object-cover object-[center_right] will-change-transform"
@@ -99,8 +99,8 @@ function WhatIs() {
       <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[74px]">
           <Reveal className="flex justify-center lg:justify-start">
-            <img
-              src="/assets/svc-chiro-whatis-pills.png"
+            <img loading="lazy"
+              src="/assets/svc-chiro-whatis-pills.webp"
               alt="A First MD chiropractor examining a patient's spine and posture"
               className="h-auto w-full max-w-[616px]"
             />
@@ -173,7 +173,7 @@ function Services() {
             {SERVICES.map((card, i) => (
               <Reveal key={card.title} delay={(i % 2) * 90} className="h-full">
                 <div className="flex h-full items-center gap-6 rounded-3xl border border-navy bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0px_18px_36px_rgba(0,48,94,0.14)] lg:p-7">
-                  <img src={card.icon} alt="" className="size-14 shrink-0" />
+                  <img loading="lazy" src={card.icon} alt="" className="size-14 shrink-0" />
                   <div className="flex flex-col gap-1">
                     <h3 className="font-poppins text-xl font-bold leading-[1.3] text-navy lg:text-2xl">{card.title}</h3>
                     <p className="font-poppins text-base text-ink lg:text-lg">{card.desc}</p>
@@ -256,8 +256,8 @@ function WhyChoose() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[83px]">
           <Reveal className="flex justify-center lg:justify-start">
             <div className="max-h-[560px] w-full max-w-[656px] overflow-hidden rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.12)] lg:max-h-[640px]">
-              <img
-                src="/assets/svc-chiro-why.png"
+              <img loading="lazy"
+                src="/assets/svc-chiro-why.webp"
                 alt="A First MD chiropractor adjusting a patient's neck and shoulders"
                 className="h-full w-full object-cover"
               />
@@ -331,8 +331,8 @@ function Insurance() {
           </Reveal>
 
           <Reveal delay={120} className="flex justify-center lg:justify-end">
-            <img
-              src="/assets/svc-chiro-insurance-pills.png"
+            <img loading="lazy"
+              src="/assets/svc-chiro-insurance-pills.webp"
               alt="First MD providers guiding chiropractic patients through their care"
               className="h-auto w-full max-w-[616px]"
             />

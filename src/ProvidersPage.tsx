@@ -136,13 +136,13 @@ function Hero() {
     <section className="relative flex flex-col overflow-hidden bg-page lg:min-h-svh">
       {/* Mobile: stacked banner photo (whole subject visible, no text overlay) */}
       <div className="relative lg:hidden">
-        <img src="/assets/providers-hero.png" alt="" className="block w-full object-cover" />
+        <img src="/assets/providers-hero.webp" alt="" className="block w-full object-cover" />
         <div aria-hidden className="absolute inset-x-0 top-0 -bottom-2 bg-gradient-to-b from-page/30 via-page/0 via-40% to-page to-92%" />
       </div>
       {/* Desktop: full-bleed background photo with text overlaid */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <img
-          src="/assets/providers-hero.png"
+          src="/assets/providers-hero.webp"
           alt=""
           ref={heroRef}
           className="absolute inset-0 h-full w-full object-cover object-[center_30%] will-change-transform"
@@ -198,7 +198,7 @@ function TeamIntro() {
     <Container className="py-14 lg:py-20">
       <div className="grid items-center gap-10 lg:grid-cols-[480px_1fr] lg:gap-[60px]">
         <Reveal className="aspect-[635/694] w-full max-w-[480px] overflow-hidden rounded-3xl shadow-xl">
-          <img src="/assets/team-photo.png" alt="The First MD care team" className="h-full w-full object-cover" />
+          <img loading="lazy" src="/assets/team-photo.webp" alt="The First MD care team" className="h-full w-full object-cover" />
         </Reveal>
         <Reveal delay={120} className="flex max-w-[600px] flex-col gap-8">
           <SectionHeading eyebrow="Team Introduction" title="Healthcare Professionals You Can Trust" />
@@ -239,7 +239,7 @@ const PROVIDERS: Provider[] = [
     id: 'edward',
     name: 'Edward Martinez',
     title: 'PA-C · Co-Founder',
-    img: '/assets/prov-src-2.png',
+    img: '/assets/prov-src-2.webp',
     specialties: ['Family & Internal Medicine', 'Bioidentical Hormone Therapy', 'Peptide Therapy'],
     experience: '20+ Years Experience',
     bio: [
@@ -252,7 +252,7 @@ const PROVIDERS: Provider[] = [
     id: 'courtney',
     name: 'Courtney',
     title: 'FNP',
-    img: '/assets/prov-courtney.png',
+    img: '/assets/prov-courtney.webp',
     specialties: ['Primary & Urgent Care', 'Family Medicine', 'Patient Education'],
     experience: '12+ Years Experience',
     bio: [
@@ -304,7 +304,7 @@ function ProviderTile({ provider, onOpen }: { provider: Provider; onOpen: () => 
     >
       <div className="relative h-[360px] overflow-hidden bg-gradient-to-b from-blue to-navy">
         {provider.img ? (
-          <img
+          <img loading="lazy"
             src={provider.img}
             alt={provider.name}
             className="absolute inset-0 h-full w-full object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.04]"
@@ -361,7 +361,7 @@ function ProviderModal({ provider, onClose }: { provider: Provider; onClose: () 
         {/* Photo */}
         <div className="relative h-[300px] shrink-0 overflow-hidden bg-gradient-to-b from-blue to-navy sm:h-[380px] lg:h-auto lg:w-[44%]">
           {provider.img ? (
-            <img
+            <img loading="lazy"
               src={provider.img}
               alt={provider.name}
               className="absolute inset-0 h-full w-full object-contain object-bottom"
@@ -473,8 +473,8 @@ function WhyTrust() {
           <Reveal delay={120} className="hidden shrink-0 items-center justify-center gap-4 sm:gap-5 lg:flex">
             <CapsuleFrame className="h-[460px] w-[210px] -translate-y-6" outlineClassName="border-page/40">
               <div className="absolute inset-0 [transform:scaleX(-1)]">
-                <img
-                  src="/assets/trust-group.png"
+                <img loading="lazy"
+                  src="/assets/trust-group.webp"
                   alt="First MD physician"
                   className="absolute max-w-none"
                   style={{ width: '660%', height: '161.3%', left: '-189.5%', top: '-35%' }}
@@ -482,7 +482,7 @@ function WhyTrust() {
               </div>
             </CapsuleFrame>
             <CapsuleFrame sharp="bl" className="h-[460px] w-[210px] translate-y-6" outlineClassName="border-page/40">
-              <img src="/assets/trust-nurse.png" alt="First MD nurse" className="h-full w-full -scale-y-100 object-cover object-center" />
+              <img loading="lazy" src="/assets/trust-nurse.webp" alt="First MD nurse" className="h-full w-full -scale-y-100 object-cover object-center" />
             </CapsuleFrame>
           </Reveal>
         </div>
@@ -517,7 +517,7 @@ function CtaBanner() {
             className="pointer-events-none absolute inset-0 z-10 hidden lg:block"
             style={{ clipPath: 'inset(-70px 0px 0px 0px round 16px)' }}
           >
-            <img src="/assets/cta-doctor.png" alt="" className="absolute bottom-0 right-[3%] h-[128%] w-auto object-contain" />
+            <img loading="lazy" src="/assets/cta-doctor.webp" alt="" className="absolute bottom-0 right-[3%] h-[128%] w-auto object-contain" />
           </div>
 
           {/* Copy */}
