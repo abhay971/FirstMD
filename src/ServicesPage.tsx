@@ -9,6 +9,7 @@
 
 import {
   BOOK,
+  CapsuleFrame,
   CheckCircle,
   Container,
   CrossDecor,
@@ -98,12 +99,24 @@ function WhatIs() {
     <section id="family-medicine" className="relative scroll-mt-28 overflow-hidden">
       <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[40px]">
+          {/* Capsule collage — left sharp at top-right (nudged down, outlined), right sharp at bottom-left */}
           <Reveal className="flex justify-center lg:justify-start">
-            <img
-              src="/assets/fm-intro-pills.png"
-              alt="A First MD provider consulting a patient, and a family protected by caring hands"
-              className="h-auto w-full max-w-[616px]"
-            />
+            <div className="flex w-full max-w-[616px] items-start gap-5 sm:gap-6">
+              <CapsuleFrame className="aspect-[585/1300] w-[calc(50%-10px)] translate-y-3 sm:w-[calc(50%-12px)]">
+                <img
+                  src="/assets/fm-intro-doctor.jpg"
+                  alt="A First MD provider sheltering a paper family with caring hands"
+                  className="h-full w-full object-cover object-center"
+                />
+              </CapsuleFrame>
+              <CapsuleFrame sharp="bl" outlineClassName="border-transparent" className="aspect-[577/1320] w-[calc(50%-10px)] sm:w-[calc(50%-12px)]">
+                <img
+                  src="/assets/fm-intro-family.png"
+                  alt="A paper family standing in front of a red heart"
+                  className="h-full w-full object-cover object-center"
+                />
+              </CapsuleFrame>
+            </div>
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col gap-8">
