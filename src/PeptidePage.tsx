@@ -9,6 +9,7 @@
 
 import {
   BOOK,
+  CapsuleFrame,
   CheckCircle,
   Container,
   CrossDecor,
@@ -190,12 +191,24 @@ function TreatmentInfo() {
             </PillButton>
           </Reveal>
 
+          {/* Capsule collage — left sharp at top-right (nudged down, outlined), right sharp at bottom-left */}
           <Reveal delay={120} className="flex justify-center lg:justify-end">
-            <img
-              src="/assets/svc-peptide-insurance-pills.png"
-              alt="First MD medical team supporting peptide therapy patients"
-              className="h-auto w-full max-w-[616px]"
-            />
+            <div className="flex w-full max-w-[616px] items-start gap-5 sm:gap-6">
+              <CapsuleFrame className="aspect-[585/1300] w-[calc(50%-10px)] translate-y-3 sm:w-[calc(50%-12px)]">
+                <img
+                  src="/assets/svc-insurance-stethoscope.jpg"
+                  alt="A stethoscope and a red heart on a blue background"
+                  className="h-full w-full object-cover object-center"
+                />
+              </CapsuleFrame>
+              <CapsuleFrame sharp="bl" outlineClassName="border-transparent" className="aspect-[577/1320] w-[calc(50%-10px)] sm:w-[calc(50%-12px)]">
+                <img
+                  src="/assets/svc-insurance-glucose.png"
+                  alt="A provider checking a patient's blood sugar"
+                  className="h-full w-full object-cover object-center"
+                />
+              </CapsuleFrame>
+            </div>
           </Reveal>
         </div>
       </Container>
