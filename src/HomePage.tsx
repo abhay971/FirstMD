@@ -213,7 +213,7 @@ function WhyChoose() {
           <Reveal className="flex items-center justify-center gap-4 sm:gap-5">
             {/* Doctor capsule — nudged up */}
             <CapsuleFrame className="h-[440px] w-[200px] -translate-y-4 sm:h-[560px] sm:w-[268px] sm:-translate-y-7">
-              <img src="/assets/why-b.png" alt="First MD physician" className="h-full w-full object-cover" />
+              <img src="/assets/why-stethoscope.jpg" alt="A First MD provider holding out a stethoscope" className="h-full w-full object-cover object-center" />
             </CapsuleFrame>
             {/* Anatomy capsule — nudged down, flipped vertically so the figure stands upright */}
             <CapsuleFrame sharp="bl" className="hidden translate-y-4 sm:block sm:h-[560px] sm:w-[268px] sm:translate-y-7">
