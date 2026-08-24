@@ -571,6 +571,12 @@ type Provider = { id: string; name: string; title: string; img?: string; bio?: s
 const PROVIDERS: Provider[] = [
   { id: 'edward', name: 'Edward Martinez', title: 'PA-C', img: '/assets/prov-edward.png' },
   { id: 'courtney', name: 'Courtney', title: 'FNP', img: '/assets/prov-courtney.png' },
+  {
+    id: 'deevers',
+    name: 'Dr. Robert Deevers',
+    title: 'DC · Chiropractor',
+    bio: 'Doctor of Chiropractic, Parker University (2009), with additional training in sports injury, manual and soft tissue therapies, and extremity adjusting. A Roanoke resident who coaches and volunteers locally.',
+  },
 ]
 
 function ProviderCard({ provider }: { provider: Provider }) {
@@ -607,7 +613,7 @@ export function Providers() {
       <Container className="relative z-10 py-14 lg:py-20">
         <Reveal className="flex flex-col items-center gap-12">
           <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">Meet our Providers</h2>
-          <div className="mx-auto grid w-full max-w-[680px] grid-cols-1 justify-items-center gap-x-6 gap-y-14 sm:grid-cols-2">
+          <div className="mx-auto grid w-full max-w-[680px] grid-cols-1 justify-items-center gap-x-6 gap-y-14 sm:grid-cols-2 lg:max-w-[1020px] lg:grid-cols-3">
             {PROVIDERS.map((p) => (
               <ProviderCard key={p.name} provider={p} />
             ))}

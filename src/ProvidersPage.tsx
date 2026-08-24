@@ -227,7 +227,8 @@ type Provider = {
   id: string
   name: string
   title: string
-  img: string
+  /** Omit while a photo is pending — the tile/popup fall back to initials. */
+  img?: string
   specialties: string[]
   experience: string
   bio: string[]
@@ -259,7 +260,37 @@ const PROVIDERS: Provider[] = [
       'Known for a personable and attentive bedside manner, Courtney values building trusting relationships with patients and creating an environment where individuals feel heard and supported. She is passionate about patient education and believes informed patients are empowered to make confident decisions about their health. By combining evidence-based practice with compassionate care, Courtney strives to help patients achieve long-term wellness and improved quality of life.',
     ],
   },
+  {
+    id: 'deevers',
+    name: 'Dr. Robert Deevers',
+    title: 'DC · Chiropractor',
+    specialties: ['Chiropractic Care', 'Sports Injury', 'Manual & Soft Tissue Therapy', 'Extremity Adjusting'],
+    experience: '15+ Years Experience',
+    bio: [
+      'Dr. Robert Deevers is a Doctor of Chiropractic who graduated from Parker University in Dallas, TX in 2009. While at Parker, he concurrently earned a Bachelor’s degree in Anatomy & Physiology and a Bachelor’s in Health and Wellness. He has since completed additional training in sports injury, manual therapy techniques, soft tissue therapies, and extremity adjusting techniques.',
+      'Dr. Deevers uses hands-on techniques to address problems involving the spine, joints, and muscles, helping patients reduce discomfort, improve mobility, and get back to the activities they love. He takes time to understand each patient’s symptoms, health concerns, and goals so care can be tailored to their needs.',
+      'A Roanoke resident, Dr. Deevers lives locally with his wife, Jamie, and their four active children. The Deevers family is involved in their local church, and when he is not in the clinic you may find him coaching a local sports team or volunteering in the community.',
+    ],
+  },
 ]
+
+/** Placeholder shown in place of a photo until one is supplied. */
+function ProviderInitials({ name }: { name: string }) {
+  const initials = name
+    .replace(/^Dr\.\s+/, '')
+    .split(' ')
+    .map((w) => w[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase()
+  return (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <span className="flex size-32 items-center justify-center rounded-full border-2 border-white/40 bg-white/10 font-poppins text-5xl font-bold text-white">
+        {initials}
+      </span>
+    </div>
+  )
+}
 
 /** Compact clickable tile — opens the provider's popup. */
 function ProviderTile({ provider, onOpen }: { provider: Provider; onOpen: () => void }) {
@@ -272,11 +303,15 @@ function ProviderTile({ provider, onOpen }: { provider: Provider; onOpen: () => 
       className="group flex scroll-mt-28 flex-col overflow-hidden rounded-3xl border border-navy bg-white text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
     >
       <div className="relative h-[360px] overflow-hidden bg-gradient-to-b from-blue to-navy">
-        <img
-          src={provider.img}
-          alt={provider.name}
-          className="absolute inset-0 h-full w-full object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.04]"
-        />
+        {provider.img ? (
+          <img
+            src={provider.img}
+            alt={provider.name}
+            className="absolute inset-0 h-full w-full object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.04]"
+          />
+        ) : (
+          <ProviderInitials name={provider.name} />
+        )}
       </div>
       <div className="flex items-center justify-between gap-4 p-6">
         <div>
@@ -325,11 +360,15 @@ function ProviderModal({ provider, onClose }: { provider: Provider; onClose: () 
 
         {/* Photo */}
         <div className="relative h-[300px] shrink-0 overflow-hidden bg-gradient-to-b from-blue to-navy sm:h-[380px] lg:h-auto lg:w-[44%]">
-          <img
-            src={provider.img}
-            alt={provider.name}
-            className="absolute inset-0 h-full w-full object-contain object-bottom"
-          />
+          {provider.img ? (
+            <img
+              src={provider.img}
+              alt={provider.name}
+              className="absolute inset-0 h-full w-full object-contain object-bottom"
+            />
+          ) : (
+            <ProviderInitials name={provider.name} />
+          )}
         </div>
 
         {/* Content (scrolls if long) */}
@@ -380,7 +419,7 @@ function ProvidersGrid() {
 
   return (
     <Container className="py-12">
-      <Reveal className="mx-auto grid w-full max-w-[840px] grid-cols-1 gap-8 sm:grid-cols-2">
+      <Reveal className="mx-auto grid w-full max-w-[840px] grid-cols-1 gap-8 sm:grid-cols-2 lg:max-w-[1272px] lg:grid-cols-3">
         {PROVIDERS.map((p) => (
           <ProviderTile key={p.id} provider={p} onOpen={() => setActiveId(p.id)} />
         ))}
