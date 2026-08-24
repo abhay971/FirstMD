@@ -9,6 +9,7 @@
 
 import {
   BOOK,
+  CapsuleFrame,
   Container,
   CrossDecor,
   FAQ,
@@ -97,12 +98,24 @@ function WhatIs() {
     <section id="hormone" className="relative scroll-mt-28 overflow-hidden">
       <Container className="relative z-10 py-14 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[40px]">
+          {/* Capsule collage — left sharp at top-right (nudged down, outlined), right sharp at bottom-left */}
           <Reveal className="flex justify-center lg:justify-start">
-            <img
-              src="/assets/svc-hormone-pills.png"
-              alt="A First MD provider consulting a patient, and a family protected by caring hands"
-              className="h-auto w-full max-w-[616px]"
-            />
+            <div className="flex w-full max-w-[616px] items-start gap-5 sm:gap-6">
+              <CapsuleFrame className="aspect-[585/1300] w-[calc(50%-10px)] translate-y-3 sm:w-[calc(50%-12px)]">
+                <img
+                  src="/assets/svc-hormone-medication.jpg"
+                  alt="A provider pouring medication into a patient's hand"
+                  className="h-full w-full object-cover object-[50%_40%]"
+                />
+              </CapsuleFrame>
+              <CapsuleFrame sharp="bl" outlineClassName="border-transparent" className="aspect-[577/1320] w-[calc(50%-10px)] sm:w-[calc(50%-12px)]">
+                <img
+                  src="/assets/svc-hormone-hologram.png"
+                  alt="A provider holding a glowing medical cross hologram"
+                  className="h-full w-full object-cover object-center"
+                />
+              </CapsuleFrame>
+            </div>
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col gap-6">
