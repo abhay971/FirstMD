@@ -151,13 +151,18 @@ const SERVICES = [
     desc: 'Targeted peptide treatments to support recovery, metabolism, and healthy aging.',
     href: '/services/peptide',
   },
+  {
+    name: 'Chiropractic Care',
+    desc: 'Hands-on care for the spine, joints, and muscles to ease discomfort and improve mobility.',
+    href: '/services/chiropractic',
+  },
 ]
 
 function Services() {
   return (
     <section id="services" className="relative scroll-mt-28 overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
-        <img src="/assets/services-doctor.png" alt="" className="h-full w-full -scale-x-100 object-cover object-center" />
+        <img src="/assets/services-bp-check.jpg" alt="" className="h-full w-full object-cover object-[70%_center]" />
         <div className="absolute inset-0 bg-gradient-to-r from-page from-0% via-page/25 via-55% to-transparent to-100%" />
       </div>
 
