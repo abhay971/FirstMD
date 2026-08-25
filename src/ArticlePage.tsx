@@ -25,7 +25,7 @@ import { ARTICLES, articleBySlug, articleHref, type Article, type ArticleBlock }
 
 export function ArticleCard({ article }: { article: Article }) {
   return (
-    <article className="flex w-[240px] shrink-0 snap-start flex-col gap-3 sm:w-[280px] lg:w-[405px] lg:gap-4">
+    <article className="flex w-[240px] shrink-0 flex-col gap-3 sm:w-[280px] lg:w-[340px] lg:gap-4">
       <a href={articleHref(article)} className="block aspect-square w-full overflow-hidden rounded-2xl bg-[#d9d9d9]">
         {article.image && (
           <img
@@ -38,10 +38,10 @@ export function ArticleCard({ article }: { article: Article }) {
       </a>
       <div className="flex flex-col gap-3 text-navy lg:gap-4">
         <div className="flex flex-col">
-          <h3 className="font-poppins text-lg font-bold leading-[1.4] lg:text-2xl lg:leading-[1.5]">{article.title}</h3>
-          <p className="font-poppins text-sm leading-[1.5] opacity-60 lg:text-xl">{article.summary}</p>
+          <h3 className="font-poppins text-lg font-bold leading-[1.4] lg:text-xl">{article.title}</h3>
+          <p className="font-poppins text-sm leading-[1.5] opacity-60 lg:text-base">{article.summary}</p>
         </div>
-        <a href={articleHref(article)} className="group inline-flex items-center gap-2 font-poppins text-base lg:text-2xl">
+        <a href={articleHref(article)} className="group inline-flex items-center gap-2 font-poppins text-base lg:text-lg">
           <span className="group-hover:underline">Read Article</span>
           <span className="transition-transform duration-200 group-hover:translate-x-1">{ARROW}</span>
         </a>
@@ -50,7 +50,11 @@ export function ArticleCard({ article }: { article: Article }) {
   )
 }
 
-/** Horizontal, snap-scrolling rail of article cards; `exclude` hides the current article. */
+/**
+ * Continuously looping rail of article cards (pauses on hover, still scrollable
+ * by hand); `exclude` hides the current article. The list is rendered twice so
+ * the shared -50% marquee keyframe wraps seamlessly.
+ */
 export function ArticleRail({ exclude, heading }: { exclude?: string; heading?: string }) {
   const list = ARTICLES.filter((a) => a.slug !== exclude)
   return (
@@ -58,17 +62,19 @@ export function ArticleRail({ exclude, heading }: { exclude?: string; heading?: 
       <Reveal>
         {heading && (
           <Container className="pt-10 lg:pt-20">
-            <h2 className="font-poppins text-[28px] font-bold leading-[1.1] text-navy sm:text-[34px] lg:text-[60px]">{heading}</h2>
+            <h2 className="font-poppins text-[28px] font-bold leading-[1.1] text-navy sm:text-[34px] lg:text-[44px]">{heading}</h2>
           </Container>
         )}
-        <div
-          className={`no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-10 lg:gap-11 lg:pb-16 lg:pl-[max(2rem,calc((100vw-1272px)/2))] ${
-            heading ? 'pt-6 lg:pt-12' : 'pt-10 lg:pt-16'
-          }`}
-        >
-          {list.map((a) => (
-            <ArticleCard key={a.slug} article={a} />
-          ))}
+        <div className={`no-scrollbar overflow-x-auto pb-10 lg:pb-16 ${heading ? 'pt-6 lg:pt-12' : 'pt-10 lg:pt-16'}`}>
+          <div className="marquee-track animate-marquee-slow flex w-max">
+            {[0, 1].map((copy) => (
+              <div key={copy} aria-hidden={copy === 1} className="flex shrink-0 gap-5 pr-5 lg:gap-10 lg:pr-10">
+                {list.map((a) => (
+                  <ArticleCard key={a.slug} article={a} />
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </Reveal>
     </section>
@@ -185,12 +191,12 @@ export default function ArticlePage() {
       <Navbar />
       <main>
         {/* Title + meta + hero photo */}
-        <Container className="pt-28 lg:pt-44">
+        <Container className="pt-28 lg:pt-40">
           <div className="hero-rise flex flex-col gap-2 text-navy">
-            <h1 className="max-w-[1100px] font-poppins text-[28px] font-bold leading-[1.15] sm:text-[36px] lg:text-[56px] lg:leading-[1.4] xl:text-[64px]">
+            <h1 className="max-w-[1000px] font-poppins text-[28px] font-bold leading-[1.15] sm:text-[36px] lg:text-[40px] lg:leading-[1.25] xl:text-[48px]">
               {article.title}
             </h1>
-            <p className="font-poppins text-base font-bold opacity-60 lg:text-2xl">
+            <p className="font-poppins text-base font-bold opacity-60 lg:text-lg">
               Category: {article.category}
               <span className="mx-3 lg:mx-4">|</span>
               Reading Time: {article.readingTime}
