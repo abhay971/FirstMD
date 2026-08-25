@@ -179,7 +179,7 @@ export function Reveal({
  * the service pages (Family Medicine, Hormone, IV) so every section heading
  * matches. Pair it with a color class (text-navy on light, text-page on navy).
  */
-export const SECTION_TITLE = 'font-poppins text-[28px] font-bold leading-[1.1] sm:text-[34px] lg:text-[40px] xl:text-[44px]'
+export const SECTION_TITLE = 'font-poppins text-[26px] font-bold leading-[1.1] sm:text-[30px] lg:text-[40px] xl:text-[44px]'
 
 export function SectionHeading({
   eyebrow,
@@ -198,7 +198,7 @@ export function SectionHeading({
       {size === 'md' ? (
         <h2 className={`${SECTION_TITLE} text-navy`}>{title}</h2>
       ) : (
-        <h2 className="font-poppins text-[30px] font-bold leading-[1.08] text-navy sm:text-4xl lg:text-[44px] xl:text-[52px] 2xl:text-[60px]">
+        <h2 className="font-poppins text-[28px] font-bold leading-[1.08] text-navy sm:text-[32px] lg:text-[44px] xl:text-[52px] 2xl:text-[60px]">
           {title}
         </h2>
       )}
@@ -530,9 +530,9 @@ export function FAQ({ items = FAQS }: { items?: { q: string; a: string }[] }) {
     <section className="relative overflow-hidden">
       <SoftTexture />
       <CrossDecor src="/assets/cross-1.svg" className="left-[-50px] bottom-[14%] w-[260px]" />
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <Reveal className="flex flex-col items-center gap-8 lg:gap-10">
-          <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">FAQ</h2>
+          <h2 className="text-center font-poppins text-[28px] font-bold text-navy sm:text-[34px] lg:text-6xl">FAQ</h2>
           <div className="flex w-full flex-col gap-4 lg:gap-6">
             {items.map((faq, i) => (
               <div
@@ -610,9 +610,9 @@ export function Providers() {
     <section id="providers" className="relative scroll-mt-28 overflow-hidden">
       <SoftTexture />
       <CrossDecor src="/assets/cross-2.svg" className="right-[-60px] bottom-[12%] w-[210px]" />
-      <Container className="relative z-10 py-14 lg:py-20">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-20">
         <Reveal className="flex flex-col items-center gap-12">
-          <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">Meet our Providers</h2>
+          <h2 className="text-center font-poppins text-[28px] font-bold text-navy sm:text-[34px] lg:text-6xl">Meet our Providers</h2>
           <div className="mx-auto grid w-full max-w-[680px] grid-cols-1 justify-items-center gap-x-6 gap-y-14 sm:grid-cols-2 lg:max-w-[1020px] lg:grid-cols-3">
             {PROVIDERS.map((p) => (
               <ProviderCard key={p.name} provider={p} />

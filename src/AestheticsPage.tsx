@@ -97,7 +97,7 @@ function Hero() {
             Services
           </p>
           <h1
-            className="hero-rise font-poppins text-[40px] font-bold leading-[1.1] text-navy sm:text-5xl lg:text-[56px] xl:text-[64px] 2xl:text-[72px] 2xl:leading-[1.12]"
+            className="hero-rise font-poppins text-[40px] font-bold leading-[1.1] text-navy sm:text-[40px] lg:text-[56px] xl:text-[64px] 2xl:text-[72px] 2xl:leading-[1.12]"
             style={{ animationDelay: '80ms' }}
           >
             Medical Aesthetics &amp; Wellness in Roanoke, TX
@@ -130,7 +130,7 @@ function Hero() {
 function Expertise() {
   return (
     <section id="aesthetics" className="relative scroll-mt-28 overflow-hidden">
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[64px]">
           {/* Stadium collage — two top-aligned capsules, outline behind the left one */}
           <Reveal className="flex items-start justify-center gap-3 sm:gap-[23px] lg:justify-start">
@@ -186,9 +186,9 @@ const DEVICES = [
 function AdvancedTechnology() {
   return (
     <section className="relative scroll-mt-28 overflow-hidden">
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <Reveal className="flex flex-col gap-10 lg:gap-14">
-          <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">Advanced Technology</h2>
+          <h2 className="text-center font-poppins text-[28px] font-bold text-navy sm:text-[34px] lg:text-6xl">Advanced Technology</h2>
           <div className="grid gap-6 lg:grid-cols-2">
             {DEVICES.map((device, i) => (
               <Reveal key={device.name} delay={i * 90}>
@@ -264,9 +264,9 @@ function Treatments() {
     <section id="treatments" className="relative scroll-mt-28 overflow-hidden">
       <SoftTexture />
       <CrossDecor src="/assets/cross-1.svg" className="left-[-50px] bottom-[8%] w-[240px]" />
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <Reveal className="flex flex-col gap-10 lg:gap-14">
-          <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">Explore Our Treatments</h2>
+          <h2 className="text-center font-poppins text-[28px] font-bold text-navy sm:text-[34px] lg:text-6xl">Explore Our Treatments</h2>
           <div className="grid gap-6 lg:grid-cols-2">
             {TREATMENT_GROUPS.map((group, i) => (
               <Reveal key={group.title} delay={(i % 2) * 90} className="h-full">
@@ -317,9 +317,9 @@ const TIERS: { name: string; minutes: string; items: string[]; featured?: boolea
 function HydraFacialCollection() {
   return (
     <section id="hydrafacial" className="relative scroll-mt-28 overflow-hidden">
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <Reveal className="flex flex-col gap-10 lg:gap-14">
-          <h2 className="text-center font-poppins text-4xl font-bold text-navy lg:text-6xl">HydraFacial Collection</h2>
+          <h2 className="text-center font-poppins text-[28px] font-bold text-navy sm:text-[34px] lg:text-6xl">HydraFacial Collection</h2>
           <div className="grid items-stretch gap-6 lg:grid-cols-3 lg:gap-8">
             {TIERS.map((tier, i) => (
               <Reveal key={tier.name} delay={i * 90} className="h-full">
@@ -372,7 +372,7 @@ function WhyChoose() {
   return (
     <section className="relative scroll-mt-28 overflow-hidden">
       <CrossDecor src="/assets/cross-3.svg" className="left-[-60px] top-[4%] w-[240px]" />
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[100px]">
           <Reveal className="flex flex-col gap-8">
             <h2 className={`${BIG_TITLE} max-w-[470px] text-navy`}>Why Choose First MD Wellness</h2>

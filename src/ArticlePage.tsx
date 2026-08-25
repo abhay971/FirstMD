@@ -25,7 +25,7 @@ import { ARTICLES, articleBySlug, articleHref, type Article, type ArticleBlock }
 
 export function ArticleCard({ article }: { article: Article }) {
   return (
-    <article className="flex w-[280px] shrink-0 snap-start flex-col gap-4 sm:w-[340px] lg:w-[405px]">
+    <article className="flex w-[240px] shrink-0 snap-start flex-col gap-3 sm:w-[280px] lg:w-[405px] lg:gap-4">
       <a href={articleHref(article)} className="block aspect-square w-full overflow-hidden rounded-2xl bg-[#d9d9d9]">
         {article.image && (
           <img
@@ -36,12 +36,12 @@ export function ArticleCard({ article }: { article: Article }) {
           />
         )}
       </a>
-      <div className="flex flex-col gap-4 text-navy">
+      <div className="flex flex-col gap-3 text-navy lg:gap-4">
         <div className="flex flex-col">
-          <h3 className="font-poppins text-xl font-bold leading-[1.5] lg:text-2xl">{article.title}</h3>
-          <p className="font-poppins text-base leading-[1.5] opacity-60 lg:text-xl">{article.summary}</p>
+          <h3 className="font-poppins text-lg font-bold leading-[1.4] lg:text-2xl lg:leading-[1.5]">{article.title}</h3>
+          <p className="font-poppins text-sm leading-[1.5] opacity-60 lg:text-xl">{article.summary}</p>
         </div>
-        <a href={articleHref(article)} className="group inline-flex items-center gap-2 font-poppins text-lg lg:text-2xl">
+        <a href={articleHref(article)} className="group inline-flex items-center gap-2 font-poppins text-base lg:text-2xl">
           <span className="group-hover:underline">Read Article</span>
           <span className="transition-transform duration-200 group-hover:translate-x-1">{ARROW}</span>
         </a>
@@ -57,13 +57,13 @@ export function ArticleRail({ exclude, heading }: { exclude?: string; heading?: 
     <section className="relative overflow-hidden bg-page">
       <Reveal>
         {heading && (
-          <Container className="pt-14 lg:pt-20">
-            <h2 className="font-poppins text-[34px] font-bold leading-[1.1] text-navy lg:text-[60px]">{heading}</h2>
+          <Container className="pt-10 lg:pt-20">
+            <h2 className="font-poppins text-[28px] font-bold leading-[1.1] text-navy sm:text-[34px] lg:text-[60px]">{heading}</h2>
           </Container>
         )}
         <div
-          className={`no-scrollbar flex snap-x snap-mandatory gap-8 overflow-x-auto px-6 pb-14 lg:gap-11 lg:pb-16 lg:pl-[max(2rem,calc((100vw-1272px)/2))] ${
-            heading ? 'pt-8 lg:pt-12' : 'pt-14 lg:pt-16'
+          className={`no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-10 lg:gap-11 lg:pb-16 lg:pl-[max(2rem,calc((100vw-1272px)/2))] ${
+            heading ? 'pt-6 lg:pt-12' : 'pt-10 lg:pt-16'
           }`}
         >
           {list.map((a) => (
@@ -110,7 +110,7 @@ function Block({ block }: { block: ArticleBlock }) {
 function Section({ heading, blocks }: Article['intro']) {
   return (
     <section className="flex flex-col gap-3">
-      <h2 className="font-poppins text-xl font-bold leading-[1.3] text-navy lg:text-2xl">{heading}</h2>
+      <h2 className="font-poppins text-lg font-bold leading-[1.3] text-navy lg:text-2xl">{heading}</h2>
       <div className="flex flex-col gap-4">
         {blocks.map((b, i) => (
           <Block key={i} block={b} />
@@ -126,7 +126,7 @@ function Section({ heading, blocks }: Article['intro']) {
 
 function ArticleCta({ cta }: { cta: Article['cta'] }) {
   return (
-    <Container className="pb-12 pt-4 lg:pb-16">
+    <Container className="pb-10 pt-2 lg:pb-16 lg:pt-4">
       <Reveal>
         <div className="relative rounded-3xl bg-navy px-6 py-9 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:min-h-[280px] lg:px-14 lg:py-12">
           <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl">
@@ -139,7 +139,7 @@ function ArticleCta({ cta }: { cta: Article['cta'] }) {
             />
           </div>
           <div className="relative z-10 max-w-[688px]">
-            <h2 className="font-poppins text-2xl font-bold lg:text-[32px]">{cta.heading}</h2>
+            <h2 className="font-poppins text-xl font-bold sm:text-2xl lg:text-[32px]">{cta.heading}</h2>
             <p className="mt-2 font-poppins text-base text-white/60 lg:text-lg">{cta.text}</p>
             <div className="mt-6 flex flex-wrap items-center gap-6">
               <PillButton variant="accent" href={BOOK} className="!text-base lg:!text-lg">
@@ -185,25 +185,25 @@ export default function ArticlePage() {
       <Navbar />
       <main>
         {/* Title + meta + hero photo */}
-        <Container className="pt-32 lg:pt-44">
+        <Container className="pt-28 lg:pt-44">
           <div className="hero-rise flex flex-col gap-2 text-navy">
-            <h1 className="max-w-[1100px] font-poppins text-[34px] font-bold leading-[1.15] sm:text-[44px] lg:text-[56px] lg:leading-[1.4] xl:text-[64px]">
+            <h1 className="max-w-[1100px] font-poppins text-[28px] font-bold leading-[1.15] sm:text-[36px] lg:text-[56px] lg:leading-[1.4] xl:text-[64px]">
               {article.title}
             </h1>
-            <p className="font-poppins text-lg font-bold opacity-60 lg:text-2xl">
+            <p className="font-poppins text-base font-bold opacity-60 lg:text-2xl">
               Category: {article.category}
               <span className="mx-3 lg:mx-4">|</span>
               Reading Time: {article.readingTime}
             </p>
           </div>
-          <div className="hero-rise mt-8 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[#d9d9d9] lg:mt-14 lg:aspect-[1271/469]">
+          <div className="hero-rise mt-6 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[#d9d9d9] lg:mt-14 lg:aspect-[1271/469]">
             {article.image && <img src={article.image} alt="" className="h-full w-full object-cover" />}
           </div>
         </Container>
 
         {/* Body */}
-        <Container className="pt-12 lg:pt-14">
-          <Reveal className="flex flex-col gap-8 divide-y divide-navy/20 [&>section+section]:pt-8">
+        <Container className="pt-10 lg:pt-14">
+          <Reveal className="flex flex-col gap-6 divide-y divide-navy/20 [&>section+section]:pt-6 lg:gap-8 lg:[&>section+section]:pt-8">
             <Section {...article.intro} />
             {article.sections.map((s) => (
               <Section key={s.heading} {...s} />

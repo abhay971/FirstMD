@@ -54,7 +54,7 @@ function Hero() {
       <Container className="relative flex flex-col py-10 lg:min-h-svh lg:flex-row lg:items-center lg:pt-40 lg:pb-24">
         <div className="flex max-w-[560px] flex-col gap-6">
           <h1
-            className="hero-rise font-poppins text-[40px] font-bold leading-[1.08] text-navy sm:text-5xl lg:max-w-[560px] lg:text-[52px] lg:leading-[1.05] xl:text-[64px] 2xl:text-[76px] 2xl:leading-[1.06]"
+            className="hero-rise font-poppins text-[40px] font-bold leading-[1.08] text-navy sm:text-[40px] lg:max-w-[560px] lg:text-[52px] lg:leading-[1.05] xl:text-[64px] 2xl:text-[76px] 2xl:leading-[1.06]"
             style={{ animationDelay: '60ms' }}
           >
             Healthcare That Puts Your Family First
@@ -83,7 +83,7 @@ function Hero() {
 
 function NeedCareBanner() {
   return (
-    <Container className="py-12 lg:py-16">
+    <Container className="py-10 lg:py-16">
       <Reveal>
         <div className="relative rounded-2xl bg-navy px-6 py-8 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-9">
           {/* Concentric rings — clipped to the rounded banner, centered behind the providers */}
@@ -212,7 +212,7 @@ function WhyChoose() {
     <section id="about" className="relative scroll-mt-28 overflow-hidden">
       <SoftTexture />
       <CrossDecor src="/assets/cross-3.svg" className="right-[2%] top-3 w-[260px]" />
-      <Container className="relative z-10 py-14 lg:py-20">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-20">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[119px]">
           {/* Capsule collage — staggered stadium photos matching the Services page */}
           <Reveal className="flex items-center justify-center gap-4 sm:gap-5">
@@ -266,7 +266,7 @@ function Insurance() {
   return (
     <section id="insurance" className="relative scroll-mt-28 overflow-hidden bg-white">
       <CrossDecor src="/assets/cross-3.svg" className="left-[-70px] top-[15%] w-[180px] opacity-70" />
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-[653px_1fr] lg:gap-[83px]">
           <Reveal className="flex flex-col gap-8">
             <SectionHeading eyebrow="Insurance" title="Insurance Made Simple" className="max-w-[450px]" />
@@ -306,7 +306,7 @@ function Contact() {
   return (
     <section id="contact" className="relative scroll-mt-28 overflow-hidden bg-white">
       <CrossDecor src="/assets/cross-2.svg" className="right-[-60px] top-[16%] w-[200px] opacity-70" />
-      <Container className="relative z-10 py-14 lg:py-20">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-20">
         <Reveal className="flex flex-col gap-10">
           {/* Intro: map + copy */}
           <div className="grid items-stretch gap-10 lg:grid-cols-2">

@@ -62,7 +62,7 @@ function Hero() {
             Services
           </p>
           <h1
-            className="hero-rise font-poppins text-[40px] font-bold leading-[1.1] text-navy sm:text-5xl lg:text-[56px] xl:text-[64px] 2xl:text-[72px] 2xl:leading-[1.12]"
+            className="hero-rise font-poppins text-[40px] font-bold leading-[1.1] text-navy sm:text-[40px] lg:text-[56px] xl:text-[64px] 2xl:text-[72px] 2xl:leading-[1.12]"
             style={{ animationDelay: '80ms' }}
           >
             Hormone Therapy
@@ -96,7 +96,7 @@ function Hero() {
 function WhatIs() {
   return (
     <section id="hormone" className="relative scroll-mt-28 overflow-hidden">
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[40px]">
           {/* Capsule collage — left sharp at top-right (nudged down, outlined), right sharp at bottom-left */}
           <Reveal className="flex justify-center lg:justify-start">
@@ -155,7 +155,7 @@ function WhatYouMayNotice() {
         src="/assets/fm-conditions-graphic.svg"
         className="pointer-events-none absolute right-[-20px] top-1/2 hidden w-[440px] -translate-y-1/2 select-none lg:block xl:w-[520px]"
       />
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <Reveal className="flex flex-col gap-12">
           <h2 className={`${SECTION_TITLE} max-w-[794px] text-page`}>What You May Notice</h2>
           <div className="flex flex-col gap-x-16 gap-y-2 sm:flex-row">
@@ -192,7 +192,7 @@ function HowItWorks() {
   return (
     <section className="relative scroll-mt-28 overflow-hidden">
       <CrossDecor src="/assets/cross-3.svg" className="right-[-60px] top-[2%] w-[240px]" />
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <Reveal className="flex flex-col gap-12">
           <h2 className={`${SECTION_TITLE} text-navy`}>How It Works</h2>
           <div className="grid gap-6 lg:grid-cols-2">

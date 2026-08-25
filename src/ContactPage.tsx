@@ -3,7 +3,7 @@
  * Shared chrome (Navbar, FAQ, Footer) + primitives come from ./shared.
  */
 
-import type { ReactNode } from 'react'
+import { useState, type FormEvent, type ReactNode } from 'react'
 import {
   ARROW,
   Container,
@@ -122,7 +122,7 @@ function Hero() {
       <Container className="relative z-10 flex flex-col gap-8 py-10 lg:flex-1 lg:gap-0 lg:pt-36 lg:pb-8">
         <div className="hero-rise flex max-w-[700px] flex-col gap-3" style={{ animationDelay: '60ms' }}>
           <p className="font-poppins text-lg font-bold text-blue">Contact &amp; Book Online</p>
-          <h1 className="font-poppins text-[36px] font-bold leading-[1.04] text-navy sm:text-5xl lg:text-[56px] xl:text-[64px] 2xl:text-[72px]">
+          <h1 className="font-poppins text-[32px] font-bold leading-[1.04] text-navy sm:text-[40px] lg:text-[56px] xl:text-[64px] 2xl:text-[72px]">
             Getting quality healthcare should be simple.
           </h1>
           <p className="max-w-[620px] font-poppins text-base text-navy lg:text-lg">
@@ -161,7 +161,7 @@ function Hero() {
 
 function QuickCards() {
   return (
-    <section className="bg-navy py-12 lg:py-16">
+    <section className="bg-navy py-10 lg:py-16">
       <Container>
         <Reveal className="grid gap-6 lg:grid-cols-3">
           {/* Call */}
@@ -170,7 +170,7 @@ function QuickCards() {
               <p className="font-poppins text-2xl font-bold text-black">Call Our Office</p>
               <p className="font-poppins text-lg text-black">Speak directly with our team.</p>
             </div>
-            <a href={PHONE_HREF} className="font-poppins text-3xl font-bold text-black hover:text-accent">
+            <a href={PHONE_HREF} className="font-poppins text-2xl font-bold text-black hover:text-accent lg:text-3xl">
               {PHONE_DISPLAY}
             </a>
             <a
@@ -232,51 +232,114 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
 const inputCls =
   'w-full rounded-md border border-[rgba(66,80,102,0.4)] bg-white px-4 py-3 font-poppins text-base text-black shadow-sm outline-none transition-colors focus:border-blue'
 
+type FormStatus = 'idle' | 'sending' | 'success' | 'error'
+
 function AppointmentForm() {
+  const [status, setStatus] = useState<FormStatus>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (status === 'sending') return
+    const form = e.currentTarget
+    const payload = Object.fromEntries(new FormData(form).entries())
+
+    setStatus('sending')
+    setErrorMsg('')
+    try {
+      const res = await fetch('/api/send-mail.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const body = await res.json().catch(() => null)
+      if (res.ok && body?.ok) {
+        setStatus('success')
+        form.reset()
+      } else {
+        setStatus('error')
+        setErrorMsg(body?.error ?? 'Something went wrong. Please try again or call our office.')
+      }
+    } catch {
+      setStatus('error')
+      setErrorMsg('Could not reach the server. Please try again or call our office.')
+    }
+  }
+
   return (
-    <Container className="py-12 lg:py-16">
+    <Container className="py-10 lg:py-16">
       <Reveal className="scroll-mt-28 flex flex-col gap-10 rounded-3xl bg-white p-8 shadow-sm lg:p-16" id="appointment-form">
         <div>
-          <h2 className="font-poppins text-3xl font-bold text-black lg:text-4xl">Request Appointment</h2>
+          <h2 className="font-poppins text-2xl font-bold text-black sm:text-3xl lg:text-4xl">Request Appointment</h2>
           <p className="font-poppins text-lg text-black">Schedule a visit at your convenience.</p>
         </div>
 
-        <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+          {/* Honeypot: hidden from humans; bots that fill it are silently dropped server-side */}
+          <input
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute -left-[9999px] h-0 w-0 opacity-0"
+          />
+
           <div className="grid gap-6 md:grid-cols-2">
             <Field label="Full Name">
-              <input className={inputCls} type="text" placeholder="John Doe" />
+              <input className={inputCls} type="text" name="fullName" required placeholder="John Doe" />
             </Field>
             <Field label="Email Address">
-              <input className={inputCls} type="email" placeholder="john@test.com" />
+              <input className={inputCls} type="email" name="email" required placeholder="john@test.com" />
             </Field>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <Field label="Phone Number">
-              <input className={inputCls} type="tel" placeholder="(682) 000-0000" />
+              <input className={inputCls} type="tel" name="phone" required placeholder="(682) 000-0000" />
             </Field>
             <Field label="Date of Birth">
-              <input className={inputCls} type="date" />
+              <input className={inputCls} type="date" name="dob" />
             </Field>
             <Field label="Preferred Appointment Date">
-              <input className={inputCls} type="date" />
+              <input className={inputCls} type="date" name="preferredDate" />
             </Field>
             <Field label="Preferred Appointment Time">
-              <input className={inputCls} type="time" />
+              <input className={inputCls} type="time" name="preferredTime" />
             </Field>
           </div>
 
           <Field label="Reason for Visit">
-            <textarea className={`${inputCls} min-h-[150px] resize-y`} placeholder="Tell us briefly what you need help with…" />
+            <textarea
+              className={`${inputCls} min-h-[150px] resize-y`}
+              name="reason"
+              required
+              placeholder="Tell us briefly what you need help with…"
+            />
           </Field>
 
           <Field label="Insurance Provider">
-            <input className={`${inputCls} max-w-[612px]`} type="text" placeholder="e.g. Aetna, Cigna, BlueCross…" />
+            <input className={`${inputCls} max-w-[612px]`} type="text" name="insurance" placeholder="e.g. Aetna, Cigna, BlueCross…" />
           </Field>
 
-          <PillButton variant="accent" href="#" className="w-fit">
-            Submit Appointment Request
-          </PillButton>
+          {status === 'success' && (
+            <p className="rounded-md border border-green-600/30 bg-green-50 px-4 py-3 font-poppins text-base font-semibold text-green-800">
+              Thank you! Your appointment request has been sent. Our team will contact you shortly to confirm.
+            </p>
+          )}
+          {status === 'error' && (
+            <p className="rounded-md border border-accent/30 bg-accent-soft px-4 py-3 font-poppins text-base font-semibold text-accent">
+              {errorMsg}
+            </p>
+          )}
+
+          <button
+            type="submit"
+            disabled={status === 'sending'}
+            className="group inline-flex w-fit items-center justify-center gap-2 whitespace-nowrap rounded-full border-4 border-white/10 bg-accent px-7 py-3.5 font-poppins text-lg font-bold text-white shadow-[0px_12px_10px_rgba(0,0,0,0.1)] transition-all duration-200 hover:-translate-y-1 hover:bg-[#c4006a] hover:shadow-xl active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+          >
+            {status === 'sending' ? 'Sending…' : 'Submit Appointment Request'}
+          </button>
         </form>
       </Reveal>
     </Container>
@@ -295,7 +358,7 @@ const HOURS: [string, string][] = [
 
 function ClinicVisit() {
   return (
-    <Container className="py-12 lg:py-16">
+    <Container className="py-10 lg:py-16">
       <Reveal className="flex flex-col gap-10">
         <div className="grid items-stretch gap-10 lg:grid-cols-2">
           <a
@@ -380,7 +443,7 @@ const STEPS = [
 
 function WhatHappensNext() {
   return (
-    <Container className="py-12 lg:py-16">
+    <Container className="py-10 lg:py-16">
       <div className="grid items-center gap-10 lg:grid-cols-[480px_1fr] lg:gap-[48px]">
         <Reveal className="aspect-[603/694] w-full max-w-[480px] overflow-hidden rounded-3xl bg-[#d9d9d9] shadow-xl">
           <img loading="lazy" src="/assets/happens-next.webp" alt="The First MD team" className="h-full w-full object-cover" />
@@ -388,7 +451,7 @@ function WhatHappensNext() {
         <Reveal delay={120} className="flex max-w-[600px] flex-col gap-7">
           <div className="flex flex-col gap-2">
             <p className="font-poppins text-lg font-bold text-blue">What Happens Next?</p>
-            <h2 className="font-poppins text-3xl font-bold leading-[1.1] text-navy sm:text-4xl lg:text-[44px]">
+            <h2 className="font-poppins text-[26px] font-bold leading-[1.1] text-navy sm:text-[32px] lg:text-[44px]">
               After You Submit Your Appointment Request
             </h2>
           </div>
@@ -414,7 +477,7 @@ function WhatHappensNext() {
 
 function ScheduleCta() {
   return (
-    <Container className="py-12 lg:py-16">
+    <Container className="py-10 lg:py-16">
       <Reveal>
         <div className="relative rounded-2xl bg-navy px-6 py-8 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-9">
           <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">

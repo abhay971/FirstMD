@@ -63,7 +63,7 @@ function Hero() {
             Services
           </p>
           <h1
-            className="hero-rise font-poppins text-[40px] font-bold leading-[1.1] text-navy sm:text-5xl lg:text-[56px] xl:text-[64px] 2xl:text-[72px] 2xl:leading-[1.12]"
+            className="hero-rise font-poppins text-[40px] font-bold leading-[1.1] text-navy sm:text-[40px] lg:text-[56px] xl:text-[64px] 2xl:text-[72px] 2xl:leading-[1.12]"
             style={{ animationDelay: '80ms' }}
           >
             IV Hydration Therapy in Roanoke, TX
@@ -97,7 +97,7 @@ function Hero() {
 function WhatIs() {
   return (
     <section id="iv" className="relative scroll-mt-28 overflow-hidden">
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[40px]">
           <Reveal className="flex justify-center lg:justify-start">
             <img loading="lazy"
@@ -144,7 +144,7 @@ function WhyChoose() {
   return (
     <section id="services" className="relative scroll-mt-28 overflow-hidden">
       <CrossDecor src="/assets/cross-3.svg" className="right-[-60px] top-[2%] w-[240px]" />
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <Reveal className="flex flex-col gap-12">
           <h2 className={`${SECTION_TITLE} text-navy`}>Why People Choose IV</h2>
           <div className="grid gap-6 lg:grid-cols-2">
@@ -176,7 +176,7 @@ function Customized() {
         src="/assets/fm-conditions-graphic.svg"
         className="pointer-events-none absolute right-[-20px] top-1/2 hidden w-[440px] -translate-y-1/2 select-none lg:block xl:w-[520px]"
       />
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <Reveal className="flex max-w-[820px] flex-col gap-6">
           <h2 className={`${SECTION_TITLE} text-page`}>Customized For You</h2>
           <p className="font-poppins text-xl text-page">
@@ -204,7 +204,7 @@ function TreatmentInfo() {
   return (
     <section id="insurance" className="relative scroll-mt-28 overflow-hidden">
       <CrossDecor src="/assets/cross-1.svg" className="left-[-80px] bottom-[6%] w-[280px]" />
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[40px]">
           <Reveal className="flex flex-col gap-8">
             <SectionHeading eyebrow="Feel Better, Faster" title="Insurance & Treatment Information" size="md" className="max-w-[550px]" />

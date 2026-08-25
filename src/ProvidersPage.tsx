@@ -154,7 +154,7 @@ function Hero() {
       <Container className="relative z-10 flex flex-col gap-8 py-10 lg:flex-1 lg:gap-0 lg:pt-36 lg:pb-8">
         <div className="hero-rise flex max-w-[680px] flex-col gap-4" style={{ animationDelay: '60ms' }}>
           <p className="font-poppins text-lg font-bold text-blue">Meet the Providers</p>
-          <h1 className="font-poppins text-[36px] font-bold leading-[1.04] text-navy sm:text-5xl lg:text-[52px] xl:text-[58px] 2xl:text-[64px]">
+          <h1 className="font-poppins text-[32px] font-bold leading-[1.04] text-navy sm:text-[40px] lg:text-[52px] xl:text-[58px] 2xl:text-[64px]">
             Compassionate Care Starts With the Right Team
           </h1>
           <p className="font-poppins text-lg font-bold text-navy">Rehydrate. Recover. Recharge.</p>
@@ -195,7 +195,7 @@ function Hero() {
 
 function TeamIntro() {
   return (
-    <Container className="py-14 lg:py-20">
+    <Container className="py-10 sm:py-12 lg:py-20">
       <div className="grid items-center gap-10 lg:grid-cols-[480px_1fr] lg:gap-[60px]">
         <Reveal className="aspect-[635/694] w-full max-w-[480px] overflow-hidden rounded-3xl shadow-xl">
           <img loading="lazy" src="/assets/team-photo.webp" alt="The First MD care team" className="h-full w-full object-cover" />
@@ -374,7 +374,7 @@ function ProviderModal({ provider, onClose }: { provider: Provider; onClose: () 
         {/* Content (scrolls if long) */}
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-7 lg:p-10">
           <div>
-            <p className="font-poppins text-3xl font-bold text-navy">{provider.name}</p>
+            <p className="font-poppins text-2xl font-bold text-navy lg:text-3xl">{provider.name}</p>
             <p className="font-poppins text-lg font-bold text-blue">{provider.title}</p>
           </div>
           <div className="flex flex-col gap-3">
@@ -452,7 +452,7 @@ function WhyTrust() {
           <Reveal className="flex max-w-[540px] flex-col gap-6">
             <div className="flex flex-col gap-2">
               <p className="font-poppins text-base font-bold">Why Patients Trust First MD</p>
-              <h2 className="font-poppins text-3xl font-bold leading-[1.08] lg:text-[44px]">
+              <h2 className="font-poppins text-[26px] font-bold leading-[1.08] sm:text-[32px] lg:text-[44px]">
                 More Than Healthcare. A Long-Term Partnership.
               </h2>
             </div>
@@ -497,7 +497,7 @@ function WhyTrust() {
 
 function CtaBanner() {
   return (
-    <Container className="py-12 lg:py-16">
+    <Container className="py-10 lg:py-16">
       <Reveal>
         <div className="relative rounded-2xl bg-navy px-6 py-8 text-white shadow-[0px_16px_32px_rgba(0,0,0,0.12)] lg:px-14 lg:py-9">
           {/* Concentric rings — clipped to the banner, centered behind the provider */}

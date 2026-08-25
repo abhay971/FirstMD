@@ -67,7 +67,7 @@ function Hero() {
             Patient Resources
           </p>
           <h1
-            className="hero-rise max-w-[8.8em] font-poppins text-[40px] font-bold leading-[1.1] text-navy sm:text-5xl lg:text-[56px] xl:text-[64px] 2xl:text-[76px] 2xl:leading-[1.12]"
+            className="hero-rise max-w-[8.8em] font-poppins text-[40px] font-bold leading-[1.1] text-navy sm:text-[40px] lg:text-[56px] xl:text-[64px] 2xl:text-[76px] 2xl:leading-[1.12]"
             style={{ animationDelay: '80ms' }}
           >
             Everything You Need Before Your Visit
@@ -150,7 +150,7 @@ function WhatToExpect() {
     <section className="relative overflow-hidden bg-page pt-12 lg:pt-20">
       <Container className="relative z-10">
         <Reveal className="flex flex-col items-center gap-4 text-center">
-          <h2 className="font-poppins text-[30px] font-bold leading-[1.08] text-navy sm:text-4xl lg:text-[44px] xl:text-[52px] 2xl:text-[60px]">
+          <h2 className="font-poppins text-[28px] font-bold leading-[1.08] text-navy sm:text-[32px] lg:text-[44px] xl:text-[52px] 2xl:text-[60px]">
             What to Expect on Your First Visit
           </h2>
           <p className="font-poppins text-lg text-blue lg:text-xl">
@@ -229,10 +229,10 @@ const TELEHEALTH_TIPS = [
 function Telehealth() {
   return (
     <section className="relative overflow-hidden bg-navy">
-      <Container className="relative z-10 py-14 lg:py-16">
+      <Container className="relative z-10 py-10 lg:py-16">
         <Reveal className="flex flex-col gap-10">
           <div className="flex flex-col gap-1">
-            <h2 className="font-poppins text-3xl font-bold text-page lg:text-[32px]">Telehealth Made Easy</h2>
+            <h2 className="font-poppins text-2xl font-bold text-page lg:text-[32px]">Telehealth Made Easy</h2>
             <p className="font-poppins text-base text-page/60 lg:text-lg">
               Connect with your provider from the comfort of your home.
             </p>
@@ -290,7 +290,7 @@ function Insurance() {
   return (
     <section id="insurance" className="relative scroll-mt-28 overflow-hidden bg-white">
       <CrossDecor src="/assets/cross-3.svg" className="left-[-70px] top-[15%] w-[180px] opacity-70" />
-      <Container className="relative z-10 py-14 lg:py-24">
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-[653px_1fr] lg:gap-[83px]">
           <Reveal className="flex flex-col gap-8">
             <SectionHeading eyebrow="Insurance" title="Insurance Made Simple" className="max-w-[450px]" />

@@ -84,7 +84,7 @@ function Hero({ title, subtitle }: { title: string; subtitle?: string }) {
     <section className="bg-page pt-32 lg:pt-40">
       <Container>
         <div className="flex flex-col items-center gap-6 text-center">
-          <h1 className="font-poppins text-4xl font-bold leading-[1.05] text-navy sm:text-6xl lg:text-[80px]">
+          <h1 className="font-poppins text-[32px] font-bold leading-[1.05] text-navy sm:text-[40px] lg:text-6xl lg:text-[80px]">
             {title}
           </h1>
           {subtitle && (
@@ -118,7 +118,7 @@ function Card({ children, className = '' }: { children: ReactNode; className?: s
 
 function ClinicVisit() {
   return (
-    <Container className="py-12 lg:py-16">
+    <Container className="py-10 lg:py-16">
       <Reveal className="flex flex-col gap-10">
         {/* Intro: map + copy */}
         <div className="grid items-stretch gap-10 lg:grid-cols-2">
