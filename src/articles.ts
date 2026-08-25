@@ -1018,6 +1018,7 @@ export const ARTICLES: Article[] = [
   },
   {
     "slug": "sciatica",
+    "image": "/assets/articles/sciatica.webp",
     "title": "Sciatica: Symptoms, Causes and When to See a Doctor",
     "category": "Chiropractic / Family Medicine",
     "readingTime": "5–6 Minutes",
@@ -1164,6 +1165,7 @@ export const ARTICLES: Article[] = [
   },
   {
     "slug": "prevent-back-pain-habits",
+    "image": "/assets/articles/prevent-back-pain-habits.webp",
     "title": "Everyday Habits That Can Help Prevent Back Pain",
     "category": "Chiropractic / Wellness",
     "readingTime": "5–6 Minutes",
@@ -1283,6 +1285,7 @@ export const ARTICLES: Article[] = [
   },
   {
     "slug": "flu-symptoms-when-to-see-doctor",
+    "image": "/assets/articles/flu-symptoms-when-to-see-doctor.webp",
     "title": "Common Flu Symptoms and When You Should See a Doctor",
     "category": "Urgent Care",
     "readingTime": "5–6 Minutes",
@@ -1458,6 +1461,7 @@ export const ARTICLES: Article[] = [
   },
   {
     "slug": "cold-flu-season-protection",
+    "image": "/assets/articles/cold-flu-season-protection.webp",
     "title": "How to Protect Your Health During Cold & Flu Season",
     "category": "Family Medicine / Preventive Care",
     "readingTime": "5–6 Minutes",

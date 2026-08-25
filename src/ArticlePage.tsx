@@ -4,7 +4,7 @@
  * "More articles" card rail → navy CTA banner → footer. Content comes from
  * ./articles; the CTA copy is each article's own closing section.
  */
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import {
   ARROW,
@@ -51,12 +51,60 @@ export function ArticleCard({ article }: { article: Article }) {
 }
 
 /**
- * Continuously looping rail of article cards (pauses on hover, still scrollable
- * by hand); `exclude` hides the current article. The list is rendered twice so
- * the shared -50% marquee keyframe wraps seamlessly.
+ * Infinite article rail. The list is rendered twice inside a normal horizontal
+ * scroller; a rAF loop nudges scrollLeft and wraps it by one copy's width, so
+ * it glides forever, pauses on hover/touch, and still scrolls by hand in either
+ * direction without ever hitting an end. `exclude` hides the current article.
  */
+const RAIL_SPEED = 40 // px per second
+
 export function ArticleRail({ exclude, heading }: { exclude?: string; heading?: string }) {
   const list = ARTICLES.filter((a) => a.slug !== exclude)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    let paused = false
+    let raf = 0
+    let last = performance.now()
+    const half = () => el.scrollWidth / 2
+
+    // Keep scrollLeft inside [0, half) so both auto-glide and manual scrolling wrap seamlessly.
+    const wrap = () => {
+      const h = half()
+      if (h <= 0) return
+      if (el.scrollLeft >= h) el.scrollLeft -= h
+      else if (el.scrollLeft <= 0) el.scrollLeft += h
+    }
+    const tick = (now: number) => {
+      const dt = Math.min(now - last, 100) / 1000
+      last = now
+      if (!paused && !reduceMotion) el.scrollLeft += RAIL_SPEED * dt
+      wrap()
+      raf = requestAnimationFrame(tick)
+    }
+    const pause = () => (paused = true)
+    const resume = () => (paused = false)
+
+    el.scrollLeft = 1 // start just inside the first copy so scrolling left can wrap
+    raf = requestAnimationFrame(tick)
+    el.addEventListener('scroll', wrap, { passive: true })
+    el.addEventListener('pointerenter', pause)
+    el.addEventListener('pointerleave', resume)
+    el.addEventListener('touchstart', pause, { passive: true })
+    el.addEventListener('touchend', resume)
+    return () => {
+      cancelAnimationFrame(raf)
+      el.removeEventListener('scroll', wrap)
+      el.removeEventListener('pointerenter', pause)
+      el.removeEventListener('pointerleave', resume)
+      el.removeEventListener('touchstart', pause)
+      el.removeEventListener('touchend', resume)
+    }
+  }, [])
+
   return (
     <section className="relative overflow-hidden bg-page">
       <Reveal>
@@ -65,16 +113,17 @@ export function ArticleRail({ exclude, heading }: { exclude?: string; heading?: 
             <h2 className="font-poppins text-[28px] font-bold leading-[1.1] text-navy sm:text-[34px] lg:text-[44px]">{heading}</h2>
           </Container>
         )}
-        <div className={`no-scrollbar overflow-x-auto pb-10 lg:pb-16 ${heading ? 'pt-6 lg:pt-12' : 'pt-10 lg:pt-16'}`}>
-          <div className="marquee-track animate-marquee-slow flex w-max">
-            {[0, 1].map((copy) => (
-              <div key={copy} aria-hidden={copy === 1} className="flex shrink-0 gap-5 pr-5 lg:gap-10 lg:pr-10">
-                {list.map((a) => (
-                  <ArticleCard key={a.slug} article={a} />
-                ))}
-              </div>
-            ))}
-          </div>
+        <div
+          ref={ref}
+          className={`no-scrollbar flex overflow-x-auto pb-10 lg:pb-16 ${heading ? 'pt-6 lg:pt-12' : 'pt-10 lg:pt-16'}`}
+        >
+          {[0, 1].map((copy) => (
+            <div key={copy} aria-hidden={copy === 1} className="flex shrink-0 gap-5 pr-5 lg:gap-10 lg:pr-10">
+              {list.map((a) => (
+                <ArticleCard key={a.slug} article={a} />
+              ))}
+            </div>
+          ))}
         </div>
       </Reveal>
     </section>
@@ -209,7 +258,7 @@ export default function ArticlePage() {
 
         {/* Body */}
         <Container className="pt-10 lg:pt-14">
-          <Reveal className="flex flex-col gap-6 divide-y divide-navy/20 [&>section+section]:pt-6 lg:gap-8 lg:[&>section+section]:pt-8">
+          <Reveal className="flex flex-col gap-6 lg:gap-8 [&>section+section]:border-t [&>section+section]:border-navy/20 [&>section+section]:pt-6 lg:[&>section+section]:pt-8">
             <Section {...article.intro} />
             {article.sections.map((s) => (
               <Section key={s.heading} {...s} />

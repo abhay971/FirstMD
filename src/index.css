@@ -55,11 +55,6 @@ summary {
   animation: marquee 28s linear infinite;
 }
 
-/* Slower variant for wide content like the article card rail */
-.animate-marquee-slow {
-  animation: marquee 70s linear infinite;
-}
-
 .marquee-track:hover {
   animation-play-state: paused;
 }
@@ -115,8 +110,7 @@ summary {
     animation: none !important;
     transition: none !important;
   }
-  .animate-marquee,
-  .animate-marquee-slow {
+  .animate-marquee {
     animation: none !important;
   }
 }
