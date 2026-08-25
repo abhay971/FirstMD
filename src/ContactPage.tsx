@@ -3,7 +3,7 @@
  * Shared chrome (Navbar, FAQ, Footer) + primitives come from ./shared.
  */
 
-import { useState, type FormEvent, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import {
   ARROW,
   Container,
@@ -232,40 +232,7 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
 const inputCls =
   'w-full rounded-md border border-[rgba(66,80,102,0.4)] bg-white px-4 py-3 font-poppins text-base text-black shadow-sm outline-none transition-colors focus:border-blue'
 
-type FormStatus = 'idle' | 'sending' | 'success' | 'error'
-
 function AppointmentForm() {
-  const [status, setStatus] = useState<FormStatus>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    if (status === 'sending') return
-    const form = e.currentTarget
-    const payload = Object.fromEntries(new FormData(form).entries())
-
-    setStatus('sending')
-    setErrorMsg('')
-    try {
-      const res = await fetch('/api/send-mail.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-      const body = await res.json().catch(() => null)
-      if (res.ok && body?.ok) {
-        setStatus('success')
-        form.reset()
-      } else {
-        setStatus('error')
-        setErrorMsg(body?.error ?? 'Something went wrong. Please try again or call our office.')
-      }
-    } catch {
-      setStatus('error')
-      setErrorMsg('Could not reach the server. Please try again or call our office.')
-    }
-  }
-
   return (
     <Container className="py-10 lg:py-16">
       <Reveal className="scroll-mt-28 flex flex-col gap-10 rounded-3xl bg-white p-8 shadow-sm lg:p-16" id="appointment-form">
@@ -274,72 +241,42 @@ function AppointmentForm() {
           <p className="font-poppins text-lg text-black">Schedule a visit at your convenience.</p>
         </div>
 
-        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
-          {/* Honeypot: hidden from humans; bots that fill it are silently dropped server-side */}
-          <input
-            type="text"
-            name="company"
-            tabIndex={-1}
-            autoComplete="off"
-            aria-hidden="true"
-            className="absolute -left-[9999px] h-0 w-0 opacity-0"
-          />
-
+        <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
           <div className="grid gap-6 md:grid-cols-2">
             <Field label="Full Name">
-              <input className={inputCls} type="text" name="fullName" required placeholder="John Doe" />
+              <input className={inputCls} type="text" placeholder="John Doe" />
             </Field>
             <Field label="Email Address">
-              <input className={inputCls} type="email" name="email" required placeholder="john@test.com" />
+              <input className={inputCls} type="email" placeholder="john@test.com" />
             </Field>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <Field label="Phone Number">
-              <input className={inputCls} type="tel" name="phone" required placeholder="(682) 000-0000" />
+              <input className={inputCls} type="tel" placeholder="(682) 000-0000" />
             </Field>
             <Field label="Date of Birth">
-              <input className={inputCls} type="date" name="dob" />
+              <input className={inputCls} type="date" />
             </Field>
             <Field label="Preferred Appointment Date">
-              <input className={inputCls} type="date" name="preferredDate" />
+              <input className={inputCls} type="date" />
             </Field>
             <Field label="Preferred Appointment Time">
-              <input className={inputCls} type="time" name="preferredTime" />
+              <input className={inputCls} type="time" />
             </Field>
           </div>
 
           <Field label="Reason for Visit">
-            <textarea
-              className={`${inputCls} min-h-[150px] resize-y`}
-              name="reason"
-              required
-              placeholder="Tell us briefly what you need help with…"
-            />
+            <textarea className={`${inputCls} min-h-[150px] resize-y`} placeholder="Tell us briefly what you need help with…" />
           </Field>
 
           <Field label="Insurance Provider">
-            <input className={`${inputCls} max-w-[612px]`} type="text" name="insurance" placeholder="e.g. Aetna, Cigna, BlueCross…" />
+            <input className={`${inputCls} max-w-[612px]`} type="text" placeholder="e.g. Aetna, Cigna, BlueCross…" />
           </Field>
 
-          {status === 'success' && (
-            <p className="rounded-md border border-green-600/30 bg-green-50 px-4 py-3 font-poppins text-base font-semibold text-green-800">
-              Thank you! Your appointment request has been sent. Our team will contact you shortly to confirm.
-            </p>
-          )}
-          {status === 'error' && (
-            <p className="rounded-md border border-accent/30 bg-accent-soft px-4 py-3 font-poppins text-base font-semibold text-accent">
-              {errorMsg}
-            </p>
-          )}
-
-          <button
-            type="submit"
-            disabled={status === 'sending'}
-            className="group inline-flex w-fit items-center justify-center gap-2 whitespace-nowrap rounded-full border-4 border-white/10 bg-accent px-7 py-3.5 font-poppins text-lg font-bold text-white shadow-[0px_12px_10px_rgba(0,0,0,0.1)] transition-all duration-200 hover:-translate-y-1 hover:bg-[#c4006a] hover:shadow-xl active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
-          >
-            {status === 'sending' ? 'Sending…' : 'Submit Appointment Request'}
-          </button>
+          <PillButton variant="accent" href="#" className="w-fit">
+            Submit Appointment Request
+          </PillButton>
         </form>
       </Reveal>
     </Container>
