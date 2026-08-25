@@ -29,6 +29,7 @@ export type Article = {
 export const ARTICLES: Article[] = [
   {
     "slug": "high-blood-pressure",
+    "image": "/assets/articles/high-blood-pressure.webp",
     "title": "Understanding High Blood Pressure: Causes, Symptoms & What You Can Do",
     "category": "Chronic Illness Management",
     "readingTime": "5–6 Minutes",
@@ -181,6 +182,7 @@ export const ARTICLES: Article[] = [
   },
   {
     "slug": "diabetes-early-signs",
+    "image": "/assets/articles/diabetes-early-signs.webp",
     "title": "Diabetes: Early Signs, Risk Factors & How to Stay Healthy",
     "category": "Chronic Illness Management",
     "readingTime": "5–6 Minutes",
@@ -352,6 +354,7 @@ export const ARTICLES: Article[] = [
   },
   {
     "slug": "back-pain-causes-treatment",
+    "image": "/assets/articles/back-pain-causes-treatment.webp",
     "title": "Back Pain: Common Causes, Warning Signs & Treatment Options",
     "category": "Chiropractic / Family Medicine",
     "readingTime": "5–6 Minutes",
@@ -512,6 +515,7 @@ export const ARTICLES: Article[] = [
   },
   {
     "slug": "cold-vs-flu",
+    "image": "/assets/articles/cold-vs-flu.webp",
     "title": "How to Tell the Difference Between a Cold and the Flu",
     "category": "Urgent Care",
     "readingTime": "5–6 Minutes",
@@ -685,6 +689,7 @@ export const ARTICLES: Article[] = [
   },
   {
     "slug": "why-physical-exams-matter",
+    "image": "/assets/articles/why-physical-exams-matter.webp",
     "title": "Why Regular Physical Exams Matter Even When You Feel Healthy",
     "category": "Preventive Care",
     "readingTime": "5–6 Minutes",
@@ -833,6 +838,7 @@ export const ARTICLES: Article[] = [
   },
   {
     "slug": "high-cholesterol",
+    "image": "/assets/articles/high-cholesterol.webp",
     "title": "What Causes High Cholesterol and How Can You Manage It?",
     "category": "Chronic Illness Management",
     "readingTime": "5–6 Minutes",

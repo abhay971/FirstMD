@@ -1,12 +1,13 @@
 // One-off / reusable: convert every PNG/JPG in public/assets to WebP.
 //   node scripts/optimize-images.mjs            → converts + deletes originals
 //   node scripts/optimize-images.mjs --keep     → converts, keeps originals
+//   node scripts/optimize-images.mjs public/assets/articles   → another folder
 // Photos are capped at MAX_EDGE px on the long side; transparency is preserved.
 import sharp from 'sharp'
 import { readdir, stat, unlink } from 'node:fs/promises'
 import path from 'node:path'
 
-const DIR = 'public/assets'
+const DIR = process.argv.find((a) => !a.startsWith('--') && a !== process.argv[0] && a !== process.argv[1]) ?? 'public/assets'
 const MAX_EDGE = 2000
 const QUALITY = 80
 const keep = process.argv.includes('--keep')
