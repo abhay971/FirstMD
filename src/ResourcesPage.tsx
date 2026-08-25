@@ -25,6 +25,7 @@ import {
   SectionHeading,
   useParallax,
 } from './shared'
+import { ArticleRail } from './ArticlePage'
 
 /* ----------------------------------------------------------------------------
  * Hero — full-bleed photo, copy left, trust chips along the bottom
@@ -269,37 +270,8 @@ function Telehealth() {
  * Health articles — horizontally scrolling cards
  * ------------------------------------------------------------------------- */
 
-const ARTICLES = [
-  { title: 'Managing High Blood Pressure', desc: 'Tips for monitoring and improving heart health.' },
-  { title: 'Cold vs. Flu: Know the Difference', desc: 'How to spot the symptoms and when to see a provider.' },
-  { title: 'Annual Physicals Matter', desc: 'What routine checkups catch early — and why it counts.' },
-  { title: 'Staying Hydrated in Texas Heat', desc: 'Simple habits to keep your family safe in summer.' },
-  { title: 'Building a Heart-Healthy Diet', desc: 'Everyday food choices that support long-term health.' },
-  { title: 'When to Choose Urgent Care', desc: 'Knowing where to go for non-life-threatening needs.' },
-]
-
 function HealthArticles() {
-  return (
-    <section className="relative overflow-hidden bg-page">
-      <Reveal>
-        <div className="no-scrollbar flex snap-x snap-mandatory gap-8 overflow-x-auto py-14 pl-6 pr-6 lg:py-16 lg:pl-[max(2rem,calc((100vw-1272px)/2))]">
-          {ARTICLES.map((article) => (
-            <article key={article.title} className="flex w-[260px] shrink-0 snap-start flex-col gap-3 sm:w-[300px]">
-              <div className="aspect-square w-full rounded-2xl bg-[#d9d9d9]" />
-              <div className="flex flex-col gap-1">
-                <h3 className="font-poppins text-lg font-bold text-navy lg:text-xl">{article.title}</h3>
-                <p className="font-poppins text-base text-ink/60 lg:text-lg">{article.desc}</p>
-              </div>
-              <a href="#" className="group inline-flex items-center gap-2 font-poppins text-base text-navy lg:text-lg">
-                <span className="group-hover:underline">Read Article</span>
-                <span className="transition-transform duration-200 group-hover:translate-x-1">{ARROW}</span>
-              </a>
-            </article>
-          ))}
-        </div>
-      </Reveal>
-    </section>
-  )
+  return <ArticleRail />
 }
 
 /* ----------------------------------------------------------------------------

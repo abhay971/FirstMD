@@ -12,6 +12,7 @@ import AestheticsPage from './AestheticsPage'
 import ChiropracticPage from './ChiropracticPage'
 import PrivacyPolicyPage from './PrivacyPolicyPage'
 import AccessibilityPage from './AccessibilityPage'
+import ArticlePage from './ArticlePage'
 
 /** Scroll to a #hash target after the page renders (links like /#contact). */
 function ScrollToHash() {
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="/providers" element={<ProvidersPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/resources" element={<ResourcesPage />} />
+        <Route path="/resources/articles/:slug" element={<ArticlePage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/accessibility" element={<AccessibilityPage />} />
       </Routes>
