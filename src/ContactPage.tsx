@@ -350,8 +350,8 @@ function AppointmentForm() {
  * ------------------------------------------------------------------------- */
 
 const HOURS: [string, string][] = [
-  ['Mon–Fri', '8:00 AM – 6:00 PM'],
-  ['Saturday', '9:00 AM – 1:00 PM'],
+  ['Mon–Fri', '8:00 AM – 5:00 PM'],
+  ['Saturday', '8:00 AM – 1:00 PM'],
   ['Sunday', 'Closed'],
 ]
 
