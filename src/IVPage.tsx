@@ -102,7 +102,7 @@ function WhatIs() {
           <Reveal className="flex justify-center lg:justify-start">
             <img loading="lazy"
               src="/assets/svc-iv-pills.webp"
-              alt="A patient receiving IV hydration therapy with a First MD nurse"
+              alt="Two patients resting comfortably while receiving IV hydration therapy"
               className="h-auto w-full max-w-[616px]"
             />
           </Reveal>

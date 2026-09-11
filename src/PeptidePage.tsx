@@ -8,6 +8,7 @@
  */
 
 import {
+  ARROW,
   BOOK,
   CapsuleFrame,
   CheckCircle,
@@ -33,7 +34,7 @@ import {
 const HERO_CHIPS: { icon: string; label: [string, string] }[] = [
   { icon: '/assets/chip-providers.svg', label: ['Provider-Guided', 'Protocols'] },
   { icon: '/assets/chip-diagnostics.svg', label: ['Custom Peptide', 'Stacks'] },
-  { icon: '/assets/chip-insurance.svg', label: ['Experienced', 'Medical Team'] },
+  { icon: '/assets/chip-insurance.svg', label: ['Certified Peptide', 'Provider'] },
   { icon: '/assets/chip-sameday.svg', label: ['Convenient', 'At-Home Dosing'] },
 ]
 
@@ -70,9 +71,9 @@ function Hero() {
             Peptide Therapy
           </h1>
           <p className="hero-rise max-w-[640px] font-poppins text-base text-navy lg:text-lg" style={{ animationDelay: '180ms' }}>
-            <span className="font-bold">Smart molecules. Targeted results.</span> Peptides are short chains of amino
-            acids that signal your body's cells — directing healing, growth, recovery, and renewal. As we age, our
-            natural levels decline. Peptide therapy gently replenishes them.
+            <span className="font-bold">Prescribed by a Certified Peptide Provider.</span> Peptides are short chains
+            of amino acids that signal your body's cells — directing healing, growth, recovery, and renewal. As we
+            age, our natural levels decline. Peptide therapy gently replenishes them.
           </p>
           <div className="hero-rise mt-8 flex flex-wrap items-center gap-4" style={{ animationDelay: '280ms' }}>
             <PillButton variant="accent" href={BOOK}>
@@ -86,6 +87,44 @@ function Hero() {
 
         {/* Trust chips */}
         <HeroChips chips={HERO_CHIPS} />
+      </Container>
+    </section>
+  )
+}
+
+/* ----------------------------------------------------------------------------
+ * Certified Peptide Provider — credential band, deliberately placed high on the
+ * page so it reads before any of the therapy copy
+ * ------------------------------------------------------------------------- */
+
+function CertifiedBand() {
+  return (
+    <section className="relative overflow-hidden bg-page">
+      <Container className="relative z-10 py-8 lg:py-12">
+        <Reveal>
+          <div className="flex flex-col items-start gap-6 rounded-3xl border-2 border-accent bg-accent-soft p-7 lg:flex-row lg:items-center lg:gap-8 lg:p-10">
+            <img src="/assets/chip-insurance.svg" alt="" className="size-14 shrink-0 lg:size-16" />
+            <div className="flex flex-col gap-2">
+              <p className="font-poppins text-sm font-bold uppercase tracking-[0.14em] text-accent">
+                Certified Peptide Provider
+              </p>
+              <h2 className="font-poppins text-2xl font-bold leading-[1.2] text-navy lg:text-[32px]">
+                Peptide therapy certification by the International Peptide Society
+              </h2>
+              <p className="font-poppins text-base text-ink lg:text-lg">
+                Every peptide protocol at First MD is designed and prescribed by Edward Martinez, PA-C — a certified
+                peptide provider and member of the American Academy of Anti-Aging Medicine. Peptides are powerful
+                signalling molecules, and they belong in trained hands.
+              </p>
+              <a
+                href="/providers"
+                className="mt-2 w-fit font-poppins text-base font-bold text-accent underline underline-offset-4 hover:text-navy lg:text-lg"
+              >
+                Meet your provider {ARROW}
+              </a>
+            </div>
+          </div>
+        </Reveal>
       </Container>
     </section>
   )
@@ -161,7 +200,7 @@ function WhyDifferent() {
 
 const INFO_POINTS = [
   'Personalized Wellness Plans',
-  'Experienced Medical Team',
+  'Certified Peptide Provider',
   'Convenient Appointments',
   'Dedicated Patient Support',
 ]
@@ -247,6 +286,7 @@ export default function PeptidePage() {
       <main>
         <Hero />
         <MarqueeStrip />
+        <CertifiedBand />
         <Benefits />
         <WhyDifferent />
         <TreatmentInfo />

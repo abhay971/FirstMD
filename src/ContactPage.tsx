@@ -3,9 +3,9 @@
  * Shared chrome (Navbar, FAQ, Footer) + primitives come from ./shared.
  */
 
-import type { ReactNode } from 'react'
+import { useState, type ChangeEvent, type ReactNode } from 'react'
 import {
-  ARROW,
+  ClinicMap,
   Container,
   FAQ,
   Footer,
@@ -79,7 +79,7 @@ const HERO_BADGES = [
     icon: IconShield,
     label: (
       <>
-        Most Major Insurance
+        Major Insurance Providers
         <br />
         Accepted
       </>
@@ -232,6 +232,68 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
 const inputCls =
   'w-full rounded-md border border-[rgba(66,80,102,0.4)] bg-white px-4 py-3 font-poppins text-base text-black shadow-sm outline-none transition-colors focus:border-blue'
 
+/**
+ * Date entry pinned to the US MM-DD-YYYY format. A native <input type="date">
+ * renders in the *browser's* locale (DD-MM-YYYY for much of the world), so we
+ * use a masked text field instead and submit the same MM-DD-YYYY string.
+ */
+function DateInput({ name, required = false }: { name: string; required?: boolean }) {
+  const [value, setValue] = useState('')
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    const digits = e.target.value.replace(/\D/g, '').slice(0, 8)
+    const parts = [digits.slice(0, 2), digits.slice(2, 4), digits.slice(4, 8)].filter(Boolean)
+    setValue(parts.join('-'))
+  }
+
+  return (
+    <input
+      className={inputCls}
+      type="text"
+      name={name}
+      required={required}
+      value={value}
+      onChange={handleChange}
+      placeholder="MM-DD-YYYY"
+      inputMode="numeric"
+      autoComplete="off"
+      maxLength={10}
+      pattern="(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])-(19|20)\d{2}"
+      title="Enter the date as MM-DD-YYYY"
+    />
+  )
+}
+
+/**
+ * Appointment-time picker. A native <input type="time"> renders 12- or 24-hour
+ * depending on the visitor's browser locale, so we offer explicit 12-hour US
+ * slots instead. Slots span the clinic's opening hours in 15-minute steps.
+ */
+const TIME_SLOTS = (() => {
+  const slots: string[] = []
+  for (let minutes = 8 * 60; minutes <= 17 * 60; minutes += 15) {
+    const h24 = Math.floor(minutes / 60)
+    const mm = String(minutes % 60).padStart(2, '0')
+    const h12 = h24 % 12 === 0 ? 12 : h24 % 12
+    slots.push(`${h12}:${mm} ${h24 < 12 ? 'AM' : 'PM'}`)
+  }
+  return slots
+})()
+
+function TimeInput({ name }: { name: string }) {
+  return (
+    <select className={inputCls} name={name} defaultValue="">
+      <option value="">Select a time</option>
+      {TIME_SLOTS.map((slot) => (
+        <option key={slot} value={slot}>
+          {slot}
+        </option>
+      ))}
+    </select>
+  )
+}
+
+
 function AppointmentForm() {
   return (
     <Container className="py-10 lg:py-16">
@@ -255,14 +317,14 @@ function AppointmentForm() {
             <Field label="Phone Number">
               <input className={inputCls} type="tel" placeholder="(682) 000-0000" />
             </Field>
-            <Field label="Date of Birth">
-              <input className={inputCls} type="date" />
+            <Field label="Date of Birth (MM-DD-YYYY)">
+              <DateInput name="dob" />
             </Field>
-            <Field label="Preferred Appointment Date">
-              <input className={inputCls} type="date" />
+            <Field label="Preferred Appointment Date (MM-DD-YYYY)">
+              <DateInput name="preferredDate" />
             </Field>
             <Field label="Preferred Appointment Time">
-              <input className={inputCls} type="time" />
+              <TimeInput name="preferredTime" />
             </Field>
           </div>
 
@@ -298,22 +360,7 @@ function ClinicVisit() {
     <Container className="py-10 lg:py-16">
       <Reveal className="flex flex-col gap-10">
         <div className="grid items-stretch gap-10 lg:grid-cols-2">
-          <a
-            href={MAPS_HREF}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative block h-[280px] w-full overflow-hidden rounded-3xl shadow-lg lg:h-[358px]"
-            aria-label="Open directions in Google Maps"
-          >
-            <img loading="lazy"
-              src="/assets/contact-map.webp"
-              alt="Map to First MD clinic"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-4 py-2 font-poppins text-sm font-bold text-navy shadow-md transition-colors group-hover:bg-white">
-              Open in Maps {ARROW}
-            </span>
-          </a>
+          <ClinicMap />
           <div className="flex max-w-[550px] flex-col gap-8">
             <SectionHeading eyebrow="Contact Us" title="Visit our Roanoke Clinic" />
             <p className="font-poppins text-xl text-black">

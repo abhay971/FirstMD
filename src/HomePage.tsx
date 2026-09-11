@@ -13,7 +13,7 @@ import {
   CrossDecor,
   FAQ,
   Footer,
-  MAPS_HREF,
+  ClinicMap,
   MarqueeStrip,
   Navbar,
   PHONE_DISPLAY,
@@ -148,7 +148,8 @@ const SERVICES = [
   },
   {
     name: 'Peptide Therapy',
-    desc: 'Targeted peptide treatments to support recovery, metabolism, and healthy aging.',
+    badge: 'Certified Provider',
+    desc: 'Targeted peptide treatments — prescribed by a provider certified by the International Peptide Society — to support recovery, metabolism, and healthy aging.',
     href: '/services/peptide',
   },
   {
@@ -178,6 +179,11 @@ function Services() {
                     <span className="font-poppins text-lg font-bold text-black transition-colors group-hover:text-blue">
                       {service.name}
                     </span>
+                    {service.badge && (
+                      <span className="shrink-0 rounded-full bg-accent px-2.5 py-0.5 font-poppins text-[11px] font-bold uppercase tracking-wide text-white">
+                        {service.badge}
+                      </span>
+                    )}
                   </div>
                   {/* Reveal description + "Know More" on hover */}
                   <div className="grid grid-rows-[0fr] transition-all duration-300 ease-out group-hover:grid-rows-[1fr] group-focus-within:grid-rows-[1fr]">
@@ -256,7 +262,7 @@ function WhyChoose() {
 
 const INSURANCE_POINTS = [
   'Same-Day Appointments',
-  'Most Major Insurance Accepted',
+  'Major Insurance Providers Accepted',
   'Comprehensive Family Care',
   'On-Site Diagnostics',
   'Patient-First Approach',
@@ -297,8 +303,8 @@ function Insurance() {
  * ------------------------------------------------------------------------- */
 
 const HOURS: [string, string][] = [
-  ['Mon–Fri', '8:00 AM – 6:00 PM'],
-  ['Saturday', '9:00 AM – 1:00 PM'],
+  ['Mon–Fri', '8:00 AM – 5:00 PM'],
+  ['Saturday', '8:00 AM – 1:00 PM'],
   ['Sunday', 'Closed'],
 ]
 
@@ -310,22 +316,7 @@ function Contact() {
         <Reveal className="flex flex-col gap-10">
           {/* Intro: map + copy */}
           <div className="grid items-stretch gap-10 lg:grid-cols-2">
-            <a
-              href={MAPS_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative block h-[280px] w-full overflow-hidden rounded-3xl shadow-lg lg:h-[358px]"
-              aria-label="Open directions in Google Maps"
-            >
-              <img loading="lazy"
-                src="/assets/contact-map.webp"
-                alt="Map to First MD clinic"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-4 py-2 font-poppins text-sm font-bold text-navy shadow-md transition-colors group-hover:bg-white">
-                Open in Maps {ARROW}
-              </span>
-            </a>
+            <ClinicMap />
             <div className="flex max-w-[550px] flex-col gap-8">
               <SectionHeading eyebrow="Contact Us" title="Visit our Roanoke Clinic" />
               <p className="font-poppins text-xl text-black">

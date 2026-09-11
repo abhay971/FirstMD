@@ -12,10 +12,9 @@
 
 import { type ReactNode } from 'react'
 import {
-  ARROW,
   Container,
   Footer,
-  MAPS_HREF,
+  ClinicMap,
   Navbar,
   PHONE_DISPLAY,
   Reveal,
@@ -103,8 +102,8 @@ function Hero({ title, subtitle }: { title: string; subtitle?: string }) {
  * ------------------------------------------------------------------------- */
 
 const HOURS: [string, string][] = [
-  ['Mon–Fri', '8:00 AM – 6:00 PM'],
-  ['Saturday', '9:00 AM – 1:00 PM'],
+  ['Mon–Fri', '8:00 AM – 5:00 PM'],
+  ['Saturday', '8:00 AM – 1:00 PM'],
   ['Sunday', 'Closed'],
 ]
 
@@ -122,22 +121,7 @@ function ClinicVisit() {
       <Reveal className="flex flex-col gap-10">
         {/* Intro: map + copy */}
         <div className="grid items-stretch gap-10 lg:grid-cols-2">
-          <a
-            href={MAPS_HREF}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative block h-[280px] w-full overflow-hidden rounded-3xl shadow-lg lg:h-[358px]"
-            aria-label="Open directions in Google Maps"
-          >
-            <img loading="lazy"
-              src="/assets/contact-map.webp"
-              alt="Map to First MD clinic"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-4 py-2 font-poppins text-sm font-bold text-navy shadow-md transition-colors group-hover:bg-white">
-              Open in Maps {ARROW}
-            </span>
-          </a>
+          <ClinicMap />
           <div className="flex max-w-[550px] flex-col gap-8">
             <SectionHeading eyebrow="Contact Us" title="Visit our Roanoke Clinic" />
             <p className="font-poppins text-lg text-black lg:text-xl">

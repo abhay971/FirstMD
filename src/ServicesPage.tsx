@@ -71,7 +71,7 @@ function Hero() {
             Integrated Family Medicine &amp; Urgent Care
           </h1>
           <p className="hero-rise max-w-[640px] font-poppins text-base text-navy lg:text-lg" style={{ animationDelay: '180ms' }}>
-            Personalized healthcare for children, adults, and seniors—all under one roof.
+            Primary care for adults and seniors, plus walk-in urgent care for the whole family—all under one roof.
           </p>
           <div className="hero-rise mt-8 flex flex-wrap items-center gap-4" style={{ animationDelay: '280ms' }}>
             <PillButton variant="accent" href={BOOK}>
@@ -147,11 +147,6 @@ const SERVICES = [
     icon: '/assets/fm-icon-preventive.svg',
     title: 'Wellness & Preventive Care',
     desc: 'Proactive care to support lifelong health.',
-  },
-  {
-    icon: '/assets/fm-icon-functional.svg',
-    title: 'Functional Medicine',
-    desc: 'Root-cause care for overall wellness.',
   },
   {
     icon: '/assets/fm-icon-womens.svg',
@@ -264,7 +259,7 @@ function StartWithUs() {
           <Reveal className="flex flex-col gap-8">
             <SectionHeading eyebrow="Start with us" title="Insurance Made Simple" size="md" className="max-w-[550px]" />
             <p className="max-w-[505px] font-poppins text-xl text-ink">
-              We accept most major insurance plans and can help verify your coverage before your visit.
+              We accept major insurance providers and can help verify your coverage before your visit.
             </p>
             <ul className="flex flex-col gap-4">
               {INSURANCE_POINTS.map((point) => (
@@ -316,7 +311,7 @@ const SERVICE_FAQS = [
   },
   {
     q: 'Do you treat both adults and children?',
-    a: 'Yes. We care for the whole family — from toddlers to grandparents.',
+    a: 'We provide primary and urgent care for adults and seniors. Children are seen for urgent care only — illnesses and minor injuries that need same-day attention — not for pediatric primary care, so kids should keep their pediatrician for well-child visits and immunizations.',
   },
   {
     q: 'Can First MD be my regular primary care provider?',

@@ -21,16 +21,22 @@ export const MAPS_HREF =
   'https://www.google.com/maps/dir/?api=1&destination=' +
   encodeURIComponent('208 East TX-114, Suite 300, Roanoke, TX 76262')
 
+/** Live Google Maps embed, pinned on the clinic (no API key required). */
+export const MAPS_EMBED_SRC =
+  'https://www.google.com/maps?q=' +
+  encodeURIComponent('First MD Family Walk In Clinic, 208 East TX-114, Suite 300, Roanoke, TX 76262') +
+  '&z=16&output=embed'
+
 /** The four highlighted services, used by the navbar Services dropdown. */
-export const SERVICE_LINKS = [
+export const SERVICE_LINKS: { label: string; href: string; badge?: string }[] = [
   { label: 'Family Medicine & Urgent Care', href: '/services' },
   { label: 'Hormone Therapy', href: '/services/hormone' },
   { label: 'IV Hydrating Therapy', href: '/services/iv' },
-  { label: 'Peptide Therapy', href: '/services/peptide' },
+  { label: 'Peptide Therapy', href: '/services/peptide', badge: 'Certified Provider' },
   { label: 'Chiropractic Care', href: '/services/chiropractic' },
 ]
 
-type NavItem = { label: string; id: string; href: string; children?: { label: string; href: string }[] }
+type NavItem = { label: string; id: string; href: string; children?: { label: string; href: string; badge?: string }[] }
 
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', id: 'home', href: '/' },
@@ -284,6 +290,34 @@ const CAPSULE_OUTLINE_OFFSET = {
   br: '-translate-x-2 -translate-y-3',
 } as const
 
+/**
+ * The "Visit our Roanoke Clinic" map. Replaces the old static screenshot, which
+ * showed the wrong part of town and carried no marker — this is a live Google
+ * Maps embed pinned on the clinic, with an overlaid link out to directions.
+ */
+export function ClinicMap({ className = '' }: { className?: string }) {
+  return (
+    <div className={`group relative h-[280px] w-full overflow-hidden rounded-3xl shadow-lg lg:h-[358px] ${className}`}>
+      <iframe
+        title="Map showing First MD Family Walk In Clinic, 208 East TX-114 Suite 300, Roanoke, TX"
+        src={MAPS_EMBED_SRC}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        allowFullScreen
+        className="h-full w-full border-0"
+      />
+      <a
+        href={MAPS_HREF}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute bottom-4 left-4 rounded-full bg-white/90 px-4 py-2 font-poppins text-sm font-bold text-navy shadow-md transition-colors hover:bg-white"
+      >
+        Open in Maps {ARROW}
+      </a>
+    </div>
+  )
+}
+
 export function CapsuleFrame({
   children,
   className = '',
@@ -413,6 +447,9 @@ export function Navbar() {
                         className="rounded-xl px-4 py-2.5 font-poppins text-sm text-white/75 transition-colors hover:bg-white/10 hover:text-white"
                       >
                         {child.label}
+                        {child.badge && (
+                          <span className="ml-2 inline-block rounded-full bg-accent px-2 py-0.5 font-poppins text-[10px] font-bold uppercase tracking-wide text-white align-middle">{child.badge}</span>
+                        )}
                       </a>
                     ))}
                   </div>
@@ -474,6 +511,9 @@ export function Navbar() {
                         className="block rounded-lg px-4 py-2 font-poppins text-base text-white/70 transition-colors hover:bg-white/5 hover:text-white"
                       >
                         {child.label}
+                        {child.badge && (
+                          <span className="ml-2 inline-block rounded-full bg-accent px-2 py-0.5 font-poppins text-[10px] font-bold uppercase tracking-wide text-white align-middle">{child.badge}</span>
+                        )}
                       </a>
                     </li>
                   ))}
@@ -520,9 +560,9 @@ export function MarqueeStrip() {
 
 const FAQS = [
   { q: 'Do you accept walk-ins?', a: 'Yes, walk-ins are welcome based on availability.' },
-  { q: 'Do you provide pediatric care?', a: 'Yes, our family medicine practice cares for patients of all ages, including children.' },
+  { q: 'Do you provide pediatric care?', a: 'We see children for urgent care only — illnesses and minor injuries that need same-day attention. We do not provide pediatric primary care, so children should keep a pediatrician for well-child visits, immunizations, and ongoing care.' },
   { q: 'Do you offer same-day appointments?', a: 'Same-day appointments are often available — call the clinic to check current openings.' },
-  { q: 'What insurance plans do you accept?', a: 'We accept most major insurance providers. Reach out and our team will confirm your coverage.' },
+  { q: 'What insurance plans do you accept?', a: 'We accept major insurance providers. Reach out and our team will confirm your coverage.' },
 ]
 
 export function FAQ({ items = FAQS }: { items?: { q: string; a: string }[] }) {

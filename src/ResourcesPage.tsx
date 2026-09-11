@@ -280,7 +280,7 @@ function HealthArticles() {
 
 const INSURANCE_POINTS = [
   'Same-Day Appointments',
-  'Most Major Insurance Accepted',
+  'Major Insurance Providers Accepted',
   'Comprehensive Family Care',
   'On-Site Diagnostics',
   'Patient-First Approach',
